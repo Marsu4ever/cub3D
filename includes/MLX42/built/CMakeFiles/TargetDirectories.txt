@@ -1,0 +1,7 @@
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/mlx42.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/edit_cache.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/rebuild_cache.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/list_install_components.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/install.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/install/local.dir
+/home/stigkas/Desktop/42cube3d/includes/MLX42/built/CMakeFiles/install/strip.dir
