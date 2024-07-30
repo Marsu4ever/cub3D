@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/30 11:01:42 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/07/30 12:58:00 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdlib.h> //exit, free, malloc
 # include <string.h> //strerror
 
-
-
+//errors.c
+void msg_and_exit(char *msg);
 
 
 #endif
