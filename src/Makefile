@@ -16,6 +16,7 @@ LIBS = $(LIBFT) $(LIBMLX) -L/Users/$(USER)/.brew/lib/ -ldl -lglfw -pthread -lm
 
 SRCS = \
 	main.c
+	errors/errors.c
 
 OBJS = $(SRCS:.c=.o)
 
