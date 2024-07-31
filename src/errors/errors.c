@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/30 12:58:00 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/07/31 12:02:32 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void msg_and_exit(char *msg)
 {
-    printf(msg);
+    printf("%s\n", msg);
     exit(1);
 }
