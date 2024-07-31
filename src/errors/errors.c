@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
+/*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
 /*   Updated: 2024/07/30 12:58:00 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#include "../../includes/cube3d.h"
 
-# include <math.h> //for all the math functions we will need in raycasting
-# include <fcntl.h> //open
-# include <unistd.h> //write, read, close
-# include <stdio.h> //perror, printf
-# include <stdlib.h> //exit, free, malloc
-# include <string.h> //strerror
-
-//errors.c
-void msg_and_exit(char *msg);
-
-
-#endif
+void msg_and_exit(char *msg)
+{
+    printf(msg);
+    exit(1);
+}
