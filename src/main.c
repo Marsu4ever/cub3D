@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 10:59:25 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 11:08:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ static void init_vars(t_vars *vars)
     
     player = malloc(sizeof(t_player));
     if (!player)
-        msg_and_exit("Allocation of player was failed.\n");
+        msg_and_exit("Allocation of player was failed.\n", 2);
     vars->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", true);
     if (!vars->mlx)
-        msg_and_exit("Mlx failed to be initialized.\n");
+        msg_and_exit("Mlx failed to be initialized.\n", 2);
     vars->player = player;
     vars->image = mlx_new_image(vars->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!vars->image)
     {
         mlx_close_window(vars->mlx);
-        msg_and_exit("Image failed to be created.\n");
+        msg_and_exit("Image failed to be created.\n", 2);
     }
     if (mlx_image_to_window(vars->mlx, vars->image, 0, 0) == -1)
 	{
 		mlx_close_window(vars->mlx);
-		msg_and_exit("Image failed to be converted to window.\n");
+		msg_and_exit("Image failed to be converted to window.\n", 2);
 	}
 }
 
@@ -42,7 +42,7 @@ int main (int ac, char **av)
     
 	game = (t_vars){0};
     if (ac != 2)
-        msg_and_exit("Please use only two arguments!!");
+        msg_and_exit("Please use only two arguments!!", 2);
     else
     {
         init_vars(&game);

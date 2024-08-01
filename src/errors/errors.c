@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 09:26:43 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:07:51 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void msg_and_exit(char *msg)
+void msg_and_exit(char *msg, int fd)
 {
-    printf("%s\n", msg);
+    ft_putstr_fd(msg, fd);
     exit(1);
 }
