@@ -6,11 +6,11 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/31 12:02:32 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/01 09:26:43 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cube3d.h"
+#include "cube3d.h"
 
 void msg_and_exit(char *msg)
 {
