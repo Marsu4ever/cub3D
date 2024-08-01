@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/01 11:00:06 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 11:58:32 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 void    mlx_functions(t_vars *game)
 {
     game->mlx = mlx_init(960, 540, "cub3D", false); /*game_width = 1300 and  game_height = 900 - (fshields)*/
-	game->image = mlx_new_image(game->mlx, 960, 540);
-	mlx_load_png("./textures/NO.png");
-	mlx_load_png("./textures/EA.png");
-	mlx_load_png("./textures/SO.png");
-	mlx_load_png("./textures/WE.png");
+	game->image = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	mlx_load_png("../textures/NO.png");
+	mlx_load_png("../textures/EA.png");
+	mlx_load_png("../textures/SO.png");
+	mlx_load_png("../textures/WE.png");
 	mlx_image_to_window(game->mlx, game->image, 0, 0);
 	mlx_key_hook(game->mlx, move_hook, game);
 	mlx_loop(game->mlx);
