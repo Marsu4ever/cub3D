@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/31 13:58:50 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 10:55:01 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # include <stdio.h> //perror, printf
 # include <stdlib.h> //exit, free, malloc
 # include <string.h> //strerror
-# include <libft/headers/libft.h>
-# include <libft/headers/get_next_line.h>
-# include <MLX42\include\MLX42\MLX42.h>
+# include "MLX42.h"
+# include "libft.h"
+# include "get_next_line.h"
 
 typedef struct s_player
 {
@@ -46,10 +46,10 @@ typedef struct s_vars
     char            **map;
     int             x_map;
     int             y_map;
-    mlx_texture_t   *ea_texture;
-    mlx_texture_t   *no_texture;
-    mlx_texture_t   *so_texture;
-    mlx_texture_t   *we_texture;
+    mlx_texture_t   *east;
+    mlx_texture_t   *north;
+    mlx_texture_t   *south;
+    mlx_texture_t   *west;
     mlx_texture_t   *c_texture;
     mlx_texture_t   *f_texture;
     mlx_texture_t   *text;
@@ -60,6 +60,10 @@ typedef struct s_vars
     int             players_nbr;
 }               t_vars;
 
+
+
+void 	calc_and_make_map(t_vars *game, char **av);
+void    mlx_functions(t_vars *game);
 //errors.c
 void msg_and_exit(char *msg);
 
