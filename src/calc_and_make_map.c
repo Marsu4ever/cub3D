@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   calc_and_make_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:23:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/01 10:23:38 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/01 11:00:28 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void make_map(t_game *game, int num_of_rows_in_map, char **argv)
+static void make_map(t_vars *game, int num_of_rows_in_map, char **argv)
 {
 	int		fd;
 	char	**map;
@@ -69,7 +69,7 @@ static int	number_of_rows_in_map(char **argv)
 }
 
 
-void calc_and_make_map(t_game *game, char **av)
+void calc_and_make_map(t_vars *game, char **av)
 {
 	int	num_of_rows;
 	
