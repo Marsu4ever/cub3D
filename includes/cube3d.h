@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 11:06:07 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 12:23:41 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ typedef struct s_vars
 }               t_vars;
 
 
-
+//calc_and_make_map.c
 void 	calc_and_make_map(t_vars *game, char **av);
+
+//mlx_functions.c
 void    mlx_functions(t_vars *game);
+
 //errors.c
 void msg_and_exit(char *msg, int fd);
 
