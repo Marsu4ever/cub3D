@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 11:06:07 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 15:57:57 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define SCREEN_HEIGHT 540
 # define SCREEN_WIDTH 960
-# define TEXTURE_H 64
-# define TEXTURE_W 64
+# define TEXTURE_H 1
+# define TEXTURE_W 1
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -61,9 +61,17 @@ typedef struct s_vars
 }               t_vars;
 
 
-
+//calc_and_make_map.c
 void 	calc_and_make_map(t_vars *game, char **av);
+
+//mlx_functions.c
 void    mlx_functions(t_vars *game);
+
+//render.c
+void	render(t_vars *game);
+int     get_rgba(int r, int g, int b);
+void    create_floor_ceiling(t_vars *game);
+
 //errors.c
 void msg_and_exit(char *msg, int fd);
 

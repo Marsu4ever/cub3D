@@ -15,10 +15,11 @@ HEADERS = -I includes -I $(LIBMLX_PATH)/include/MLX42 -I "/Users/$(USER)/.brew/o
 LIBS = $(LIBFT) $(LIBMLX) -L/Users/$(USER)/.brew/lib/ -ldl -lglfw -pthread -lm
 
 SRCS = \
-	src/main.c\
-	src/calc_and_make_map.c\
-	src/mlx_functions.c\
-	src/errors/errors.c\
+	src/main.c \
+	src/calc_and_make_map.c \
+	src/mlx_functions.c \
+	src/errors/errors.c \
+	src/render.c
 
 OBJS = $(SRCS:.c=.o)
 
