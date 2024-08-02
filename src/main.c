@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 11:08:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/01 11:19:58 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void init_vars(t_vars *vars)
     player = malloc(sizeof(t_player));
     if (!player)
         msg_and_exit("Allocation of player was failed.\n", 2);
-    vars->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", true);
+    vars->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", false);
     if (!vars->mlx)
         msg_and_exit("Mlx failed to be initialized.\n", 2);
     vars->player = player;
@@ -42,7 +42,7 @@ int main (int ac, char **av)
     
 	game = (t_vars){0};
     if (ac != 2)
-        msg_and_exit("Please use only two arguments!!", 2);
+        msg_and_exit("Please use only two arguments!!\n", 2);
     else
     {
         init_vars(&game);
