@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 15:57:57 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/02 14:58:10 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define SCREEN_WIDTH 960
 # define TEXTURE_H 1
 # define TEXTURE_W 1
+# define FOV 0.55 //field of view
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -30,10 +31,31 @@
 
 typedef struct s_player
 {
-    double	x_pos;
-	double	y_pos;
-	double	x_dir;
-	double	y_dir;
+    double          x_pos;
+	double          y_pos;
+	double          xdir;
+	double          ydir;
+	double          x_plane;
+	double          y_plane;
+	double          x_side_dist;
+	double          y_side_dist;
+	double          x_delta_dist;
+	double          y_delta_dist;
+	double          perp_wall_dist;
+	int		        x_step;
+	int		        y_step;
+	int		        hit;
+	int		        side;
+	int		        line_height;
+	double          x_ray_dir;
+	double          y_ray_dir;
+	double          x_camera;
+	double          move_speed;
+	double          rot_speed;
+	int		        draw_start;
+	int		        draw_end;
+	int		        x_text;
+	int		        y_text;
 }               t_player;
 
 typedef struct s_vars
@@ -72,8 +94,13 @@ void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
 void    create_floor_ceiling(t_vars *game);
 
+//raycasting.c
+void    raycasting(t_player *player, t_vars *game);
+void    calc_the_rays(t_player *player, int r);
+void    hit_check(t_player *player, t_vars *vars);
+
 //errors.c
-void msg_and_exit(char *msg, int fd);
+void    msg_and_exit(char *msg, int fd);
 
 
 #endif

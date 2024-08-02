@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/01 16:09:06 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/02 11:08:41 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	render(t_vars *game)
 	game->c_values = get_rgba(225, 30, 0);
     game->f_values = get_rgba(200, 100, 0);
     create_floor_ceiling(game);
+    raycasting(game->player, game);
 }
 

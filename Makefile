@@ -19,7 +19,8 @@ SRCS = \
 	src/calc_and_make_map.c \
 	src/mlx_functions.c \
 	src/errors/errors.c \
-	src/render.c
+	src/render.c \
+	src/raycasting.c
 
 OBJS = $(SRCS:.c=.o)
 
