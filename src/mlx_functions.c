@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/02 10:53:25 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/05 10:44:03 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 {
 	t_vars	*game;
 
-	game = (t_vars *) game_from_key_hook;
+	game = (t_vars *)game_from_key_hook;
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
@@ -36,13 +36,26 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 
 void    mlx_functions(t_vars *game)
 {
+	printf("inside mlx functions\n");
     game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", true);
+	printf("After init..\n");
 	game->image = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!game->image)
+	{
+		mlx_close_window(game->mlx);
+		msg_and_exit("No new image.\n", 2);
+	}
+	printf("After new image\n");
 	mlx_load_png("./textures/NO.png");
 	mlx_load_png("./textures/EA.png");
 	mlx_load_png("./textures/SO.png");
 	mlx_load_png("./textures/WE.png");
 	mlx_image_to_window(game->mlx, game->image, 0, 0);
+	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
+	{
+		mlx_close_window(game->mlx);
+		msg_and_exit("Image to window failed.\n", 2);
+	}
 	mlx_loop_hook(game->mlx, (void *)render, game);
 	mlx_key_hook(game->mlx, move_hook, game);
 	mlx_loop(game->mlx);

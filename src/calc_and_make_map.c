@@ -6,9 +6,11 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:23:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/01 11:00:28 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/05 11:28:54 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cube3d.h"
 
 #include "cube3d.h"
 
@@ -72,7 +74,7 @@ static int	number_of_rows_in_map(char **argv)
 void calc_and_make_map(t_vars *game, char **av)
 {
 	int	num_of_rows;
-	
+
 	num_of_rows = number_of_rows_in_map(av);
 	make_map(game, num_of_rows, av);
 }

@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/02 11:08:41 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/05 11:07:10 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_rgba(int r, int g, int b)
 
 void	render(t_vars *game)
 {
-	size_t length;
+	int32_t length;
 
 	length = game->image->height * game->image->width * sizeof(int32_t);
 	ft_memset(game->image->pixels, 0, length);
