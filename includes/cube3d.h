@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/03 00:30:10 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/05 13:47:48 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,8 @@ void    hit_check(t_player *player, t_vars *vars);
 //errors.c
 void    msg_and_exit(char *msg, int fd);
 
+//parsing.c
+void 	parsing(int fd, t_vars *game);
+void	check_map(t_vars *game);
 
 #endif

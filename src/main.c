@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/05 11:16:37 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/05 13:30:13 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 int main (int ac, char **av)
 {
     t_vars  game;
-    // int     fd;
+    int     fd;
     
 	game = (t_vars){0};
     if (ac != 2)
@@ -37,9 +37,10 @@ int main (int ac, char **av)
         if (!game.map_path || (ft_strlen(game.map_path) > 5 &&
             ft_strncmp(&game.map_path[ft_strlen(game.map_path) - 4], ".cub", 4)))
             msg_and_exit("Wrong map input.\n", 2);
-        // fd = open(game.map_path, 2);
-    	// if (fd == -1)
-        //     msg_and_exit("Fd not opened.\n", 2);
+        fd = open(game.map_path, 2);
+    	if (fd == -1)
+            msg_and_exit("Fd not opened.\n", 2);
+        parsing(fd, &game);
         calc_and_make_map(&game, av);
 		mlx_functions(&game);
     }
