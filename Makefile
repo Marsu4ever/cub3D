@@ -20,7 +20,9 @@ SRCS = \
 	src/mlx_functions.c \
 	src/errors/errors.c \
 	src/render.c \
-	src/raycasting.c
+	src/raycasting.c \
+	src/parsing.c \
+	src/compass.c
 
 OBJS = $(SRCS:.c=.o)
 
