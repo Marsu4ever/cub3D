@@ -14,15 +14,14 @@
 
 void orientation_calc(char compass, t_vars *game)
 {
-    if (ft_strcmp(&compass, "N") == 0)
+    if (compass == 'N')
         n_s_compass(game->player, -1.0, FOV);
-    else if (ft_strcmp(&compass, "E") == 0)
+    else if (compass == 'E' == 0)
         e_w_compass(game->player, 1.0, FOV);
-    else if (ft_strcmp(&compass, "S") == 0)
+    else if (compass == 'S')
         n_s_compass(game->player, 1.0, -FOV);
-    else if (ft_strcmp(&compass, "W") == 0)
+    else if (compass == 'W')
         e_w_compass(game->player, -1.0, -FOV);
-    printf("Orientation_calc\n");
 }
 
 void player_nbr_check(t_vars *game, char **map, int y)
@@ -30,10 +29,8 @@ void player_nbr_check(t_vars *game, char **map, int y)
     size_t j;
 
     j = 0;
-    printf("Map[y] = %s", map[y]);
     while (j < ft_strlen(map[y]) - 1)
     {
-        printf("map[i][j] = %c\n", map[y][j]);
         if (map[y][j] == 'N' || map[y][j] == 'W' || map[y][j] == 'E' || map[y][j] == 'S')
         {
             orientation_calc(map[y][j], game);
