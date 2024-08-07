@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/07 13:20:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/07 18:36:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ void    msg_and_exit(char *msg, int fd);
 //parsing.c
 void 	parsing(int fd, t_vars *game);
 void	check_map(t_vars *game);
-int		player_amount_check(t_vars *game, char *map, int i);
-void	orientation(char *compass, t_vars *game);
+void	player_nbr_check(t_vars *game, char **map, int i);
+void	orientation_calc(char compass, t_vars *game);
 
 //compass.c
 void n_s_compass(t_player * player, double num, double nmro);

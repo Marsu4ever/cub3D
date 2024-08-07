@@ -6,11 +6,9 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:23:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/05 11:28:54 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/07 17:57:16 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "cube3d.h"
 
 #include "cube3d.h"
 
@@ -34,8 +32,6 @@ static void make_map(t_vars *game, int num_of_rows_in_map, char **argv)
 	while (i < num_of_rows_in_map)
 	{
 		map[i] = get_next_line(fd);
-		if (map[i] == NULL)
-			// free_incomplete_map_and_exit(map, i);
 		i++;
 	}
 	map[i] = NULL;
@@ -61,7 +57,6 @@ static int	number_of_rows_in_map(char **argv)
 	while (string)
 	{
 		string = get_next_line(fd);
-		// printf("%s", string);
 		if (string)
 			num_of_rows_in_map++;
 		free (string);
