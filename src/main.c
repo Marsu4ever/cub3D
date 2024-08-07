@@ -6,12 +6,11 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/02 14:48:57 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/07 10:09:41 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
 
 // static void init_player(t_vars *vars)
 // {
@@ -26,14 +25,16 @@
 int main (int ac, char **av)
 {
     t_vars  game;
-    t_vars  game_parse;
+    
+    t_vars  game1;
 
-    game_parse = (t_vars){0};
-    parsing(&game_parse, ac, av);
-
+    game1 = (t_vars){0};
+    
+    parsing(&game1, ac, av);
+    
 	game = (t_vars){0};
     if (ac != 2)
-        msg_and_exit("Please use only two arguments!!\n", 2);
+        msg_and_exit("Please use only two arguments!!", 2);
     else
     {
         // init_player(&game);
@@ -44,8 +45,4 @@ int main (int ac, char **av)
         calc_and_make_map(&game, av);
 		mlx_functions(&game);
     }
-    return (0);
 }
-
-
-  
