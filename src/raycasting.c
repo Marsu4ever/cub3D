@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/07 15:50:43 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/08 10:13:23 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void hit_check(t_player *player, t_vars *game)
 
 void    calc_the_rays(t_player  *player, int r)
 {
-    player->x_camera = 0.0;
-    if (player == NULL)
-        printf("player is null\n");
     player->x_camera = 2 * r / (double)SCREEN_WIDTH - 1;
     player->x_ray_dir = player->xdir + player->x_plane + player->x_camera;
     player->y_ray_dir = player->ydir + player->y_plane + player->x_camera;
@@ -42,12 +39,10 @@ void    raycasting(t_player *player, t_vars *game)
     int r;
 
     r = 0;
-    (void)game;
-    (void)player;
     while (r < SCREEN_WIDTH)
     {
-        // calc_the_rays(player, r);
-        // hit_check(player, game);
+        calc_the_rays(player, r);
+        hit_check(player, game);
         r++;
     }
 }

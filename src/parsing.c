@@ -54,7 +54,7 @@ void check_map(t_vars *game)
     }
     if (game->players_nbr == 0)
         msg_and_exit("No players found..\n", 2);
-    printf("Number of players: %i", game->players_nbr);
+    printf("Number of players: %i\n", game->players_nbr);
 
 }
 

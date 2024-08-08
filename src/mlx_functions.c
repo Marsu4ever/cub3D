@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/07 13:41:25 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/08 10:14:58 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		printf("Key Press: Right arrow\n");                         //Ray tracing 4 simos
+		printf("Key Press: -------->\n");                         //Ray tracing 4 simos
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		printf("Key Press: Left arrow\n");							//Ray tracing
+		printf("Key Press: <--------\n");							//Ray tracing
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 		printf("Key Press: W arrow\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
@@ -54,6 +54,6 @@ void    mlx_functions(t_vars *game)
 	}
 	mlx_loop_hook(game->mlx, (void *)render, game);
 	mlx_key_hook(game->mlx, move_hook, game);
-	mlx_loop(game->mlx); //segfaults
+	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }
