@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/07 18:36:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/08 14:18:23 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct s_player
 	double          ydir;
 	double          x_plane;
 	double          y_plane;
-	double          x_side_dist;
-	double          y_side_dist;
-	double          x_delta_dist;
-	double          y_delta_dist;
-	double          perp_wall_dist;
+	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
+	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
+	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
+	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
+	double          perp_wall_dist; //perpendtical wall distance
 	int		        x_step;
 	int		        y_step;
 	int		        hit;
@@ -96,8 +96,8 @@ void    create_floor_ceiling(t_vars *game);
 
 //raycasting.c
 void    raycasting(t_player *player, t_vars *game);
-void    calc_the_rays(t_player *player, int r);
-void    hit_check(t_player *player, t_vars *vars);
+void    init_rays(t_player *player, int r);
+void    delta_dist(t_player *player, t_vars *vars);
 
 //errors.c
 void    msg_and_exit(char *msg, int fd);
