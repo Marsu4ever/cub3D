@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/08 16:39:40 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:32:40 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	count_lines_in_file(char *av)
 		line_count++;
 	}
 	close (fd);
-	printf("line_count: %d\n", line_count);
+	// printf("line_count: %d\n", line_count);
 	return (line_count);
 }
 
@@ -176,7 +176,7 @@ void	read_whole_file(t_vars *game, char *av)
 
 	number_of_lines = count_lines_in_file(av);
 	game->whole_file = retrieve_whole_file(av, number_of_lines);
-	print_it(game->whole_file);
+	// print_it(game->whole_file);
 	/*
 		-print whole map - function
 	*/
@@ -739,7 +739,7 @@ char	**get_map(t_vars *game)
 	int		end;
 	char	**map;
 	
-	printf("Get map\n");
+	// printf("Get map\n");
 	start = get_index_start_of_map(game);
 	/*
 		-check for newlines in middle of map
@@ -748,7 +748,7 @@ char	**get_map(t_vars *game)
 	*/
 	end = get_index_end_of_map(game, start);
 	map = make_map(game, start, end);
-	print_it(map);
+	// print_it(map);
 	new_line_check(game, map);
 	change_spaces_to_walls(map);
 	change_new_lines_to_null_terminators(map);

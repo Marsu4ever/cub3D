@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/07 11:59:45 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:43:35 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,11 @@
 int main (int ac, char **av)
 {
     t_vars  game;
-    
-    t_vars  game1;
 
-    game1 = (t_vars){0};
-    
-    parsing(&game1, ac, av);
-    
-	game = (t_vars){0};
-    if (ac != 2)
-        msg_and_exit("Please use only two arguments!!", 2);
-    else
-    {
-        // init_player(&game);
-        game.map_path = ft_strdup(av[1]);
-        if (!game.map_path || (ft_strlen(game.map_path) > 5 &&
-            ft_strncmp(&game.map_path[ft_strlen(game.map_path) - 4], ".cub", 4)))
-            msg_and_exit("Wrong map input.\n", 2);
-        calc_and_make_map(&game, av);
-		mlx_functions(&game);
-    }
+	game = (t_vars){0};    
+    parsing(&game, ac, av);
+    // init_player(&game);
+    calc_and_make_map(&game, av);
+    mlx_functions(&game);
+    return (0);
 }
