@@ -3,14 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/09 09:32:40 by mkorpela         ###   ########.fr       */
+/*   Created: 2024/08/09 11:34:54 by stigkas           #+#    #+#             */
+/*   Updated: 2024/08/09 11:48:05 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void orientation_calc(char compass, t_vars *game)
+{
+    if (compass == 'N')
+        n_s_compass(game->player, -1.0, FOV);
+    else if (compass == 'E' == 0)
+        e_w_compass(game->player, 1.0, FOV);
+    else if (compass == 'S')
+        n_s_compass(game->player, 1.0, -FOV);
+    else if (compass == 'W')
+        e_w_compass(game->player, -1.0, -FOV);
+}
+
+void player_nbr_check(t_vars *game, char **map, int y)
+{
+    size_t j;
+
+    j = 0;
+    while (j < ft_strlen(map[y]) - 1)
+    {
+        if (map[y][j] == 'N' || map[y][j] == 'W' || map[y][j] == 'E' || map[y][j] == 'S')
+        {
+            orientation_calc(map[y][j], game);
+            game->player->x_pos = (double)j;          
+            game->player->y_pos = (double)y;
+            game->players_nbr++;
+        }
+        j++;
+    }
+}
+
+void check_map(t_vars *game)
+{
+    int i;
+
+    i = 0;
+    while (game->map[i])
+    {
+        player_nbr_check(game, game->map, i);
+        i++;
+    }
+    if (game->players_nbr == 0)
+        msg_and_exit("No players found..\n", 2);
+    printf("Number of players: %i\n", game->players_nbr);
+
+}
 
 void	free_array(char **array)
 {
@@ -817,6 +863,8 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 	game->f_values = get_colour(game, "F ");	//Refactor this function [I vote against whileloops]
 	game->c_values = get_colour(game, "C ");
 	game->map = get_map(game);
+
+    check_map(game);
 	/*
 		-set player direction
 	*/
@@ -847,7 +895,8 @@ void	parsing(t_vars *game, int ac, char **av)
 	/*
 		-check user input
 	*/
-	check_argument_count(ac);
+	
+    check_argument_count(ac);
 	check_file_extension(av[1]);
 	read_whole_file(game, av[1]);
 	check_config_file(game);

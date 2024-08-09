@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/08 10:59:08 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/09 11:48:01 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define SCREEN_WIDTH 960
 # define TEXTURE_H 1
 # define TEXTURE_W 1
+# define FOV 0.55 //field of view
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -31,10 +32,31 @@
 
 typedef struct s_player
 {
-    double	x_pos;
-	double	y_pos;
-	double	x_dir;
-	double	y_dir;
+    double          x_pos;
+	double          y_pos;
+	double          xdir;
+	double          ydir;
+	double          x_plane;
+	double          y_plane;
+	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
+	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
+	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
+	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
+	double          perp_wall_dist; //perpendtical wall distance
+	int		        x_step;
+	int		        y_step;
+	int		        hit;
+	int		        side;
+	int		        line_height;
+	double          x_ray_dir;
+	double          y_ray_dir;
+	double          x_camera;
+	double          move_speed;
+	double          rot_speed;
+	int		        draw_start;
+	int		        draw_end;
+	int		        x_text;
+	int		        y_text;
 }               t_player;
 
 typedef struct s_vars
@@ -87,5 +109,21 @@ void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
 void    create_floor_ceiling(t_vars *game);
 
+//raycasting.c
+void    raycasting(t_player *player, t_vars *game);
+void    init_rays(t_player *player, int r);
+void    delta_dist(t_player *player, t_vars *vars);
+
+//errors.c
+void    msg_and_exit(char *msg, int fd);
+
+//parsing.c
+void	check_map(t_vars *game);
+void	player_nbr_check(t_vars *game, char **map, int i);
+void	orientation_calc(char compass, t_vars *game);
+
+//compass.c
+void n_s_compass(t_player * player, double num, double nmro);
+void e_w_compass(t_player * player, double num, double nmro);
 
 #endif
