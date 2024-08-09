@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/02 15:19:14 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/08 10:59:08 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct s_vars
     char            player_start_direction; //N, S, W, E
     int 			player_start_x; // 3
 	int 			player_start_y; // 4
-
     int             map_start;
     char            *map_path;
     char            **map;
@@ -79,7 +78,9 @@ void msg_and_exit(char *msg, int fd);
 void    mlx_functions(t_vars *game);
 
 //parsing.c
+int     get_rgba(int r, int g, int b);  //Does this stay here?
 void	parsing(t_vars *game, int ac, char **av);
+
 
 //render.c
 void	render(t_vars *game);
