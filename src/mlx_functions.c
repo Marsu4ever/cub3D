@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/09 11:40:28 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 11:54:55 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
 		printf("Key Press: D arrow\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
-		printf("Key Press: A arrow\n");			
-		printf("Key Press: A\n");								//Ray tracing
+		printf("Key Press: A arrow\n");
 }
 
 

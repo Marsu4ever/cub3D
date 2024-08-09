@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:34:54 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 11:48:05 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 11:59:50 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void check_map(t_vars *game)
     if (game->players_nbr == 0)
         msg_and_exit("No players found..\n", 2);
     printf("Number of players: %i\n", game->players_nbr);
-
 }
 
 void	free_array(char **array)
