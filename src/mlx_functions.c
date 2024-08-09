@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/09 11:54:55 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 12:09:41 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 		printf("Key Press: D\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		printf("Key Press: A arrow\n");								//Ray tracing
+		printf("Key Press: A\n");								//Ray tracing
 
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
-		printf("Key Press: Right arrow\n");                         //Ray tracing 4 simos
+		printf("Key Press: -------->\n");                         //Ray tracing 4 simos
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
-		printf("Key Press: Left arrow\n");							//Ray tracing
+		printf("Key Press: <--------\n");							//Ray tracing
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
-		printf("Key Press: W arrow\n");								//Ray tracing
+		printf("Key Press: W\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
-		printf("Key Press: S arrow\n");								//Ray tracing
+		printf("Key Press: S\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
-		printf("Key Press: D arrow\n");								//Ray tracing
+		printf("Key Press: D\n");								//Ray tracing
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
-		printf("Key Press: A arrow\n");
+		printf("Key Press: A\n");
 }
 
 
