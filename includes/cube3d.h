@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 11:48:01 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 17:39:31 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,16 @@ typedef struct s_player
 	int		        y_step;
 	int		        hit;
 	int		        side;
-	int		        line_height;
+	int		        wall_height;
 	double          x_ray_dir;
 	double          y_ray_dir;
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	int		        draw_start;
-	int		        draw_end;
-	int		        x_text;
-	int		        y_text;
+	int		        start_of_wall;
+	int		        end_of_wall;
+	int		        x_texture;
+	int		        y_texture;
 }               t_player;
 
 typedef struct s_vars
@@ -77,7 +77,7 @@ typedef struct s_vars
     mlx_texture_t   *north;
     mlx_texture_t   *south;
     mlx_texture_t   *west;
-    mlx_texture_t   *text;
+    mlx_texture_t   *texture;
     int             c_values;
     int             f_values;
     uint32_t        wall_color;
@@ -125,5 +125,8 @@ void	orientation_calc(char compass, t_vars *game);
 //compass.c
 void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
+
+//buildsomewalls.c
+void	init_walls(t_player *player);
 
 #endif

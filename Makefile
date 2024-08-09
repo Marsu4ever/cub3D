@@ -22,7 +22,8 @@ SRCS = \
 	src/render.c \
 	src/raycasting.c \
 	src/parsing.c \
-	src/compass.c
+	src/compass.c \
+	src/buildsomewalls.c
 
 OBJS = $(SRCS:.c=.o)
 
