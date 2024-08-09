@@ -34,8 +34,8 @@ void player_nbr_check(t_vars *game, char **map, int y)
         if (map[y][j] == 'N' || map[y][j] == 'W' || map[y][j] == 'E' || map[y][j] == 'S')
         {
             orientation_calc(map[y][j], game);
-            game->player->x_pos = (double)j + 0.4;          
-            game->player->y_pos = (double)y + 0.4;
+            game->player->x_pos = (double)j;          
+            game->player->y_pos = (double)y;
             game->players_nbr++;
         }
         j++;

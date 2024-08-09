@@ -6,16 +6,16 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/08 14:21:42 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 11:17:30 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void dda_loop(t_player *player, t_vars *game)
-{
-    //update of x_side_dist and y_side_dist if a ray hits a wall
-}
+// void dda_loop(t_player *player, t_vars *game)
+// {
+//     //update of x_side_dist and y_side_dist if a ray hits a wall
+// }
 
 void calc_rays(t_player *player, t_vars * game)
 {
@@ -73,7 +73,7 @@ void    raycasting(t_player *player, t_vars *game)
         init_rays(player, r);
         delta_dist(player, game);
         calc_rays(player, game);
-        dda_loop(player, game);
+        // dda_loop(player, game);
         r++;
     }
 }
