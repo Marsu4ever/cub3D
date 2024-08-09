@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:27 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 16:30:37 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,12 @@ static void init_player(t_vars *vars)
 int main (int ac, char **av)
 {
     t_vars  game;
-	game = (t_vars){0};
+	
+    game = (t_vars){0};
     game.player = NULL;
-
-
+    
     init_player(&game);
     parsing(&game, ac, av);
-   
     calc_and_make_map(&game, av);
     mlx_functions(&game);
     return (0);

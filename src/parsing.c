@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 11:34:54 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 11:59:50 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 16:22:30 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void orientation_calc(char compass, t_vars *game)
 {
     if (compass == 'N')
         n_s_compass(game->player, -1.0, FOV);
-    else if (compass == 'E' == 0)
+    else if (compass == 'E')
         e_w_compass(game->player, 1.0, FOV);
     else if (compass == 'S')
         n_s_compass(game->player, 1.0, -FOV);
@@ -138,9 +138,6 @@ int	count_lines_in_file(char *av)
 	int		fd;
 	char	*line;
 	int		line_count;
-	int i;
-
-	i = 0;
 
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
@@ -894,7 +891,6 @@ void	parsing(t_vars *game, int ac, char **av)
 	/*
 		-check user input
 	*/
-	
     check_argument_count(ac);
 	check_file_extension(av[1]);
 	read_whole_file(game, av[1]);
