@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 12:43:37 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/09 13:30:19 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ void dda_loop(t_player *player, t_vars *game)
         }
         if (game->map[game->x_map][game->y_map] > 0)
             player->hit = 1;
+        if (player->side == 0)
+            player->perp_wall_dist = (player->x_side_dist - player->x_delta_dist) / player->x_ray_dir;
+        else
+            player->perp_wall_dist = (player->y_side_dist - player->y_delta_dist) / player->y_ray_dir;
     }
 }
 
