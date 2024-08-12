@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/09 09:32:40 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/12 09:55:25 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,18 +245,31 @@ bool	check_if_map(char *line)
 	int	i;
 
 	i = 0;
-	if (line[i] == ' ')//Consider what spaces are...
+	while (line[i])//Consider what spaces are...
 	{
+		if (line[i] == '1')
+		{
+			return (true);
+		}
 		i++;
 	}
-	if (line[i] == '1')
-	{
-		return (true);
-	}
-	else
-	{
-		return (false);
-	}
+	return (false);
+	// if (line[i] == '1' || line[i] == '0')
+	// {
+	// 	return (true);
+	// }
+	// if (line[i] == 'N' || line[i] == 'S')
+	// {
+	// 	return (true);
+	// }
+	// if (line[i] == 'W' || line[i] == 'E')
+	// {
+	// 	return (true);
+	// }	
+	// else
+	// {
+		
+	// }
 }
 
 void	check_if_map_exists_and_is_last(t_vars *game)
@@ -271,7 +284,7 @@ void	check_if_map_exists_and_is_last(t_vars *game)
 	{
 		if (check_if_identifier(game->whole_file[i]) == true)
 			identifier_count++;
-		if (check_if_map(game->whole_file[i]) == true)
+		else if (check_if_map(game->whole_file[i]) == true)
 		{
 			if (identifier_count == 6)
 			{
@@ -504,6 +517,35 @@ int	get_colour(t_vars *game, char *identifier)
 	return (colour_value);
 }
 
+bool	check_if_indicator(char *line)
+{
+	if (ft_strncmp(line, "NO ", ft_strlen("NO ")) == 0)
+	{
+		return (true);
+	}
+	if (ft_strncmp(line, "SO ", ft_strlen("SO ")) == 0)
+	{
+		return (true);
+	}
+	if (ft_strncmp(line, "WE ", ft_strlen("WE ")) == 0)
+	{
+		return (true);
+	}
+	if (ft_strncmp(line, "EA ", ft_strlen("EA ")) == 0)
+	{
+		return (true);
+	}
+	if (ft_strncmp(line, "F ", ft_strlen("F ")) == 0)
+	{
+		return (true);
+	}
+	if (ft_strncmp(line, "C ", ft_strlen("C ")) == 0)
+	{
+		return (true);
+	}
+	return (false);		
+}
+
 int	get_index_start_of_map(t_vars *game)
 {
 	int	i;
@@ -511,7 +553,11 @@ int	get_index_start_of_map(t_vars *game)
 	i = 0;
 	while (game->whole_file[i])
 	{
-		if (check_if_map(game->whole_file[i]) == true)
+		if (check_if_indicator(game->whole_file[i]) == true)
+		{
+			;
+		}
+		else if (check_if_map(game->whole_file[i]) == true)
 		{
 			return (i) ;
 		}
@@ -748,7 +794,7 @@ char	**get_map(t_vars *game)
 	*/
 	end = get_index_end_of_map(game, start);
 	map = make_map(game, start, end);
-	// print_it(map);
+	print_it(map);
 	new_line_check(game, map);
 	change_spaces_to_walls(map);
 	change_new_lines_to_null_terminators(map);
@@ -808,6 +854,101 @@ char	**get_map(t_vars *game)
 	*/
 }
 
+char	search_for_player(char *line)
+{
+	int		i;
+	char	player;
+
+	i = 0;
+	player = '0';
+	while (line[i])
+	{
+		if (line[i] == 'N')
+		{
+			player = 'N';
+		}
+		if (line[i] == 'S')
+		{
+			player = 'S';
+		}
+		if (line[i] == 'W')
+		{
+			player = 'W';
+		}
+		if (line[i] == 'E')
+		{
+			player = 'E';
+		}					
+		i++;
+	}
+	return (player);
+}
+
+char	get_player_start_direction(t_vars *game)
+{
+	int	i;
+	char	player_direction;
+
+	i = 0;
+	player_direction = '0';
+	while (game->map[i])
+	{
+		player_direction = search_for_player(game->map[i]);
+		if (player_direction != '0')
+		{
+			return (player_direction);
+		}
+		i++;
+	}
+	return (player_direction);
+}
+
+int	get_player_start_x(t_vars *game)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = 0;
+	while(game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j] != '\0')
+		{
+			if (game->map[i][j] == game->player_start_direction)
+			{
+				return (j);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
+int	get_player_start_y(t_vars *game)
+{
+	int	i;
+	int	j;
+	
+	i = 0;
+	j = 0;
+	while(game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j] != '\0')
+		{
+			if (game->map[i][j] == game->player_start_direction)
+			{
+				return (i);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (-1);
+}
+
 void	check_and_extract_data_from_config_file(t_vars *game)
 {
 	game->north = get_texture(game, "NO ");		//Refactor this function [I do not like while_loops]
@@ -817,6 +958,12 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 	game->f_values = get_colour(game, "F ");	//Refactor this function [I vote against whileloops]
 	game->c_values = get_colour(game, "C ");
 	game->map = get_map(game);
+	game->player_start_direction = get_player_start_direction(game);
+	game->player_start_x = get_player_start_x(game); 	//I don't need these.
+	game->player_start_y = get_player_start_y(game);	//I don't need these.
+	printf("game->player_start_x: %d\n", game->player_start_x);
+	printf("game->player_start_y: %d\n", game->player_start_y);
+	// printf("game->player_start_direction: %c\n", game->player_start_direction);
 	/*
 		-set player direction
 	*/
