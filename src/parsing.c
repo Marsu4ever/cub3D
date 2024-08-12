@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/12 10:30:04 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:05:27 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void check_map(t_vars *game)
     }
     if (game->players_nbr == 0)
         msg_and_exit("No players found..\n", 2);
-    printf("Number of players: %i\n", game->players_nbr);
+    // printf("Number of players: %i\n", game->players_nbr);
 }
 
 void	free_array(char **array)
@@ -824,6 +824,217 @@ void	check_number_of_players(t_vars *game, char **map)
 	}
 }
 
+int	count_map_rows(char **map)
+{
+	int i;
+
+	i = 0;
+	while (map[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+void	check_top(t_vars *game, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[0][i])
+	{
+		if (map[0][i] != '1')
+		{
+			error_msg_and_exit("Map is not closed at the Top (i.e. Use only ONEs (and spaces))", NULL, game);
+		}
+		i++;
+	}
+}
+
+void	check_bottom(t_vars *game, char **map, int row_count)
+{
+	int	i;
+	int	last_row;
+
+	last_row = row_count - 1;
+	i = 0;
+	while (map[last_row][i])
+	{
+		if (map[last_row][i] != '1')
+		{
+			error_msg_and_exit("Map is not closed at the Bottom (i.e. Use only ONEs (and spaces))", NULL, game);
+		}
+		i++;
+	}
+}
+
+void	must_have_at_least_3_rows(t_vars *game, int row_count)
+{
+	if (row_count <= 2)
+	{
+		error_msg_and_exit("Map should have at least 3 rows to be closed", NULL, game);
+	}
+}
+
+void	check_last_char_is_one(t_vars *game, char *line)
+{
+	int	last_char;
+
+	last_char = ft_strlen(line) - 1;
+	if (line[last_char] != '1')
+	{
+		printf("line[last_char]: %c\n", line[last_char]);
+		printf("line: %s\n", line);
+		error_msg_and_exit("Map is not closed at the Right (i.e. last char is not a '1' or space)", NULL, game);
+	}
+}
+
+void	check_overhanging_chars(t_vars *game, char *line, int other_row_len)
+{
+	int	i;
+	
+	i = other_row_len;
+	while (line[i])
+	{
+		if (line[i] != '1')
+		{
+			printf("char: %c\n", line[i]);
+			printf("line: %s\n", line);
+			error_msg_and_exit("Map is not closed at the Right - check overhanging chars.", NULL, game);
+		}
+		i++;
+	}
+}
+
+/* void	check_right(t_vars *game, char **map, int row_count)
+{
+	int	i;
+	int	row1;
+	int	row2;
+
+	i = 0;
+	while (i < row_count - 1)
+	{
+		row1 = ft_strlen(map[i]);
+		row2 = ft_strlen(map[i + 1]);
+		if (row1 >= row2)
+		{
+			check_last_char_is_one(game, map[i + 1]);
+		}
+		// else if (row1 == row2)
+		// {
+		// 	check_last_char_is_one(game, map[i + 1]);
+		// }
+		else if (row1 + 1 == row2)
+		{
+			check_last_char_is_one(game, map[i + 1]);
+		}
+		else
+		{
+			check_protruding_chars_are_one(game, map[i + 1], row1);
+		}
+		i++;
+	}
+} */
+
+void	check_lines_end_with_1(t_vars *game, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		check_last_char_is_one(game, map[i]);
+		i++;
+	}
+}
+
+void	check_overhanging_chars_are_1(t_vars *game, char **map, int row_count)
+{
+	int	i;
+	int	row1;
+	int	row2;
+
+	i = 0;
+	while (i < row_count - 1)
+	{
+		row1 = ft_strlen(map[i]);
+		row2 = ft_strlen(map[i + 1]);
+		if ((row1 == row2) || (row1 == row2 + 1) || (row1 + 1 == row2))
+			;
+		else
+		{
+			// printf("map[%d    ]: %s\n", i, map[i]);
+			// printf("map[%d + 1]: %s\n", i, map[i + 1]);
+			if (row1 < row2)
+			{
+				check_overhanging_chars(game, map[i + 1], row1);
+			}
+			if (row1 > row2)
+			{
+				check_overhanging_chars(game, map[i], row2);
+			}
+		}
+		i++;
+	}	
+}
+
+void	check_right(t_vars *game, char **map, int row_count)
+{
+	check_lines_end_with_1(game, map);
+	check_overhanging_chars_are_1(game, map, row_count);	
+}
+
+
+void	check_left(t_vars *game, char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] != '1')
+		{
+			error_msg_and_exit("Map is not closed on the Left (i.e. Use only ONEs (and spaces))", NULL, game);
+		}
+		i++;
+	}
+}
+
+void	check_if_closed(t_vars *game, char **map)
+{
+	int	row_count;
+	
+	row_count = count_map_rows(map);
+	// printf("row_count: %d\n", row_count);
+	must_have_at_least_3_rows(game, row_count);
+	check_top(game, map);
+	check_bottom(game, map, row_count);
+	check_left(game, map);
+	check_right(game, map, row_count);
+	
+	// check_if_only_1_or_two_rows();
+	
+	/*
+		check top, bottom, left, right
+	
+		Rule 1: 1st and last row must  be "1's"
+
+		Rule 5: Check LHS is 
+
+		Rule 2: if r2 =< r1
+					last char must be '1'
+		Rule 3: if r2 == r1 + 1
+					last char must be '1'
+		Rule 4: if r2 > r1 + 1
+
+
+		Consider if map is only 1/2 rows
+			-if one or two lines
+				-map is not closed
+	*/
+}
+
 char	**get_map(t_vars *game)
 {
 	int		start;
@@ -838,13 +1049,17 @@ char	**get_map(t_vars *game)
 		-check map forward
 	*/
 	end = get_index_end_of_map(game, start);
-	map = make_map(game, start, end);
+	map = make_map(game, start, end); /*Consider putting into a struct here. It'll help with freeing.*/
 	print_it(map);
 	new_line_check(game, map);
 	change_spaces_to_walls(map);
+	printf("After change\n");
+	print_it(map);
 	change_new_lines_to_null_terminators(map);
 	check_for_invalid_character(game, map);
 	check_number_of_players(game, map);
+
+	check_if_closed(game, map);
 	// int i;
 
 	// i = 0;
@@ -994,6 +1209,49 @@ int	get_player_start_y(t_vars *game)
 	return (-1);
 }
 
+/*
+	-check if indicator
+	-check if map
+	-check if (spaces/tabs + newline)
+	-otherwise error
+*/
+
+int	skip_map_section(char **map)
+{
+	int	row_count;
+	
+	row_count = count_map_rows(map);
+	row_count--;
+	return (row_count);
+}
+
+void	check_for_errors_in_config_file(t_vars *game)
+{
+	int	i;
+
+	i = 0;
+	while (game->whole_file[i])
+	{
+		if (check_if_indicator(game->whole_file[i]) == true)
+		{
+			;
+		}
+		else if (check_if_map(game->whole_file[i]) == true)
+		{
+			i += skip_map_section(game->map);
+		}
+		else if (game->whole_file[i][0] == '\n')
+		{
+			;
+		}
+		else
+		{
+			error_msg_and_exit("Config file can only contain newlines between elements.", NULL, game);
+		}
+		i++;
+	}
+}
+
 void	check_and_extract_data_from_config_file(t_vars *game)
 {
 	game->north = get_texture(game, "NO ");		//Refactor this function [I do not like while_loops]
@@ -1004,7 +1262,8 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 	game->c_values = get_colour(game, "C ");
 	game->map = get_map(game);
 	check_map(game);
-	
+	check_for_errors_in_config_file(game);
+
 	/* 	
 		game->player_start_direction = get_player_start_direction(game);
 		game->player_start_x = get_player_start_x(game); 	//I don't need these.
