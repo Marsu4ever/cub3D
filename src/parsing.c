@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/12 16:05:27 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/12 16:14:53 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,7 +353,9 @@ void	check_config_file(t_vars *game)
 	check_for_identifier(game, "EA ");
 	check_for_identifier(game, "F ");
 	check_for_identifier(game, "C ");
-	check_if_map_exists_and_is_last(game);
+	check_if_map_exists_and_is_last(game); /*Set map???*/
+
+	/*Check config file...*/
 	/*
 		-check for invalid input
 			-
