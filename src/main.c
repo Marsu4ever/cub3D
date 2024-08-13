@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 11:57:27 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/13 11:27:26 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main (int ac, char **av)
     init_player(&game);
     parsing(&game, ac, av);
    
-    calc_and_make_map(&game, av);
+    // calc_and_make_map(&game, av);
     mlx_functions(&game);
     return (0);
 }

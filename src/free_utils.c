@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/13 12:28:57 by mkorpela         ###   ########.fr       */
+/*   Created: 2024/08/13 13:29:04 by mkorpela          #+#    #+#             */
+/*   Updated: 2024/08/13 13:30:01 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void msg_and_exit(char *msg, int fd)
+void	free_array(char **array)
 {
-    ft_putstr_fd(msg, fd);
-    exit(1);
-}
+	int	i;
 
-void	error_msg_and_exit(char	*msg, char *specifier, t_vars *game)
-{
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(msg, 2);
-	if (specifier != NULL)
+	i = 0;
+	while (array[i])
 	{
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(specifier, 2);
+		free(array[i]);
+		i++;
 	}
-	ft_putstr_fd("\n", 2);
-	if (game != NULL)
-	{
-		/*free and destroy*/
-	}
-	exit (1);
+	free(array);
+	array = NULL;
 }
