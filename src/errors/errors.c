@@ -6,16 +6,16 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/13 12:28:57 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:18:33 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void msg_and_exit(char *msg, int fd)
+void	msg_and_exit(char *msg, int fd)
 {
-    ft_putstr_fd(msg, fd);
-    exit(1);
+	ft_putstr_fd(msg, fd);
+	exit(1);
 }
 
 void	error_msg_and_exit(char	*msg, char *specifier, t_vars *game)

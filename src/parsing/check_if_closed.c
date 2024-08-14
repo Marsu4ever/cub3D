@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:52:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 12:53:57 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:53:52 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	check_left(t_vars *game, char **map)
 void	check_if_closed(t_vars *game, char **map)
 {
 	int	row_count;
-	
+
 	row_count = count_map_rows(map);
 	// printf("row_count: %d\n", row_count);
 	must_have_at_least_3_rows(game, row_count);

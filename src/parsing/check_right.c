@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:49:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 12:50:50 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:51:31 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	check_lines_end_with_1(t_vars *game, char **map)
 void	check_overhanging_chars(t_vars *game, char *line, int other_row_len)
 {
 	int	i;
-	
+
 	i = other_row_len;
 	while (line[i])
 	{
@@ -87,5 +87,5 @@ void	check_overhanging_chars_are_1(t_vars *game, char **map, int row_count)
 void	check_right(t_vars *game, char **map, int row_count)
 {
 	check_lines_end_with_1(game, map);
-	check_overhanging_chars_are_1(game, map, row_count);	
+	check_overhanging_chars_are_1(game, map, row_count);
 }

@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:38:47 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 12:40:08 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:06:06 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	check_for_identifier(t_vars *game, char *identifier)
 	if (identifier_count == 1)
 	{
 		return ;
-	} 
+	}
 	if (identifier_count >= 2)
 	{
 		error_msg_and_exit("Duplicates of identifier detected", identifier, NULL);
-	} 
+	}
 }
 
 void	check_config_file(t_vars *game)
@@ -78,9 +78,10 @@ void	check_config_file(t_vars *game)
 	check_for_identifier(game, "EA ");
 	check_for_identifier(game, "F ");
 	check_for_identifier(game, "C ");
-	check_if_map_exists_and_is_last(game); /*Set map???*/
-
-	/*Check config file...*/
+	check_if_map_exists_and_is_last(game); 
+	/*
+		Check config file...
+	*/
 	/*
 		-check for invalid input
 			-

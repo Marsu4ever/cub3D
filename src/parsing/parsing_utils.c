@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:43:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 15:12:37 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:10:55 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	count_map_rows(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -24,7 +24,7 @@ int	count_map_rows(char **map)
 	return (i);
 }
 
-char	*character_replace(char	*line, char	char_initial, char char_final)
+char	*character_replace(char	*line, char char_initial, char char_final)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ char	*character_replace(char	*line, char	char_initial, char char_final)
 	{
 		return (line);
 	}
-	i = 0;	
+	i = 0;
 	while (line[i] != '\0')
 	{
 		if (line[i] == char_initial)
@@ -82,7 +82,7 @@ bool	check_if_map(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i])//Consider what spaces are...
+	while (line[i]) //Consider what spaces are...
 	{
 		if (line[i] == '1')
 		{
@@ -119,7 +119,7 @@ bool	check_if_identifier(char *line)
 		"C ",
 		"F ",
 		NULL
-    };
+	};
 
 	int	i;
 
@@ -161,7 +161,7 @@ bool	check_if_indicator(char *line)
 	{
 		return (true);
 	}
-	return (false);		
+	return (false);
 }
 
 int	get_element_index(t_vars *game, char *identifier)

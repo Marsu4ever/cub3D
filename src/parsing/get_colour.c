@@ -6,13 +6,13 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:25:55 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 15:17:56 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:59:31 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	check_if_only_digits_and_commas(t_vars *game, char	*value, char *identifier)
+void	check_if_only_digits_and_commas(t_vars *game, char *value, char *identifier)
 {
 	int	i;
 
@@ -21,16 +21,15 @@ void	check_if_only_digits_and_commas(t_vars *game, char	*value, char *identifier
 	while (value[i])
 	{
 		// printf("%c\n", value[i]);
-		if ((value[i] >= '0' && value[i] <='9') || value[i] == ',')
+		if ((value[i] >= '0' && value[i] <= '9') || value[i] == ',')
 		{
-			;
+			i++;
 		}
 		else
 		{
 			free(value);
 			error_msg_and_exit("Only digits[0-9] and commas are allowed - Check the following identifier", identifier, game);
 		}
-		i++;
 	}
 }
 
@@ -79,7 +78,7 @@ int	check_range_and_get_colour_value(t_vars *game, char *value, char *identifier
 	char	**rgb_strings;
 	int		i;
 	int		number;
-	
+
 	rgb_strings = ft_split(value, ',');
 	free(value);
 	if (rgb_strings == NULL)
@@ -109,15 +108,15 @@ int	get_colour(t_vars *game, char *identifier)
 	int		i;
 	int		colour_value;
 
-    i = get_element_index(game, identifier);
-    value_start = get_identifier_start(game->config_file[i], identifier);
-    // printf("original line: %s", game->config_file[i]);
-    value = parse_out_key_and_spaces(game->config_file[i], value_start);// Do I need this?
-    value = character_replace(value, '\n', '\0');
-    // printf("value of original line: %s\n", value);
-    check_if_only_digits_and_commas(game, value, identifier);
-    check_for_3_numbers_and_2_commas(game, value, identifier);
+	i = get_element_index(game, identifier);
+	value_start = get_identifier_start(game->config_file[i], identifier);
+	// printf("original line: %s", game->config_file[i]);
+	value = parse_out_key_and_spaces(game->config_file[i], value_start);// Do I need this?
+	value = character_replace(value, '\n', '\0');
+	// printf("value of original line: %s\n", value);
+	check_if_only_digits_and_commas(game, value, identifier);
+	check_for_3_numbers_and_2_commas(game, value, identifier);
 	colour_value = -1;
-    colour_value = check_range_and_get_colour_value(game, value, identifier);
+	colour_value = check_range_and_get_colour_value(game, value, identifier);
 	return (colour_value);
 }

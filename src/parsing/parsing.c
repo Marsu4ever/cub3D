@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 15:13:15 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:17:24 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	print_it(char **array)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (array[i])
 	{
-		printf("row: %d: %s", i,  array[i]);
+		printf("row: %d: %s", i, array[i]);
 		i++;
 	}
 }
@@ -87,7 +87,6 @@ mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 // 	return (false);
 // }
 
-
 char	search_for_player(char *line)
 {
 	int		i;
@@ -120,8 +119,8 @@ char	search_for_player(char *line)
 
 char	get_player_start_direction(t_vars *game)
 {
-	int	i;
 	char	player_direction;
+	int		i;
 
 	i = 0;
 	player_direction = '0';
@@ -141,10 +140,10 @@ int	get_player_start_x(t_vars *game)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
-	while(game->map[i])
+	while (game->map[i])
 	{
 		j = 0;
 		while (game->map[i][j] != '\0')
@@ -164,10 +163,10 @@ int	get_player_start_y(t_vars *game)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	j = 0;
-	while(game->map[i])
+	while (game->map[i])
 	{
 		j = 0;
 		while (game->map[i][j] != '\0')
@@ -193,7 +192,7 @@ int	get_player_start_y(t_vars *game)
 int	skip_map_section(char **map)
 {
 	int	row_count;
-	
+
 	row_count = count_map_rows(map);
 	row_count--;
 	return (row_count);
@@ -208,7 +207,7 @@ void	check_for_errors_in_config_file(t_vars *game)
 	{
 		if (check_if_indicator(game->config_file[i]) == true)
 		{
-			;
+			i++;
 		}
 		else if (check_if_map(game->config_file[i]) == true)
 		{
@@ -216,29 +215,28 @@ void	check_for_errors_in_config_file(t_vars *game)
 		}
 		else if (game->config_file[i][0] == '\n')
 		{
-			;
+			i++;
 		}
 		else
 		{
 			error_msg_and_exit("Config file can only contain newlines between elements.", NULL, game);
 		}
-		i++;
 	}
 }
 
 void	check_and_extract_data_from_config_file(t_vars *game)
 {
-	game->north = get_texture(game, "NO ");		//Refactor this function [I do not like while_loops]
+	game->north = get_texture(game, "NO ");	//Refactor this function [I do not like while_loops]
 	game->south = get_texture(game, "SO ");
 	game->east = get_texture(game, "EA ");
 	game->west = get_texture(game, "WE ");
-	game->f_values = get_colour(game, "F ");	//Refactor this function [I vote against whileloops]
+	game->f_values = get_colour(game, "F ");//Refactor this function [I vote against whileloops]
 	game->c_values = get_colour(game, "C ");
 	game->map = get_map(game);
 	find_player_position(game); /*Set player orientation???*/
 	check_for_errors_in_config_file(game);
 	free_array(game->config_file);
-	
+
 	/*
 		game->player_start_direction = get_player_start_direction(game);
 		game->player_start_x = get_player_start_x(game); 	//I don't need these.
@@ -256,18 +254,15 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 void	parsing(t_vars *game, int ac, char **av)
 {
 	check_user_input(ac, av[1]);
-
 	read_config_file(game, av[1]);
 	check_config_file(game);
 	check_and_extract_data_from_config_file(game);
 	/*
 		-extract from config file
 	*/
-	
 }
 
-
-  /* 
+  /*
         Idea for code structure
 
         -Parsing

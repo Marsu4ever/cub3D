@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:02:19 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 13:06:23 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:07:45 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	new_line_check(t_vars *game, char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map[i])
@@ -30,7 +30,7 @@ void	new_line_check(t_vars *game, char **map)
 void	change_spaces_to_walls(char **map)
 {
 	int	i;
-	
+
 	i = 0;
 	while (map[i])
 	{
@@ -42,7 +42,7 @@ void	change_spaces_to_walls(char **map)
 void	change_new_lines_to_null_terminators(char **map)
 {
 	int	i;
-	
+
 	i = 0;
 	while (map[i])
 	{
@@ -60,21 +60,20 @@ void	is_there_invalid_character(t_vars *game, char *line)
 	{
 		if (line[i] == '1' || line[i] == '0')
 		{
-			;
+			i++;
 		}
 		else if (line[i] == 'N' || line[i] == 'S')
 		{
-			;
+			i++;
 		}
 		else if (line[i] == 'W' || line[i] == 'E')
 		{
-			;
+			i++;
 		}
 		else
 		{
 			error_msg_and_exit("Map should only contain 0, 1, N, S, W, E or spaces", NULL, game);
-		}
-		i++;					
+		}					
 	}
 }
 
@@ -126,7 +125,7 @@ int	char_count_in_array(char **map, char character)
 void	check_number_of_players(t_vars *game, char **map)
 {
 	int	player_count;
-	
+
 	player_count = 0;
 	player_count += char_count_in_array(map, 'N');//ALSO set the player into struct
 	player_count += char_count_in_array(map, 'S');
@@ -183,7 +182,7 @@ char	**make_map(t_vars *game, int start, int end)
 int	get_index_end_of_map(t_vars *game, int start)
 {
 	int	end;
-	
+
 	end = start;
 	while (game->config_file[start])
 	{
@@ -205,11 +204,11 @@ int	get_index_start_of_map(t_vars *game)
 	{
 		if (check_if_indicator(game->config_file[i]) == true)
 		{
-			;
+			i++;
 		}
 		else if (check_if_map(game->config_file[i]) == true)
 		{
-			return (i) ;
+			return (i);
 		}
 		i++;
 	}
@@ -221,7 +220,7 @@ char	**get_map(t_vars *game)
 	int		start;
 	int		end;
 	char	**map;
-	
+
 	// printf("Get map\n");
 	
 	/*

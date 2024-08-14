@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:23:25 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 12:25:14 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/14 09:55:17 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static void	check_file_extension(char *av)
 
 		is it a directory???
 	*/
-
 	size_t	i;
 
 	i = ft_strlen(av);
@@ -47,7 +46,7 @@ static void	check_file_extension(char *av)
 
 void	check_user_input(int ac, char *av)
 {
-    check_argument_count(ac);
+	check_argument_count(ac);
 	/*
 		-check_if_directory
 	*/
