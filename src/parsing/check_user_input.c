@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:23:25 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 09:55:17 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/16 12:31:53 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	check_argument_count(int ac)
 {
 	if (ac != 2)
 	{		
-		error_msg_and_exit("Pass in just ONE argument.", NULL, NULL);
+		error_msg_and_exit(WRONG_ARG_COUNT, NULL, NULL);
 	}
 	return ;
 }
@@ -36,12 +36,22 @@ static void	check_file_extension(char *av)
 	i = ft_strlen(av);
 	if (i < 5)
 	{
-		error_msg_and_exit("File name is too short.", NULL, NULL);
+		error_msg_and_exit(FILE_TOO_SHORT, NULL, NULL);
 	}
-	if (ft_strcmp(av + i - 4, ".cub") != 0)
+	/*
+		-check if directory
+		open function???
+		chdir???
+	*/
+	if (ft_strcmp(&av[i - 4], ".cub") != 0)
 	{
-		error_msg_and_exit("File should end with .cub", NULL, NULL);
+		error_msg_and_exit(FILE_NO_END_CUB, NULL, NULL);
 	}
+	if (ft_strcmp(&av[i - 5], "/.cub") == 0)
+	{
+		error_msg_and_exit(HIDDEN_FILE_CUB, NULL, NULL);
+	}
+
 }
 
 void	check_user_input(int ac, char *av)

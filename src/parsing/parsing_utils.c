@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:43:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 10:10:55 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 16:08:37 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*parse_out_key_and_spaces(char *line, int value_start)
 	value = ft_strdup(&line[value_start]);
 	if (value == NULL)
 	{
-		error_msg_and_exit("Malloc failed", "parse_out_key_and_spaces", NULL);
+		error_msg_and_exit(MALLOC_FAIL, "parse_out_key_and_spaces", NULL);
 	}
 	return (value);
 	// modified_line = character_replace(modified_line, '\n', '\0');
@@ -178,4 +178,20 @@ int	get_element_index(t_vars *game, char *identifier)
 		i++;
 	}
 	return (-1);
+}
+
+int	get_index_end_of_map(t_vars *game, int start)
+{
+	int	end;
+
+	end = start;
+	while (game->config_file[start])
+	{
+		if (ft_strchr(game->config_file[start], '1') != NULL)
+		{
+			end = start;
+		}
+		start++;
+	}
+	return (end);
 }

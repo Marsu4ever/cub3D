@@ -16,23 +16,22 @@ LIBS = $(LIBFT) $(LIBMLX) -L/Users/$(USER)/.brew/lib/ -ldl -lglfw -pthread -lm
 
 SRCS = \
 	src/main.c \
-	src/calc_and_make_map.c \
-	src/parsing/check_config_file.c \
+	src/parsing/check_file.c \
 	src/parsing/check_if_closed.c \
 	src/parsing/check_right.c \
 	src/parsing/check_user_input.c \
 	src/parsing/find_player_position.c \
 	src/free_utils.c \
 	src/parsing/get_colour.c \
-	src/parsing/get_map.c \
-	src/parsing/read_config_file.c \
+	src/parsing/modify_and_check_map.c \
+	src/parsing/read_file.c \
 	src/mlx_functions.c \
 	src/errors/errors.c \
 	src/render.c \
 	src/raycasting.c \
 	src/parsing/parsing.c \
 	src/parsing/parsing_utils.c \
-	src/parsing/compass.c
+	src/parsing/compass.c \
 
 OBJS = $(SRCS:.c=.o)
 

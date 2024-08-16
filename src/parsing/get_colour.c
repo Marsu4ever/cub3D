@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:25:55 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 09:59:31 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:54:15 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_if_only_digits_and_commas(t_vars *game, char *value, char *identifier
 		else
 		{
 			free(value);
-			error_msg_and_exit("Only digits[0-9] and commas are allowed - Check the following identifier", identifier, game);
+			error_msg_and_exit(COLOUR_INVALID_CHAR, identifier, game);
 		}
 	}
 }
@@ -68,7 +68,7 @@ void	check_for_3_numbers_and_2_commas(t_vars *game, char	*value, char *identifie
 	if (number_count != 3 || comma_count != 2)
 	{
 		free(value);
-		error_msg_and_exit("Numbers and commas must have format - [X,X,X]", identifier, game);
+		error_msg_and_exit(COLOUR_INVALID_FORMAT, identifier, game);
 	}
 }
 
@@ -83,7 +83,7 @@ int	check_range_and_get_colour_value(t_vars *game, char *value, char *identifier
 	free(value);
 	if (rgb_strings == NULL)
 	{
-		error_msg_and_exit("Malloc fail at ft_split", identifier, game);
+		error_msg_and_exit(MALLOC_FAIL, identifier, game);
 	}
 	i = 0;
 	while (i < 3)
@@ -92,7 +92,7 @@ int	check_range_and_get_colour_value(t_vars *game, char *value, char *identifier
 		if (number > 255 || number < 0)
 		{
 			free_array(rgb_strings);
-			error_msg_and_exit("Numbers must have range of 0-255 - check identifier", identifier, game);
+			error_msg_and_exit(COLOUR_WRONG_RANGE, identifier, game);			
 		}
 		rgb_numbers[i] = number;
 		i++;

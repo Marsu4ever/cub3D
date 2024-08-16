@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_map.c                                          :+:      :+:    :+:   */
+/*   modify_and_check_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:02:19 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 10:07:45 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:29:19 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	new_line_check(t_vars *game, char **map)
 	{
 		if (map[i][0] == '\n')
 		{
-			error_msg_and_exit("New_line character detected within map", NULL, game);
+			error_msg_and_exit(NEWLINE_IN_MAP, NULL, game);	
 		}
 		i++;
 	}	
@@ -72,12 +72,12 @@ void	is_there_invalid_character(t_vars *game, char *line)
 		}
 		else
 		{
-			error_msg_and_exit("Map should only contain 0, 1, N, S, W, E or spaces", NULL, game);
+			error_msg_and_exit(INVALID_CHAR_IN_MAP, NULL, game);
 		}					
 	}
 }
 
-void	check_for_invalid_character(t_vars *game, char **map)
+void	check_for_invalid_characters(t_vars *game, char **map)
 {
 	int	i;
 
@@ -133,11 +133,11 @@ void	check_number_of_players(t_vars *game, char **map)
 	player_count += char_count_in_array(map, 'W');
 	if (player_count == 0)
 	{
-		error_msg_and_exit("No player found on map", NULL, game);
+		error_msg_and_exit(NO_PLAYER_FOUND, NULL, game);
 	}
 	if (player_count >= 2)
 	{
-		error_msg_and_exit("There should be ONLY one player on map", NULL, game);
+		error_msg_and_exit(TOO_MANY_PLAYERS, NULL, game);		
 	}
 }
 
@@ -161,7 +161,7 @@ char	**make_map(t_vars *game, int start, int end)
 	map = malloc(sizeof(char *) * (end - start + 1 + 1));
 	if (map == NULL)
 	{
-		error_msg_and_exit("Malloc fail", "map", game);
+		error_msg_and_exit(MALLOC_FAIL, "map", game);
 	}
 	i = 0;
 	while (start <= end)
@@ -170,29 +170,13 @@ char	**make_map(t_vars *game, int start, int end)
 		if (map[i] == NULL)
 		{
 			free_incomplete_array(map, i);
-			error_msg_and_exit("Malloc fail", "map[i]", game);
+			error_msg_and_exit(MALLOC_FAIL, "map[i]", game);
 		}
 		i++;
 		start++;
 	}
 	map[i] = NULL;
 	return (map);
-}
-
-int	get_index_end_of_map(t_vars *game, int start)
-{
-	int	end;
-
-	end = start;
-	while (game->config_file[start])
-	{
-		if (ft_strchr(game->config_file[start], '1') != NULL)
-		{
-			end = start;
-		}
-		start++;
-	}
-	return (end);
 }
 
 int	get_index_start_of_map(t_vars *game)
@@ -217,54 +201,32 @@ int	get_index_start_of_map(t_vars *game)
 
 char	**get_map(t_vars *game)
 {
+	char	**map;
 	int		start;
 	int		end;
-	char	**map;
-
-	// printf("Get map\n");
-	
-	/*
-		-get map function
-	*/
 	
 	start = get_index_start_of_map(game);
 	end = get_index_end_of_map(game, start);
 	map = make_map(game, start, end); /*Consider putting into a struct here. It'll help with freeing.*/
-	
-	// print_it(map);
-	
-	new_line_check(game, map);
-
-	/*
-		-map_modificications
-	*/
-
-	change_spaces_to_walls(map);
-
-	// printf("After change\n");
-	// print_it(map);
-	
-	/*
-		-map_checks
-	*/
-
-	change_new_lines_to_null_terminators(map);
-	check_for_invalid_character(game, map);
-	check_number_of_players(game, map);
-
-	check_if_closed(game, map);
 	return (map);
+}
 
-	
-	//check_if_map...
-	/*
-		-get index start of map
-		-get index end of map
-			-new_line_check (in map) /
-		-malloc
-		-ft_strdup
-	*/
-	
+void	modify_map(char **map)
+{
+	change_spaces_to_walls(map);
+	change_new_lines_to_null_terminators(map);
+}
+
+void	modify_and_check_map(t_vars *game)
+{	
+	// print_it(map);
+	game->map = get_map(game);
+	new_line_check(game, game->map);
+	modify_map(game->map);
+	check_for_invalid_characters(game, game->map);
+	check_number_of_players(game, game->map);
+	check_if_closed(game, game->map);
+
 	/*
 		-Find Map - while loop
 			-start

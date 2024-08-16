@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/13 15:13:01 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:16:49 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,34 @@
 # include "MLX42.h"
 # include "libft.h"
 # include "get_next_line.h"
+
+enum				e_codes
+{
+	WRONG_ARG_COUNT,
+	FILE_TOO_SHORT,
+	HIDDEN_FILE_CUB,
+	FILE_NO_END_CUB,
+	OPEN_FUNC_FAIL,
+	MALLOC_FAIL,
+	NO_IDENTIFIER,
+	DUPLICATE_IDENTIFIER,
+	TEXTURE_TOO_SHORT,
+	TEXTURE_NO_END_PNG,
+	HIDDEN_FILE_PNG,
+	LOAD_PNG_FAIL,
+	COLOUR_INVALID_CHAR,
+	COLOUR_INVALID_FORMAT,
+	COLOUR_WRONG_RANGE,
+	NEWLINE_IN_MAP,
+	INVALID_CHAR_IN_MAP,
+	MAP_WRONG_PLACE,
+	MAP_NOT_FOUND,
+	NO_PLAYER_FOUND,
+	TOO_MANY_PLAYERS,
+	MAP_TOO_FEW_ROWS,
+	MAP_NOT_CLOSED,
+	INVALID_CHAR_IN_FILE,
+}					;
 
 typedef struct s_player
 {
@@ -89,11 +117,8 @@ typedef struct s_vars
     char            **config_file; 
 }               t_vars;
 
-//calc_and_make_map.c
-void 	calc_and_make_map(t_vars *game, char **av);
-
-//check_config_file.c
-void	check_config_file(t_vars *game);
+//check_file.c
+void	check_file(t_vars *game);
 
 //check_if_closed.c
 void	check_if_closed(t_vars *game, char **map);
@@ -109,7 +134,7 @@ void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
 
 //errors.c
-void	error_msg_and_exit(char	*msg, char *specifier, t_vars *game);
+void	error_msg_and_exit(int error_number, char *specifier, t_vars *game);
 void    msg_and_exit(char *msg, int fd);
 
 //find_player_position.c
@@ -122,8 +147,8 @@ void	free_array(char **array);
 //get_colour.c
 int	get_colour(t_vars *game, char *identifier);
 
-//get_map.c
-char	**get_map(t_vars *game);
+//modify_and_check_map.c
+void	modify_and_check_map(t_vars *game);
 
 //mlx_functions.c
 void    mlx_functions(t_vars *game);
@@ -137,8 +162,8 @@ void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
 void    delta_dist(t_player *player, t_vars *vars);
 
-//read_config_file.c
-void	read_config_file(t_vars *game, char *av);
+//read_file.c
+void	read_file(t_vars *game, char *av);
 
 //render.c
 void	render(t_vars *game);
@@ -152,6 +177,7 @@ bool	check_if_indicator(char *line);
 bool	check_if_map(char *line);
 int		count_map_rows(char **map);
 int		get_element_index(t_vars *game, char *identifier);
+int		get_index_end_of_map(t_vars *game, int start);
 int		get_identifier_start(char *line, char *identifier_key);
 char	*parse_out_key_and_spaces(char *line, int value_start);
 

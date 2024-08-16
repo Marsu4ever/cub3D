@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:49:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 09:51:31 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:46:47 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_last_char_is_one(t_vars *game, char *line)
 	{
 		// printf("line[last_char]: %c\n", line[last_char]);
 		// printf("line: %s\n", line);
-		error_msg_and_exit("Map is not closed at the Right (i.e. last char is not a '1' or space)", NULL, game);
+		error_msg_and_exit(MAP_NOT_CLOSED, "Check last char on right edge", game);
 	}
 }
 
@@ -48,7 +48,7 @@ void	check_overhanging_chars(t_vars *game, char *line, int other_row_len)
 		{
 			// printf("char: %c\n", line[i]);
 			// printf("line: %s\n", line);
-			error_msg_and_exit("Map is not closed at the Right - check overhanging chars.", NULL, game);
+			error_msg_and_exit(MAP_NOT_CLOSED, "Check right edge", game);
 		}
 		i++;
 	}

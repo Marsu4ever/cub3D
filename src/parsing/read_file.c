@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_config_file.c                                 :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:34:30 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 12:36:18 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 14:29:10 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ char	**retrieve_config_file(char *av, int number_of_lines)
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 	{
-		error_msg_and_exit("Open function failed", strerror(errno), NULL);
+		error_msg_and_exit(OPEN_FUNC_FAIL, strerror(errno), NULL);
 	}
 	file = malloc(sizeof(char *) * (number_of_lines + 1));
 	if (file == NULL)
 	{
 		close(fd);
-		error_msg_and_exit("Malloc failed", "@ retrieve_config_file", NULL);
+		error_msg_and_exit(MALLOC_FAIL, "@ retrieve_config_file", NULL);
 	}
 	i = 0;
 	// printf("retrieve whole file\n");
@@ -58,7 +58,7 @@ int	count_lines_in_file(char *av)
 	fd = open(av, O_RDONLY);
 	if (fd == -1)
 	{
-		error_msg_and_exit("Open function failed", strerror(errno), NULL);
+		error_msg_and_exit(OPEN_FUNC_FAIL, strerror(errno), NULL);
 	}
 	line_count = 0;
 	line = "let's get into the while loop!";
@@ -73,7 +73,7 @@ int	count_lines_in_file(char *av)
 	return (line_count);
 }
 
-void	read_config_file(t_vars *game, char *av)
+void	read_file(t_vars *game, char *av)
 {
 	/*
 		-open file

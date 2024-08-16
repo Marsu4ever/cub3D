@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 13:47:37 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 10:17:24 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:01:33 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@ void	print_it(char **array)
 	}
 }
 
+void	error_check_texture_string(t_vars *game, char *value, char *identifier)
+{
+	int	i;
+
+	i = ft_strlen(value);
+	if (i < 5)
+	{
+		free(value);
+		error_msg_and_exit(TEXTURE_TOO_SHORT, identifier, NULL);
+	}	
+	if (ft_strcmp(&value[i - 4], ".png") != 0)
+	{
+		free(value);
+		error_msg_and_exit(TEXTURE_NO_END_PNG, identifier, game);
+	}
+	if (ft_strcmp(&value[i - 5], "/.png") == 0)
+	{
+		free(value);
+		error_msg_and_exit(HIDDEN_FILE_PNG, identifier, game);
+	}	
+	// if (ft_strcmp(&av[i - 5], "/.cub") == 0)
+	// {
+	// 	error_msg_and_exit(HIDDEN_FILE, NULL, NULL);
+	// }
+}
+
 mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 {
 	char			*value;
@@ -37,12 +63,22 @@ mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 	value = parse_out_key_and_spaces(game->config_file[i], value_start);
 	// printf("value of original line: %s", value);
 	value = character_replace(value, '\n', '\0');
+
+	error_check_texture_string(game, value, identifier);
+	// check_if_hidden_file(game, value, identifier);
+	/*
+
+		-check .png
+		-check if hidden file
+
+	*/
+
 	// printf("value of original line without nl: %s\n", value);
 	texture = mlx_load_png(value);
 	free(value);
 	if (texture == NULL)
 	{
-		error_msg_and_exit("Check path for this identifier", identifier, NULL);
+		error_msg_and_exit(LOAD_PNG_FAIL, identifier, NULL);
 	}
 	return (texture);
 }
@@ -189,42 +225,7 @@ int	get_player_start_y(t_vars *game)
 	-otherwise error
 */
 
-int	skip_map_section(char **map)
-{
-	int	row_count;
-
-	row_count = count_map_rows(map);
-	row_count--;
-	return (row_count);
-}
-
-void	check_for_errors_in_config_file(t_vars *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->config_file[i])
-	{
-		if (check_if_indicator(game->config_file[i]) == true)
-		{
-			i++;
-		}
-		else if (check_if_map(game->config_file[i]) == true)
-		{
-			i += skip_map_section(game->map);
-		}
-		else if (game->config_file[i][0] == '\n')
-		{
-			i++;
-		}
-		else
-		{
-			error_msg_and_exit("Config file can only contain newlines between elements.", NULL, game);
-		}
-	}
-}
-
-void	check_and_extract_data_from_config_file(t_vars *game)
+void	get_and_check_data(t_vars *game)
 {
 	game->north = get_texture(game, "NO ");	//Refactor this function [I do not like while_loops]
 	game->south = get_texture(game, "SO ");
@@ -232,9 +233,9 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 	game->west = get_texture(game, "WE ");
 	game->f_values = get_colour(game, "F ");//Refactor this function [I vote against whileloops]
 	game->c_values = get_colour(game, "C ");
-	game->map = get_map(game);
+	modify_and_check_map(game);
 	find_player_position(game); /*Set player orientation???*/
-	check_for_errors_in_config_file(game);
+	// check_for_errors_in_config_file(game);
 	free_array(game->config_file);
 
 	/*
@@ -244,7 +245,7 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 		printf("game->player_start_x: %d\n", game->player_start_x);
 		printf("game->player_start_y: %d\n", game->player_start_y);
 	\*/
-	
+
 	// printf("game->player_start_direction: %c\n", game->player_start_direction);
 	/*
 		-set player direction
@@ -254,15 +255,12 @@ void	check_and_extract_data_from_config_file(t_vars *game)
 void	parsing(t_vars *game, int ac, char **av)
 {
 	check_user_input(ac, av[1]);
-	read_config_file(game, av[1]);
-	check_config_file(game);
-	check_and_extract_data_from_config_file(game);
-	/*
-		-extract from config file
-	*/
+	read_file(game, av[1]);
+	check_file(game);
+	get_and_check_data(game);
 }
 
-  /*
+  /* 
         Idea for code structure
 
         -Parsing

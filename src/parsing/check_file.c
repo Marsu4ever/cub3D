@@ -1,16 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_config_file.c                                :+:      :+:    :+:   */
+/*   check_file_and_get_map.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:38:47 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 10:06:06 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:35:40 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	skip_map_section(t_vars *game, int start)
+{
+	int	end;
+
+	end = get_index_end_of_map(game, start);
+	end++;
+	return (end);
+/* 	int	row_count;
+
+	row_count = count_map_rows(map);
+	// printf("row_count: %d\n", row_count);
+	return (row_count); */
+}
+
+void	check_for_invalid_characters_in_file(t_vars *game)
+{
+	int	i;
+
+	i = 0;
+	while (game->config_file[i])
+	{
+		if (check_if_indicator(game->config_file[i]) == true)
+		{
+			i++;
+		}
+		else if (check_if_map(game->config_file[i]) == true)
+		{
+			i = skip_map_section(game, i);
+		}
+		else if (game->config_file[i][0] == '\n')
+		{
+			i++;
+		}
+		else
+		{
+			error_msg_and_exit(INVALID_CHAR_IN_FILE, NULL, game);
+		}
+	}
+}
 
 void	check_if_map_exists_and_is_last(t_vars *game)
 {
@@ -32,12 +72,12 @@ void	check_if_map_exists_and_is_last(t_vars *game)
 			}
 			if (identifier_count < 6)
 			{
-				error_msg_and_exit("Map occurs before identifier in config file.", NULL, NULL);
+				error_msg_and_exit(MAP_WRONG_PLACE, NULL, NULL);
 			}
 		}
 		i++;
 	}
-	error_msg_and_exit("No map was found in config file.", NULL, NULL);
+	error_msg_and_exit(MAP_NOT_FOUND, NULL, NULL);
 }
 
 void	check_for_identifier(t_vars *game, char *identifier)
@@ -58,7 +98,7 @@ void	check_for_identifier(t_vars *game, char *identifier)
 	// printf("identifier_count: %d\n", identifier_count);
 	if (identifier_count == 0)
 	{
-		error_msg_and_exit("Identifier missing (or needs a separating space)", identifier, NULL);
+		error_msg_and_exit(NO_IDENTIFIER, identifier, NULL);
 	}
 	if (identifier_count == 1)
 	{
@@ -66,11 +106,12 @@ void	check_for_identifier(t_vars *game, char *identifier)
 	}
 	if (identifier_count >= 2)
 	{
-		error_msg_and_exit("Duplicates of identifier detected", identifier, NULL);
+		error_msg_and_exit(DUPLICATE_IDENTIFIER, identifier, NULL);
 	}
 }
 
-void	check_config_file(t_vars *game)
+
+void	check_file(t_vars *game)
 {
 	check_for_identifier(game, "NO ");
 	check_for_identifier(game, "SO ");
@@ -78,8 +119,11 @@ void	check_config_file(t_vars *game)
 	check_for_identifier(game, "EA ");
 	check_for_identifier(game, "F ");
 	check_for_identifier(game, "C ");
-	check_if_map_exists_and_is_last(game); 
+	check_if_map_exists_and_is_last(game);
+	check_for_invalid_characters_in_file(game);
+	// check_for_errors_in_config_file(game);/*This causes segfault... problem with funcs I think*/
 	/*
+		get_map
 		Check config file...
 	*/
 	/*

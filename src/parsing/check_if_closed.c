@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:52:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/14 09:53:52 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:58:50 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	must_have_at_least_3_rows(t_vars *game, int row_count)
 {
 	if (row_count <= 2)
 	{
-		error_msg_and_exit("Map should have at least 3 rows to be closed", NULL, game);
+		error_msg_and_exit(MAP_TOO_FEW_ROWS, NULL, game);
 	}
 }
 
@@ -29,7 +29,7 @@ void	check_top(t_vars *game, char **map)
 	{
 		if (map[0][i] != '1')
 		{
-			error_msg_and_exit("Map is not closed at the Top (i.e. Use only ONEs (and spaces))", NULL, game);
+			error_msg_and_exit(MAP_NOT_CLOSED, "Check Top", game);
 		}
 		i++;
 	}
@@ -46,7 +46,7 @@ void	check_bottom(t_vars *game, char **map, int row_count)
 	{
 		if (map[last_row][i] != '1')
 		{
-			error_msg_and_exit("Map is not closed at the Bottom (i.e. Use only ONEs (and spaces))", NULL, game);
+			error_msg_and_exit(MAP_NOT_CLOSED, "Check Bottom", game);
 		}
 		i++;
 	}
@@ -61,7 +61,7 @@ void	check_left(t_vars *game, char **map)
 	{
 		if (map[i][0] != '1')
 		{
-			error_msg_and_exit("Map is not closed on the Left (i.e. Use only ONEs (and spaces))", NULL, game);
+			error_msg_and_exit(MAP_NOT_CLOSED, "Check Left", game);
 		}
 		i++;
 	}
