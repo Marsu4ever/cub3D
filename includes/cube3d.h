@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 17:39:31 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/20 21:29:16 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_vars
     int             c_values;
     int             f_values;
     uint32_t        wall_color;
-    double          x_wall;
+    double          texture_x;
     int             players_nbr;
 
 
@@ -127,6 +127,9 @@ void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
 
 //buildsomewalls.c
-void	init_walls(t_player *player);
+void	wall_slicing(t_vars *game);
+void 	put_textures(t_vars *game);
+void    texture_coordinates(t_vars *game);
+
 
 #endif

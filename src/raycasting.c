@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 13:30:19 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/20 21:12:30 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void    raycasting(t_player *player, t_vars *game)
         delta_dist(player, game);
         calc_rays(player, game);
         dda_loop(player, game);
+        wall_slicing(game);
         r++;
     }
 }
