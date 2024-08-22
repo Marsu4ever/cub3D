@@ -15,11 +15,14 @@
 void    texture_coordinates(t_vars *game)
 {
     if (game->player->side)
-        game->texture_x = game->player->x_pos + game->player->perp_wall_dist * game->player->x_ray_dir;
+        game->x_wall = game->player->x_pos + game->player->perp_wall_dist * game->player->x_ray_dir;
     else
-        game->texture_x = game->player->y_pos + game->player->perp_wall_dist * game->player->y_ray_dir;
-    game->texture_x -=  (int)(game->texture_x);
-    //will be finished tomorrow
+        game->x_wall = game->player->y_pos + game->player->perp_wall_dist * game->player->y_ray_dir;
+    game->x_wall -=  (int)(game->x_wall);
+    game->player->x_texture = (int)(game->x_wall) * TEXTURE_W;
+    if ((game->player->x_ray_dir > 0 && game->player->side == 0) || 
+        (game->player->y_ray_dir < 0 && game->player->side == 1))
+        game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
 }
 
 void    put_textures(t_vars *game)
