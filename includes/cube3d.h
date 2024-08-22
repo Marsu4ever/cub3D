@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/20 21:29:16 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/22 13:49:13 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define SCREEN_HEIGHT 540
 # define SCREEN_WIDTH 960
-# define TEXTURE_H 1
-# define TEXTURE_W 1
+# define TEXTURE_H 64
+# define TEXTURE_W 64
 # define FOV 0.55 //field of view
 
 # include <math.h> //math functions for raycasting
@@ -81,7 +81,7 @@ typedef struct s_vars
     int             c_values;
     int             f_values;
     uint32_t        wall_color;
-    double          texture_x;
+    double          x_wall;
     int             players_nbr;
 
 
