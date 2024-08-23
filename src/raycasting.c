@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/20 21:12:30 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/23 11:33:46 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void dda_loop(t_player *player, t_vars *game)
             game->y_map += player->y_step;
             player->side = 1;
         }
-        if (game->map[game->x_map][game->y_map] > 0)
+        if (game->map[game->x_map][game->y_map] == 1)
             player->hit = 1;
         if (player->side == 0)
             player->perp_wall_dist = (player->x_side_dist - player->x_delta_dist) / player->x_ray_dir;
@@ -93,7 +93,7 @@ void    raycasting(t_player *player, t_vars *game)
         init_rays(player, r);
         delta_dist(player, game);
         calc_rays(player, game);
-        dda_loop(player, game);
+        // dda_loop(player, game);
         wall_slicing(game);
         r++;
     }
