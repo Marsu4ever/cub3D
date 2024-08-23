@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/21 13:25:48 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 12:23:52 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void orientation_calc(char compass, t_vars *game)
 {
     if (compass == 'N')
         n_s_compass(game->player, -1.0, FOV);
-    else if (compass == 'E' == 0)
+    else if (compass == 'E')
         e_w_compass(game->player, 1.0, FOV);
     else if (compass == 'S')
         n_s_compass(game->player, 1.0, -FOV);
