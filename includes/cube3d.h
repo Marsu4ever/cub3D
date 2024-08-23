@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/23 11:21:39 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:23:23 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,17 @@ void	check_map(t_vars *game);
 void	player_nbr_check(t_vars *game, char **map, int i);
 void	orientation_calc(char compass, t_vars *game);
 
+//parsing_utils.c
+char	*character_replace(char	*line, char	char_initial, char char_final);
+bool	check_if_identifier(char *line);
+bool	check_if_indicator(char *line);
+bool	check_if_map(char *line);
+int		count_map_rows(char **map);
+int		get_element_index(t_vars *game, char *identifier);
+int		get_index_end_of_map(t_vars *game, int start);
+int		get_identifier_start(char *line, char *identifier_key);
+char	*parse_out_key_and_spaces(char *line, int value_start);
+
 //compass.c
 void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
@@ -214,6 +225,5 @@ void e_w_compass(t_player * player, double num, double nmro);
 void	wall_slicing(t_vars *game);
 void 	put_textures(t_vars *game);
 void    texture_coordinates(t_vars *game);
-
 
 #endif
