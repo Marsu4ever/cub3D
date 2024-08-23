@@ -46,6 +46,8 @@ void    put_textures(t_vars *game)
 
 void wall_slicing(t_vars *game)
 {
+    game->player->start_of_wall = 0;
+    game->player->end_of_wall = 0;
     game->player->wall_height = (int)(SCREEN_HEIGHT / game->player->perp_wall_dist);
     game->player->start_of_wall = (SCREEN_HEIGHT - game->player->wall_height) / 2;
     if (game->player->start_of_wall < 0)
