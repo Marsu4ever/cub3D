@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/16 14:16:49 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 09:30:24 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # define TEXTURE_H 1
 # define TEXTURE_W 1
 # define FOV 0.55 //field of view
+# define PI 3.14159265358979323846
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -91,12 +92,13 @@ typedef struct s_vars
 {
     mlx_t           *mlx;
     mlx_image_t     *image;
+	mlx_image_t     *minimap;
     t_player        *player;
  
     char            player_start_direction; //N, S, W, E
     int 			player_start_x; // 3
 	int 			player_start_y; // 4
-    int             map_start;
+    int             map_start; //?
     char            *map_path;
     char            **map;
     int             x_map;
@@ -112,9 +114,12 @@ typedef struct s_vars
     double          x_wall;
     int             players_nbr;
 
-
+    char            **file;
 /* Quick fix variables*/
-    char            **config_file; 
+	mlx_image_t  	*wall;
+	mlx_image_t		*floor;
+	mlx_image_t		*player_image;
+	int				player_degrees;
 }               t_vars;
 
 //check_file.c
@@ -133,8 +138,12 @@ void	check_user_input(int ac, char *av);
 void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
 
+// error_message_selector.c
+void	error_msg_selector(int error);
+
 //errors.c
 void	error_msg_and_exit(int error_number, char *specifier, t_vars *game);
+void	it_ends_here(t_vars *game);
 void    msg_and_exit(char *msg, int fd);
 
 //find_player_position.c
@@ -144,11 +153,25 @@ void	orientation_calc(char compass, t_vars *game);
 //free_utils.c
 void	free_array(char **array);
 
+// get_and_check_data.c
+void	get_and_check_data(t_vars *game);
+
 //get_colour.c
 int	get_colour(t_vars *game, char *identifier);
 
-//modify_and_check_map.c
-void	modify_and_check_map(t_vars *game);
+//minimap.c
+void	minimap(t_vars *game);
+
+//make_modify_and_check_map_1.c
+void	make_modify_and_check_map(t_vars *game);
+
+//make_modify_and_check_map_2.c
+void	modify_map(char **map);
+void	new_line_check(t_vars *game, char **map);
+
+// make_modify_and_check_map_3.c
+void	check_for_invalid_characters(t_vars *game, char **map);
+void	check_number_of_players(t_vars *game, char **map);
 
 //mlx_functions.c
 void    mlx_functions(t_vars *game);

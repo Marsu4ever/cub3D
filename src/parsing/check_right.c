@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:49:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/15 12:46:47 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:10:00 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	check_last_char_is_one(t_vars *game, char *line)
 	last_char = ft_strlen(line) - 1;
 	if (line[last_char] != '1')
 	{
-		// printf("line[last_char]: %c\n", line[last_char]);
-		// printf("line: %s\n", line);
-		error_msg_and_exit(MAP_NOT_CLOSED, "Check last char on right edge", game);
+		error_msg_and_exit(MAP_NOT_CLOSED, "Check last char -right edge", game);
 	}
 }
 
@@ -46,8 +44,6 @@ void	check_overhanging_chars(t_vars *game, char *line, int other_row_len)
 	{
 		if (line[i] != '1')
 		{
-			// printf("char: %c\n", line[i]);
-			// printf("line: %s\n", line);
 			error_msg_and_exit(MAP_NOT_CLOSED, "Check right edge", game);
 		}
 		i++;
@@ -69,8 +65,6 @@ void	check_overhanging_chars_are_1(t_vars *game, char **map, int row_count)
 			;
 		else
 		{
-			// printf("map[%d    ]: %s\n", i, map[i]);
-			// printf("map[%d + 1]: %s\n", i, map[i + 1]);
 			if (row1 < row2)
 			{
 				check_overhanging_chars(game, map[i + 1], row1);

@@ -6,11 +6,31 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/13 13:39:35 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/21 13:25:48 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void    set_player_direction(t_vars *game, char player_direction)
+{
+    if (player_direction == 'N')
+    {
+        game->player_start_direction = 'N';
+    }
+    if (player_direction == 'S')
+    {
+        game->player_start_direction = 'S';
+    }
+    if (player_direction == 'E')
+    {
+        game->player_start_direction = 'E';
+    }
+    if (player_direction == 'W')
+    {
+        game->player_start_direction = 'W';
+    }			
+}
 
 void orientation_calc(char compass, t_vars *game)
 {
@@ -33,6 +53,7 @@ void set_player_position(t_vars *game, char **map, int y)
     {
         if (map[y][j] == 'N' || map[y][j] == 'W' || map[y][j] == 'E' || map[y][j] == 'S') /*This function implies that we have multiple 1st players. Is this a multiplayer game? :D */
         {
+            set_player_direction(game, map[y][j]); /*Might delete this one*/
             orientation_calc(map[y][j], game);
             game->player->x_pos = (double)j;          
             game->player->y_pos = (double)y;

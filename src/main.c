@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/16 14:43:14 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 09:36:05 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ static void	init_player(t_vars *vars)
 	vars->player = player;
 }
 
+void	close_program(t_vars *game)
+{
+	mlx_terminate(game->mlx);
+	it_ends_here(game);
+/*
+		-After mlx_terminate
+
+		-destroy textures??
+		-free???		
+*/
+	
+}
+
 int	main(int ac, char **av)
 {
 	t_vars	game;
@@ -32,6 +45,6 @@ int	main(int ac, char **av)
 	init_player(&game);
 	parsing(&game, ac, av);
 	mlx_functions(&game);
-	
+	close_program(&game);
 	return (0);
 }

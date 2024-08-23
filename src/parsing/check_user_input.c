@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:23:25 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/16 12:31:53 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:12:20 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,6 @@ static void	check_argument_count(int ac)
 
 static void	check_file_extension(char *av)
 {
-	/*
-		Edge cases
-			map_name.cub
-			./map_name.cub
-			map.cub.cub 
-
-		is it a directory???
-	*/
 	size_t	i;
 
 	i = ft_strlen(av);
@@ -38,11 +30,6 @@ static void	check_file_extension(char *av)
 	{
 		error_msg_and_exit(FILE_TOO_SHORT, NULL, NULL);
 	}
-	/*
-		-check if directory
-		open function???
-		chdir???
-	*/
 	if (ft_strcmp(&av[i - 4], ".cub") != 0)
 	{
 		error_msg_and_exit(FILE_NO_END_CUB, NULL, NULL);
@@ -51,14 +38,10 @@ static void	check_file_extension(char *av)
 	{
 		error_msg_and_exit(HIDDEN_FILE_CUB, NULL, NULL);
 	}
-
 }
 
 void	check_user_input(int ac, char *av)
 {
 	check_argument_count(ac);
-	/*
-		-check_if_directory
-	*/
 	check_file_extension(av);
 }
