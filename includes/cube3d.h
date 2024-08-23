@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/23 09:30:24 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:21:39 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define SCREEN_HEIGHT 540
 # define SCREEN_WIDTH 960
-# define TEXTURE_H 1
-# define TEXTURE_W 1
+# define TEXTURE_H 64
+# define TEXTURE_W 64
 # define FOV 0.55 //field of view
 # define PI 3.14159265358979323846
 
@@ -76,16 +76,16 @@ typedef struct s_player
 	int		        y_step;
 	int		        hit;
 	int		        side;
-	int		        line_height;
+	int		        wall_height;
 	double          x_ray_dir;
 	double          y_ray_dir;
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	int		        draw_start;
-	int		        draw_end;
-	int		        x_text;
-	int		        y_text;
+	int		        start_of_wall;
+	int		        end_of_wall;
+	int		        x_texture;
+	int		        y_texture;
 }               t_player;
 
 typedef struct s_vars
@@ -107,7 +107,7 @@ typedef struct s_vars
     mlx_texture_t   *north;
     mlx_texture_t   *south;
     mlx_texture_t   *west;
-    mlx_texture_t   *text;
+    mlx_texture_t   *texture;
     int             c_values;
     int             f_values;
     uint32_t        wall_color;
@@ -193,15 +193,27 @@ void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
 void    create_floor_ceiling(t_vars *game);
 
-//parsing_utils.c
-char	*character_replace(char	*line, char	char_initial, char char_final);
-bool	check_if_identifier(char *line);
-bool	check_if_indicator(char *line);
-bool	check_if_map(char *line);
-int		count_map_rows(char **map);
-int		get_element_index(t_vars *game, char *identifier);
-int		get_index_end_of_map(t_vars *game, int start);
-int		get_identifier_start(char *line, char *identifier_key);
-char	*parse_out_key_and_spaces(char *line, int value_start);
+//raycasting.c
+void    raycasting(t_player *player, t_vars *game);
+void    init_rays(t_player *player, int r);
+void    delta_dist(t_player *player, t_vars *vars);
+
+//errors.c
+void    msg_and_exit(char *msg, int fd);
+
+//parsing.c
+void	check_map(t_vars *game);
+void	player_nbr_check(t_vars *game, char **map, int i);
+void	orientation_calc(char compass, t_vars *game);
+
+//compass.c
+void n_s_compass(t_player * player, double num, double nmro);
+void e_w_compass(t_player * player, double num, double nmro);
+
+//buildsomewalls.c
+void	wall_slicing(t_vars *game);
+void 	put_textures(t_vars *game);
+void    texture_coordinates(t_vars *game);
+
 
 #endif
