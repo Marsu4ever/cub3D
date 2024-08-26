@@ -92,8 +92,3 @@ void wall_slicing(t_vars *game)
         game->player->wall_slice_end = SCREEN_HEIGHT - 1;
     put_textures(game);
 }
-
-void display_it(int r, t_player *player, t_vars *game)
-{
-    //will be done on Monday morning
-}
