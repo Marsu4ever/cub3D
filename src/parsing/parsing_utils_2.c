@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:19:19 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 12:22:59 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:52:59 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,16 @@ int	count_map_rows(char **map)
 
 bool	check_if_identifier(char *line)
 {
-	char *identifiers[7] = {
-		"NO ",
-		"SO ",
-		"EA ",
-		"WE ",
-		"C ",
-		"F ",
-		NULL
-	};
-	int	i;
+	char	*identifiers[7];
+	int		i;
 
+	identifiers[0] = "NO ";
+	identifiers[1] = "SO ";
+	identifiers[2] = "EA ";
+	identifiers[3] = "WE ";
+	identifiers[4] = "C ";
+	identifiers[5] = "F ";
+	identifiers[6] = NULL;
 	i = 0;
 	while (identifiers[i] != NULL)
 	{

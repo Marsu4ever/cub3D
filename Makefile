@@ -29,7 +29,7 @@ SRCS = \
 	src/parsing/make_modify_and_check_map_2.c \
 	src/parsing/make_modify_and_check_map_3.c \
 	src/parsing/read_file.c \
-	src/mlx_functions.c \
+	src/run_wolfenstein.c \
 	src/errors/errors.c \
 	src/errors/error_message_selector.c \
 	src/minimap.c \
@@ -48,9 +48,9 @@ all: $(NAME)
 $(LIBMLX):
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
 
-$(NAME): $(LIBMLX) $(SRCS) $(OBJS)
-	cd $(LIBFT_PATH) && $(MAKE) && make
-	cc $(CFLAGS) $(HEADERS) $(SRCS) $(LIBS) -o $(NAME)
+$(NAME): $(LIBMLX) $(OBJS)
+	cd $(LIBFT_PATH) && make
+	cc $(CFLAGS) $(SRCS) $(HEADERS) $(LIBS) -o $(NAME)
 
 $(OBJS): %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
@@ -62,8 +62,8 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
-	cd $(LIBFT_PATH) && make fclean
+	cd $(LIBFT_PATH) && rm -rf libft.a
 
 re: fclean all
 
-.PHONY: all clean fclean re libmlx
+.PHONY: all clean fclean re

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_functions.c                                    :+:      :+:    :+:   */
+/*   run_wolfenstein.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 11:15:11 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:06:18 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 
 void	look_left(t_vars *game, int turn_angle)
 {
-	
 	game = NULL;
 	turn_angle = 1;
 	
@@ -257,23 +256,19 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 	}
 }
 
-void	mlx_functions(t_vars *game)
+void	run_wolfenstein(t_vars *game)
 {
 	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", true);
 	if (game->mlx == NULL)
 	{
-		/*
-			-Add an mlx cleanup function here?
-		*/
-		it_ends_here(game);
+		error_msg_and_exit(MLX_INIT_FAIL, "game->mlx", game);
 	}
 	game->image = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!game->image)
 	{
-		mlx_close_window(game->mlx);
-		msg_and_exit("No new image.\n", 2);
+		error_msg_and_exit(MLX_NEW_IMAGE_FAIL, "game->image", game);
 	}
-	
+
 /* 	mlx_load_png("./textures/NO.png");
 	mlx_load_png("./textures/EA.png");
 	mlx_load_png("./textures/SO.png");
@@ -281,13 +276,13 @@ void	mlx_functions(t_vars *game)
 
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
 	{
-		mlx_close_window(game->mlx);
-		msg_and_exit("Image to window failed.\n", 2);
+		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);
 	}
-	minimap(game);
-	
-	mlx_loop_hook(game->mlx, (void *)render, game);
-
+	minimap(game);	
+	if (mlx_loop_hook(game->mlx, (void *)render, game) != 1)
+	{
+		error_msg_and_exit(MLX_LOOP_HOOK_FAIL, NULL, game);
+	}
 	mlx_key_hook(game->mlx, move_hook, game);
 	mlx_loop(game->mlx);
 }

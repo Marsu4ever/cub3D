@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:08:10 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 13:25:57 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:03:51 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,22 @@ void	error_msg_selector(int error)
 	group_2_msgs(error);
 	group_3_msgs(error);
 	group_4_msgs(error);
+	if (error == MLX_INIT_FAIL)
+	{
+		ft_putstr_fd("mlx_init fail", 2);
+	}
+	if (error == MLX_NEW_IMAGE_FAIL)
+	{
+		ft_putstr_fd("mlx_new_image fail", 2);
+	}
+	if (error == MLX_IMG_TO_WINDOW_FAIL)
+	{
+		ft_putstr_fd("mlx_image_to_window fail", 2);
+	}
+	if (error == MLX_LOOP_HOOK_FAIL)
+	{
+		ft_putstr_fd("mlx_loop_hook failed", 2);
+	}
 /* 	if (error == )
 	{
 		ft_putstr_fd("", 2);

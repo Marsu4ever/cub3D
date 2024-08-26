@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parsing_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:43:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 12:20:36 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:57:10 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ int	get_identifier_start(char *line, char *identifier_key)
 	return (value_start);
 }
 
-char	*parse_out_key_and_spaces(char *line, int value_start)
+char	*parse_out_key_and_spaces(t_vars *game, char *line, int value_start)
 {
 	char	*value;
 
 	value = ft_strdup(&line[value_start]);
 	if (value == NULL)
 	{
-		error_msg_and_exit(MALLOC_FAIL, "parse_out_key_and_spaces", NULL);
+		error_msg_and_exit(MALLOC_FAIL, "parse_out_key_and_spaces", game);
 	}
 	return (value);
 }
