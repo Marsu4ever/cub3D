@@ -54,7 +54,7 @@ void    texture_coordinates(t_vars *game)
     else
         game->x_wall = game->player->y_pos + game->player->perp_wall_dist * game->player->y_ray_dir;
     game->x_wall -=  (int)(game->x_wall);
-    game->player->x_texture = (int)(game->x_wall) * TEXTURE_W;
+    game->player->x_texture = (int)(game->x_wall) * (double)TEXTURE_W;
     if ((game->player->x_ray_dir > 0 && game->player->side == 0) || 
         (game->player->y_ray_dir < 0 && game->player->side == 1))
         game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
@@ -62,19 +62,19 @@ void    texture_coordinates(t_vars *game)
 
 void    put_textures(t_vars *game)
 {
-    if (game->player->side)
+    if (game->player->side == 1)
     {
         if (game->y_map <= game->player->y_pos)
             game->texture = game->south;
         else
             game->texture = game->north;
     }
-    else
+    else if (game->player->side == 0)
     {
         if (game->x_map <= game->player->x_pos)
-            game->texture = game->west;
-        else
             game->texture = game->east;
+        else
+            game->texture = game->west;
     }
     texture_coordinates(game);
 }
@@ -83,12 +83,16 @@ void wall_slicing(t_vars *game)
 {
     game->player->wall_slice_start = 0;
     game->player->wall_slice_end = 0;
+    if (game->player->side == 0)
+        game->player->perp_wall_dist = game->player->x_side_dist - game->player->x_delta_dist / game->player->x_ray_dir;
+    else
+        game->player->perp_wall_dist = game->player->y_side_dist - game->player->y_delta_dist / game->player->y_ray_dir;
     game->player->wall_slice_height = (int)(SCREEN_HEIGHT / game->player->perp_wall_dist);
     game->player->wall_slice_start = (SCREEN_HEIGHT - game->player->wall_slice_height) / 2;
     if (game->player->wall_slice_start < 0)
         game->player->wall_slice_start = 0;
-    game->player->wall_slice_end = (game->player->wall_slice_height + SCREEN_HEIGHT)/2;
-    if (game->player->wall_slice_end > SCREEN_HEIGHT)
+    game->player->wall_slice_end = (game->player->wall_slice_height + SCREEN_HEIGHT) / 2;
+    if (game->player->wall_slice_end >= SCREEN_HEIGHT)
         game->player->wall_slice_end = SCREEN_HEIGHT - 1;
     put_textures(game);
 }
