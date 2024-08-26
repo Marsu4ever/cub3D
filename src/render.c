@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/07 15:49:54 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/15 12:01:31 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	render(t_vars *game)
 
 	length = game->image->height * game->image->width * sizeof(int32_t);
 	ft_memset(game->image->pixels, 0, length);
-	game->c_values = get_rgba(225, 30, 0);
-    game->f_values = get_rgba(200, 100, 0);
+	// game->c_values = get_rgba(225, 30, 0);
+    // game->f_values = get_rgba(200, 100, 0);
     create_floor_ceiling(game);
     raycasting(game->player, game);
 }

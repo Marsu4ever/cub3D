@@ -49,7 +49,7 @@ void    render_wall_slice(int r, t_player *player, t_vars *game)
 
 void    texture_coordinates(t_vars *game)
 {
-    if (game->player->side)
+    if (game->player->side == 1)
         game->x_wall = game->player->x_pos + game->player->perp_wall_dist * game->player->x_ray_dir;
     else
         game->x_wall = game->player->y_pos + game->player->perp_wall_dist * game->player->y_ray_dir;
@@ -81,6 +81,8 @@ void    put_textures(t_vars *game)
 
 void wall_slicing(t_vars *game)
 {
+    game->player->wall_slice_start = 0;
+    game->player->wall_slice_end = 0;
     game->player->wall_slice_height = (int)(SCREEN_HEIGHT / game->player->perp_wall_dist);
     game->player->wall_slice_start = (SCREEN_HEIGHT - game->player->wall_slice_height) / 2;
     if (game->player->wall_slice_start < 0)
@@ -89,4 +91,9 @@ void wall_slicing(t_vars *game)
     if (game->player->wall_slice_end > SCREEN_HEIGHT)
         game->player->wall_slice_end = SCREEN_HEIGHT - 1;
     put_textures(game);
+}
+
+void display_it(int r, t_player *player, t_vars *game)
+{
+    //will be done on Monday morning
 }
