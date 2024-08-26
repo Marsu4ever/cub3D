@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/23 11:23:23 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:11:42 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ enum				e_codes
 	MAP_TOO_FEW_ROWS,
 	MAP_NOT_CLOSED,
 	INVALID_CHAR_IN_FILE,
+	MLX_INIT_FAIL,
+	MLX_NEW_IMAGE_FAIL,
+	MLX_IMG_TO_WINDOW_FAIL,
+	MLX_LOOP_HOOK_FAIL,
 }					;
 
 typedef struct s_player
@@ -113,9 +117,9 @@ typedef struct s_vars
     uint32_t        wall_color;
     double          x_wall;
     int             players_nbr;
-
     char            **file;
-/* Quick fix variables*/
+
+/* Quick fix variables - MINIMAP*/
 	mlx_image_t  	*wall;
 	mlx_image_t		*floor;
 	mlx_image_t		*player_image;
@@ -143,15 +147,17 @@ void	error_msg_selector(int error);
 
 //errors.c
 void	error_msg_and_exit(int error_number, char *specifier, t_vars *game);
-void	it_ends_here(t_vars *game);
-void    msg_and_exit(char *msg, int fd);
+void	it_ends_here(t_vars *game); //Del this later?
 
 //find_player_position.c
 void	find_player_position(t_vars *game);
 void	orientation_calc(char compass, t_vars *game);
 
 //free_utils.c
+void	free_all(t_vars *game);
 void	free_array(char **array);
+void	free_incomplete_array(char **array, int i);
+void	destroy_textures(t_vars *game);
 
 // get_and_check_data.c
 void	get_and_check_data(t_vars *game);
@@ -173,8 +179,8 @@ void	new_line_check(t_vars *game, char **map);
 void	check_for_invalid_characters(t_vars *game, char **map);
 void	check_number_of_players(t_vars *game, char **map);
 
-//mlx_functions.c
-void    mlx_functions(t_vars *game);
+//run_wolfenstein.c
+void    run_wolfenstein(t_vars *game);
 
 //parsing.c
 int     get_rgba(int r, int g, int b);  //Does this stay here?
@@ -198,12 +204,8 @@ void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
 void    delta_dist(t_player *player, t_vars *vars);
 
-//errors.c
-void    msg_and_exit(char *msg, int fd);
-
 //parsing.c
-void	check_map(t_vars *game);
-void	player_nbr_check(t_vars *game, char **map, int i);
+void	player_nbr_check(t_vars *game, char **map, int i);//Delete???
 void	orientation_calc(char compass, t_vars *game);
 
 //parsing_utils.c
@@ -215,7 +217,7 @@ int		count_map_rows(char **map);
 int		get_element_index(t_vars *game, char *identifier);
 int		get_index_end_of_map(t_vars *game, int start);
 int		get_identifier_start(char *line, char *identifier_key);
-char	*parse_out_key_and_spaces(char *line, int value_start);
+char	*parse_out_key_and_spaces(t_vars *game, char *line, int value_start);
 
 //compass.c
 void n_s_compass(t_player * player, double num, double nmro);

@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:38:47 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 11:06:32 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:54:13 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ static void	check_if_map_exists_and_is_last(t_vars *game)
 			}
 			if (identifier_count < 6)
 			{
-				error_msg_and_exit(MAP_WRONG_PLACE, NULL, NULL);
+				error_msg_and_exit(MAP_WRONG_PLACE, NULL, game);
 			}
 		}
 		i++;
 	}
-	error_msg_and_exit(MAP_NOT_FOUND, NULL, NULL);
+	error_msg_and_exit(MAP_NOT_FOUND, NULL, game);
 }
 
 static void	check_for_identifier(t_vars *game, char *identifier)
@@ -91,7 +91,7 @@ static void	check_for_identifier(t_vars *game, char *identifier)
 	}
 	if (identifier_count == 0)
 	{
-		error_msg_and_exit(NO_IDENTIFIER, identifier, NULL);
+		error_msg_and_exit(NO_IDENTIFIER, identifier, game);
 	}
 	if (identifier_count == 1)
 	{
@@ -99,7 +99,7 @@ static void	check_for_identifier(t_vars *game, char *identifier)
 	}
 	if (identifier_count >= 2)
 	{
-		error_msg_and_exit(DUPLICATE_IDENTIFIER, identifier, NULL);
+		error_msg_and_exit(DUPLICATE_IDENTIFIER, identifier, game);
 	}
 }
 

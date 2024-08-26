@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:25:55 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 11:26:04 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 13:57:23 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	get_colour(t_vars *game, char *identifier)
 
 	i = get_element_index(game, identifier);
 	value_start = get_identifier_start(game->file[i], identifier);
-	value = parse_out_key_and_spaces(game->file[i], value_start);
+	value = parse_out_key_and_spaces(game, game->file[i], value_start);
 	value = character_replace(value, '\n', '\0');
 	check_if_only_digits_and_commas(game, value, identifier);
 	check_for_3_numbers_and_2_commas(game, value, identifier);

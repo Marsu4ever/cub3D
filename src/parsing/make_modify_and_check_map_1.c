@@ -6,23 +6,11 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:33:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 13:02:33 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:59:53 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-static void	free_incomplete_array(char **array, int i)
-{
-	i--;
-	while (i >= 0)
-	{
-		free(array[i]);
-		i--;
-	}
-	free(array);
-	array = NULL;
-}
 
 static char	**make_map(t_vars *game, int start, int end)
 {

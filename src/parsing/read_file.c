@@ -6,16 +6,36 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:34:30 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/22 11:29:41 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:51:04 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-char	**retrieve_file(char *av, int number_of_lines)
+static char	**file_retrieval_service(char **file, int fd, int number_of_lines)
+{
+	int	i;
+
+	i = 0;
+	while (i < number_of_lines)
+	{
+		file[i] = get_next_line(fd);
+		if (file[i] == NULL)
+		{
+			close(fd);
+			free_incomplete_array(file, i);
+			error_msg_and_exit(MALLOC_FAIL, "@ file[i]", NULL);
+		}
+		i++;
+	}
+	file[i] = NULL;
+	close(fd);
+	return (file);
+}
+
+static char	**retrieve_file(char *av, int number_of_lines)
 {
 	char	**file;
-	int		i;
 	int		fd;
 
 	fd = open(av, O_RDONLY);
@@ -29,17 +49,11 @@ char	**retrieve_file(char *av, int number_of_lines)
 		close(fd);
 		error_msg_and_exit(MALLOC_FAIL, "@ retrieve_file", NULL);
 	}
-	i = 0;
-	while (i < number_of_lines)
-	{
-		file[i] = get_next_line(fd);
-		i++;
-	}
-	file[i] = NULL;
+	file = file_retrieval_service(file, fd, number_of_lines);
 	return (file);
 }
 
-int	count_lines_in_file(char *av)
+static int	count_lines_in_file(char *av)
 {
 	int		i;
 	int		fd;
@@ -54,9 +68,13 @@ int	count_lines_in_file(char *av)
 	}
 	line_count = 0;
 	line = "let's get into the while loop!";
-	while (line)
+	while (1)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+		{
+			break ;
+		}
 		free(line);
 		line_count++;
 	}
