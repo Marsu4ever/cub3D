@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/26 14:11:42 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:38:31 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ void	parsing(t_vars *game, int ac, char **av);
 void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
 void    delta_dist(t_player *player, t_vars *vars);
+void	display_it(int r, t_player *player, t_vars *game);
 
 //read_file.c
 void	read_file(t_vars *game, char *av);
