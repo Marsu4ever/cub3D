@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/22 13:49:13 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/26 15:30:46 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdio.h> //perror, printf
 # include <stdlib.h> //exit, free, malloc
 # include <string.h> //strerror
+# include <stdint.h> //uint32_t
 # include "errno.h"
 # include "MLX42.h"
 # include "libft.h"
@@ -47,14 +48,14 @@ typedef struct s_player
 	int		        y_step;
 	int		        hit;
 	int		        side;
-	int		        wall_height;
+	int		        wall_slice_height;
 	double          x_ray_dir;
 	double          y_ray_dir;
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	int		        start_of_wall;
-	int		        end_of_wall;
+	int		        wall_slice_start;
+	int		        wall_slice_end;
 	int		        x_texture;
 	int		        y_texture;
 }               t_player;
@@ -80,7 +81,7 @@ typedef struct s_vars
     mlx_texture_t   *texture;
     int             c_values;
     int             f_values;
-    uint32_t        wall_color;
+    uint32_t        wall_paint;
     double          x_wall;
     int             players_nbr;
 
@@ -130,6 +131,7 @@ void e_w_compass(t_player * player, double num, double nmro);
 void	wall_slicing(t_vars *game);
 void 	put_textures(t_vars *game);
 void    texture_coordinates(t_vars *game);
+void	render_wall_slice(int r, t_player *player, t_vars *game);
 
 
 #endif
