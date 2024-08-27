@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/26 15:57:56 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/27 16:08:55 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ enum				e_codes
 	MLX_LOOP_HOOK_FAIL,
 }					;
 
+typedef struct s_ray
+{
+	double          x_ray_dir;
+	double          y_ray_dir;
+	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
+	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
+	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
+	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
+	double          perp_wall_dist; //perpendtical wall distance
+	int		        wall_slice_height;
+	int				side;
+}	t_ray;
+
 typedef struct s_player
 {
     double          x_pos;
@@ -72,18 +85,9 @@ typedef struct s_player
 	double          ydir;
 	double          x_plane;
 	double          y_plane;
-	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
-	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
-	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
-	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
-	double          perp_wall_dist; //perpendtical wall distance
 	int		        x_step;
 	int		        y_step;
 	int		        hit;
-	int		        side;
-	int		        wall_slice_height;
-	double          x_ray_dir;
-	double          y_ray_dir;
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
@@ -91,6 +95,7 @@ typedef struct s_player
 	int		        wall_slice_end;
 	int		        x_texture;
 	int		        y_texture;
+	t_ray			*ray;
 }               t_player;
 
 typedef struct s_vars
@@ -188,10 +193,9 @@ int     get_rgba(int r, int g, int b);  //Does this stay here?
 void	parsing(t_vars *game, int ac, char **av);
 
 //raycasting.c
-void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
 void    delta_dist(t_player *player, t_vars *vars);
-void	display_it(int r, t_player *player, t_vars *game);
+t_ray 	*get_ray(t_player *player, t_vars * game);
 
 //read_file.c
 void	read_file(t_vars *game, char *av);
@@ -199,11 +203,13 @@ void	read_file(t_vars *game, char *av);
 //render.c
 void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
-void    create_floor_ceiling(t_vars *game);
+void    create_ceiling(int x, t_vars *game);
+void	create_the_maze(int x, t_vars *game);
+void    create_floor(int x, t_vars *game);
 
 //raycasting.c
-void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
+void    calc_rays(t_vars *game);
 void    delta_dist(t_player *player, t_vars *vars);
 
 //parsing.c
@@ -230,6 +236,6 @@ void	wall_slicing(t_vars *game);
 void 	put_textures(t_vars *game);
 void    texture_coordinates(t_vars *game);
 void	render_wall_slice(int r, t_player *player, t_vars *game);
-
+int 	pos_valid(t_vars *game);
 
 #endif
