@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_wolfenstein.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/26 14:06:18 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/08/28 13:39:04 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,29 +162,17 @@ void	minimap_movement(t_vars *game, char direction)
 	move_distance = 32;
 	turn_angle = 15;
 	if (direction == 'W')
-	{
 		move_up(game, move_distance);
-	}
 	if (direction == 'S')
-	{
 		move_down(game, move_distance);
-	}
 	if (direction == 'A')
-	{
 		move_left(game, move_distance);
-	}
 	if (direction == 'D')
-	{
 		move_right(game, move_distance);
-	}
 	if (direction == 'L')
-	{
 		look_left(game, turn_angle);
-	}
 	if (direction == 'R')
-	{
 		look_right(game, turn_angle);
-	}
 }
 
 void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
@@ -196,62 +184,74 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: -------->\n");                         //Ray tracing 4 simos
+		rotate_right(game);
+		printf("Key Press: -------->\n");
 		minimap_movement(game, 'R');
 	}
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: <--------\n");							//Ray tracing
+		rotate_left(game);
+		printf("Key Press: <--------\n");			
 		minimap_movement(game, 'L');
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: W\n");								//Ray tracing
+		move_w(game);
+		printf("Key Press: W\n");			
 		minimap_movement(game, 'W');
 	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: S\n");								//Ray tracing
+		move_s(game);
+		printf("Key Press: S\n");			
 		minimap_movement(game, 'S');
 	}	
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: D\n");								//Ray tracing
+		move_d(game);
+		printf("Key Press: D\n");		
 		minimap_movement(game, 'D');
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
 	{
-		printf("Key Press: A arrow\n");								//Ray tracing
+		move_a(game);
+		printf("Key Press: A\n");			
 		minimap_movement(game, 'A');
 	}
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: Right arrow\n");                         //Ray tracing 4 simos
+		rotate_right(game);
+		printf("Key Press: -------->\n");           
 		minimap_movement(game, 'R');
 	}	
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: Left arrow\n");							//Ray tracing
+		rotate_left(game);
+		printf("Key Press: <--------\n");				
 		minimap_movement(game, 'L');
 	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: W arrow\n");								//Ray tracing
+		move_w(game);
+		printf("Key Press: W\n");			
 		minimap_movement(game, 'W');
 	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: S arrow\n");								//Ray tracing
+		move_s(game);
+		printf("Key Press: S\n");				
 		minimap_movement(game, 'S');
 	}	
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: D arrow\n");								//Ray tracing
+		move_d(game);
+		printf("Key Press: D\n");
 		minimap_movement(game, 'D');
 	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
 	{
-		printf("Key Press: A arrow\n");
+		move_a(game);
+		printf("Key Press: A\n");
 		minimap_movement(game, 'A');
 	}
 }
@@ -279,7 +279,7 @@ void	run_wolfenstein(t_vars *game)
 		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);
 	}
 	minimap(game);	
-	if (mlx_loop_hook(game->mlx, (void *)render, game) != 1)
+	if (mlx_loop_hook(game->mlx, (void *)wall_slicing, game) != 1)
 	{
 		error_msg_and_exit(MLX_LOOP_HOOK_FAIL, NULL, game);
 	}

@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/27 16:24:33 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/28 13:27:39 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	get_rgba(int r, int g, int b)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-void	render(t_vars *game)
-{
-	int32_t length;
+// void	render(t_vars *game)
+// {
+// 	int32_t length;
 
-	length = game->image->height * game->image->width * sizeof(int32_t);
-	ft_memset(game->image->pixels, 0, length);
-	// game->c_values = get_rgba(225, 30, 0);
-    // game->f_values = get_rgba(200, 100, 0);
-    // create_floor_ceiling(game);
-}
+// 	length = game->image->height * game->image->width * sizeof(int32_t);
+// 	ft_memset(game->image->pixels, 0, length);
+// 	// game->c_values = get_rgba(225, 30, 0);
+//     // game->f_values = get_rgba(200, 100, 0);
+//     // create_floor_ceiling(game);
+// }
