@@ -68,7 +68,7 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     i = player->wall_slice_start;
     texture = texture_pick(game);
     texture_coordinates(game);
-    j = TEXTURE_H / player->ray->wall_slice_height;
+    j = game->texture->height / player->ray->wall_slice_height;
     position_of_texture = (i - SCREEN_HEIGHT/2 + player->ray->wall_slice_height/2) * j;
     while (i < player->wall_slice_end)
     {
@@ -89,6 +89,7 @@ void    wall_slicing(t_vars *game)
     t_ray   *ray;
 
     x = 0;
+    game->player->ray = malloc(sizeof(t_ray));
     ray = game->player->ray;
     while (x < SCREEN_WIDTH)
     {
@@ -96,18 +97,13 @@ void    wall_slicing(t_vars *game)
         game->player->wall_slice_end = 0;
         init_rays(game->player, x);
         calc_rays(game);
-        if (ray->side == 0)
-            ray->perp_wall_dist = ray->x_side_dist - ray->x_delta_dist / ray->x_ray_dir;
-        else
-            ray->perp_wall_dist = ray->y_side_dist - ray->y_delta_dist / ray->y_ray_dir;
-        ray->wall_slice_height = (int)(SCREEN_HEIGHT / ray->perp_wall_dist);
         game->player->wall_slice_start = (SCREEN_HEIGHT - ray->wall_slice_height) / 2;
         if (game->player->wall_slice_start < 0)
             game->player->wall_slice_start = 0;
         game->player->wall_slice_end = (ray->wall_slice_height + SCREEN_HEIGHT) / 2;
         if (game->player->wall_slice_end >= SCREEN_HEIGHT)
             game->player->wall_slice_end = SCREEN_HEIGHT - 1;
-        create_the_maze(x, game);
+        create_the_maze(x, game); //seg
         x++;
     }
 }

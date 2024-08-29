@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/27 15:48:09 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/29 14:00:27 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void delta_dist(t_player *player, t_vars *game)
 
 void    init_rays(t_player  *player, int r)
 {
+
     player->x_camera = 2 * r / (double)SCREEN_WIDTH - 1;
     player->ray->x_ray_dir = player->xdir + player->x_plane * player->x_camera;
     player->ray->y_ray_dir = player->ydir + player->y_plane * player->x_camera;
@@ -91,8 +92,8 @@ void    calc_rays(t_vars *game)
     game->player->hit = 0;
     ray = get_ray(game->player, game);
     game->x_map = (int)game->player->x_pos;
-	game->y_map = (int)game->player->y_pos;
-    dda_loop(game->player, game); 
+	game->y_map = (int)game->player->y_pos;  
+    dda_loop(game->player, game);
     if (ray->side == 1)
         ray->perp_wall_dist = ray->x_side_dist - ray->x_delta_dist;
     else

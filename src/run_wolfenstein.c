@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/28 13:39:04 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/29 14:07:38 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,31 +258,23 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 
 void	run_wolfenstein(t_vars *game)
 {
+
 	game->mlx = mlx_init(SCREEN_WIDTH, SCREEN_HEIGHT, "Wolfenstein_3D", true);
 	if (game->mlx == NULL)
-	{
 		error_msg_and_exit(MLX_INIT_FAIL, "game->mlx", game);
-	}
 	game->image = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!game->image)
-	{
 		error_msg_and_exit(MLX_NEW_IMAGE_FAIL, "game->image", game);
-	}
-
 /* 	mlx_load_png("./textures/NO.png");
 	mlx_load_png("./textures/EA.png");
 	mlx_load_png("./textures/SO.png");
 	mlx_load_png("./textures/WE.png"); */
 
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
-	{
 		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);
-	}
 	minimap(game);	
 	if (mlx_loop_hook(game->mlx, (void *)wall_slicing, game) != 1)
-	{
 		error_msg_and_exit(MLX_LOOP_HOOK_FAIL, NULL, game);
-	}
 	mlx_key_hook(game->mlx, move_hook, game);
 	mlx_loop(game->mlx);
 }
