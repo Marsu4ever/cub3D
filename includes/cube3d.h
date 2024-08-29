@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/28 13:43:42 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/29 11:25:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,5 +239,16 @@ mlx_texture_t	*texture_pick(t_vars *game);
 void    		texture_coordinates(t_vars *game);
 void			render_wall_slice(int r, t_player *player, t_vars *game);
 int 			pos_valid(t_vars *game);
+
+//move.c
+void    move_w(t_vars *game);
+void    move_a(t_vars *game);
+void    move_s(t_vars *game);
+void    move_d(t_vars *game);
+int		hit_a_wall(t_vars *game, double new_x, double new_y);
+
+//rotate_and_move_utils.c
+void    rotate_left(t_vars *game);
+void    rotate_right(t_vars *game);
 
 #endif

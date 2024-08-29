@@ -39,7 +39,9 @@ SRCS = \
 	src/parsing/parsing_utils_1.c \
 	src/parsing/parsing_utils_2.c \
 	src/parsing/compass.c \
-	src/buildsomewalls.c
+	src/buildsomewalls.c \
+	src/move.c \
+	src/rotate_and_move_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
