@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/29 14:09:25 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/29 14:20:04 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void    create_ceiling(int x, t_vars *game)
 
 void create_the_maze(int x, t_vars *game)
 {
-
-	create_floor(x, game); //there is a seg hidden here
-	render_wall_slice(x, game->player, game);
+	create_floor(x, game);
+	render_wall_slice(x, game->player, game); //something gets devided bt zero while it should not
     create_ceiling(x, game);
 }
 

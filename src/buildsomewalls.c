@@ -91,7 +91,7 @@ void    wall_slicing(t_vars *game)
     x = 0;
     game->player->ray = malloc(sizeof(t_ray));
     ray = game->player->ray;
-    while (x < SCREEN_WIDTH)
+    while (x < SCREEN_WIDTH - 1)
     {
         game->player->wall_slice_start = 0;
         game->player->wall_slice_end = 0;
