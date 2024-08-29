@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/28 13:42:08 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/29 12:41:17 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	close_program(t_vars *game)
 
 int	main(int ac, char **av)
 {
-	t_vars	game;
+	t_vars	game; 
 
 	game = (t_vars){0};
 	parsing(&game, ac, av);
