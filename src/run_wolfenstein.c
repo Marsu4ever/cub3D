@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/29 14:07:38 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/30 11:35:28 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,7 @@ void	run_wolfenstein(t_vars *game)
 
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
 		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);
-	minimap(game);	
+	// minimap(game);	
 	if (mlx_loop_hook(game->mlx, (void *)wall_slicing, game) != 1)
 		error_msg_and_exit(MLX_LOOP_HOOK_FAIL, NULL, game);
 	mlx_key_hook(game->mlx, move_hook, game);

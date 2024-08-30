@@ -6,15 +6,15 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/29 11:25:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/08/30 14:10:03 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# define SCREEN_HEIGHT 540
-# define SCREEN_WIDTH 960
+# define SCREEN_HEIGHT 980
+# define SCREEN_WIDTH 1300
 # define TEXTURE_H 64
 # define TEXTURE_W 64
 # define FOV 0.55 //field of view
@@ -72,8 +72,8 @@ typedef struct s_ray
 	double          y_ray_dir;
 	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
 	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
-	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
-	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
+	// double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
+	// double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
 	double          perp_wall_dist; //perpendtical wall distance
 	int		        wall_slice_height;
 	int				side;
@@ -194,16 +194,10 @@ void    run_wolfenstein(t_vars *game);
 int     get_rgba(int r, int g, int b);  //Does this stay here?
 void	parsing(t_vars *game, int ac, char **av);
 
-//raycasting.c
-void    init_rays(t_player *player, int r);
-void    delta_dist(t_player *player, t_vars *vars);
-t_ray 	*get_ray(t_player *player, t_vars * game);
-
 //read_file.c
 void	read_file(t_vars *game, char *av);
 
 //render.c
-void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
 void    create_ceiling(int x, t_vars *game);
 void	create_the_maze(int x, t_vars *game);
@@ -212,7 +206,8 @@ void    create_floor(int x, t_vars *game);
 //raycasting.c
 void    init_rays(t_player *player, int r);
 void    calc_rays(t_vars *game);
-void    delta_dist(t_player *player, t_vars *vars);
+double  delta_dist(double  ray_dir);
+void 	get_ray(t_player *player);
 
 //parsing.c
 void	player_nbr_check(t_vars *game, char **map, int i);//Delete???
