@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:34:41 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/02 11:43:29 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:45:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ int hit_a_wall(t_vars *game, double new_x, double new_y)
         newer_y = new_y - 0.2;
     else
         newer_y = new_y;
-    if ((int)new_x < 0 || (int)new_x >= SCREEN_WIDTH || 
-    (int)new_y < 0 || (int)new_y >= SCREEN_HEIGHT ||
-    (int)newer_x < 0 || (int)newer_x >= SCREEN_WIDTH || 
-    (int)newer_y < 0 || (int)newer_y >= SCREEN_HEIGHT)
-        return (1);
+    // if ((int)new_x < 0 || (int)new_x >= SCREEN_WIDTH || 
+    // (int)new_y < 0 || (int)new_y >= SCREEN_HEIGHT ||
+    // (int)newer_x < 0 || (int)newer_x >= SCREEN_WIDTH || 
+    // (int)newer_y < 0 || (int)newer_y >= SCREEN_HEIGHT)
+    //     return (1);
     if ((game->map[(int)new_y][(int)new_x] == '1') \
         || (game->map[(int)newer_y][(int)newer_x] == '1'))
         return (1);

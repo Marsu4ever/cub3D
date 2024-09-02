@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/02 11:24:06 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/02 14:26:15 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,22 @@ static void	error_check_texture_string(t_vars *game, char *value,
 
 static mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 {
-	char			*value;
-	int				value_start;
+	char			*path;
+	int				path_start;
 	int				i;
 	mlx_texture_t	*texture;
 
 	i = get_element_index(game, identifier);
-	value_start = get_identifier_start(game->file[i], identifier);
-	value = parse_out_key_and_spaces(game, game->file[i], value_start);
-	value = character_replace(value, '\n', '\0');
-	error_check_texture_string(game, value, identifier);
-	texture = mlx_load_png(value);
+	path_start = get_identifier_start(game->file[i], identifier);
+	path = parse_out_key_and_spaces(game, game->file[i], path_start);
+	path = character_replace(path, '\n', '\0');
+	error_check_texture_string(game, path, identifier);
+	texture = mlx_load_png(path);
 	/* 	mlx_load_png("./textures/NO.png");
 	mlx_load_png("./textures/EA.png");
 	mlx_load_png("./textures/SO.png");
 	mlx_load_png("./textures/WE.png"); */
-	free(value);
+	free(path);
 	if (texture == NULL)
 	{
 		error_msg_and_exit(LOAD_PNG_FAIL, identifier, game);
