@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/30 13:33:24 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/02 10:56:28 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void get_ray(t_player *player)
     if (player->ray->y_ray_dir >= 0)
     {
         player->y_step = 1;
-        player->ray->x_side_dist = ((int)player->y_pos + 1.0 - player->y_pos) * delta_dist(player->ray->y_ray_dir);
+        player->ray->y_side_dist = ((int)player->y_pos + 1.0 - player->y_pos) * delta_dist(player->ray->y_ray_dir);
     }
     else
     {
         player->y_step = -1;
-        player->ray->x_side_dist = (player->y_pos - (int)player->y_pos) * delta_dist(player->ray->y_ray_dir);
+        player->ray->y_side_dist = (player->y_pos - (int)player->y_pos) * delta_dist(player->ray->y_ray_dir);
     }
 }
 
@@ -86,8 +86,8 @@ void    calc_rays(t_vars *game)
         game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
     else
         game->player->ray->perp_wall_dist = game->player->ray->x_side_dist - delta_dist(game->player->ray->x_ray_dir);
-    if (game->player->ray->perp_wall_dist == 0)
-        game->player->ray->wall_slice_height = SCREEN_HEIGHT;
+    if (game->player->ray->perp_wall_dist < 1e-6)
+        game->player->ray->perp_wall_dist = 1e-6;
     else
-        game->player->ray->wall_slice_height = ((int)SCREEN_HEIGHT / game->player->ray->perp_wall_dist); //perp_wall_dist is zero..
+        game->player->ray->wall_slice_height = ((int)SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
 }

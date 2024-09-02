@@ -68,9 +68,7 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     i = player->wall_slice_start;
     texture = texture_pick(game);
     texture_coordinates(game);
-
     printf("\nWALL_SLICE_HEIGHT: %d\n", player->ray->wall_slice_height);
-    
     j = game->texture->height / player->ray->wall_slice_height;
     position_of_texture = (i - SCREEN_HEIGHT/2 + player->ray->wall_slice_height/2) * j;
     while (i < player->wall_slice_end)
@@ -89,15 +87,11 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
 void    wall_slicing(t_vars *game)
 {
     int     x;
-    // t_ray   *ray;
 
     x = 0;
     game->player->ray = malloc(sizeof(t_ray));
-    // ray = game->player->ray;
     while (x < SCREEN_WIDTH)
     {
-        // game->player->wall_slice_start = 0;
-        // game->player->wall_slice_end = 0;
         init_rays(game->player, x);
         calc_rays(game);
         printf("\nwall_slice_height: %d\n", game->player->ray->wall_slice_height);
