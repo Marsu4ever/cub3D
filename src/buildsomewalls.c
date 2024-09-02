@@ -101,7 +101,7 @@ void    wall_slicing(t_vars *game)
         game->player->wall_slice_end = game->player->ray->wall_slice_height/2 + SCREEN_HEIGHT/ 2;
         if (game->player->wall_slice_end >= SCREEN_HEIGHT)
             game->player->wall_slice_end = SCREEN_HEIGHT - 1;
-        create_the_maze(x, game); //seg
+        create_the_maze(x, game);
         x++;
     }
 }

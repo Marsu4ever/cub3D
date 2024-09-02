@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/02 10:56:28 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/02 11:01:42 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void dda_loop(t_player *player, t_vars *game)
 {
     while (player->hit == 0)
     {
-        // printf("x_side_dist: %f,  y_side_dist: %f\n", game->player->ray->x_side_dist, game->player->ray->y_side_dist);
         if (player->ray->x_side_dist < player->ray->y_side_dist) 
         {
             player->ray->x_side_dist += delta_dist(player->ray->x_ray_dir);
@@ -69,7 +68,6 @@ double delta_dist(double ray_dir)
 
 void    init_rays(t_player  *player, int r)
 {
-    // printf("y_plane: %f, ydir: %f\n", player->y_plane, player->ydir);
     player->x_camera = 2 * r / (double)SCREEN_WIDTH - 1;
     player->ray->x_ray_dir = player->xdir + player->x_plane * player->x_camera;
     player->ray->y_ray_dir = player->ydir + player->y_plane * player->x_camera;
