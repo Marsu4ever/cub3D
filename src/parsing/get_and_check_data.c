@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 15:17:30 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/02 11:24:06 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ static mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 	value = character_replace(value, '\n', '\0');
 	error_check_texture_string(game, value, identifier);
 	texture = mlx_load_png(value);
+	/* 	mlx_load_png("./textures/NO.png");
+	mlx_load_png("./textures/EA.png");
+	mlx_load_png("./textures/SO.png");
+	mlx_load_png("./textures/WE.png"); */
 	free(value);
 	if (texture == NULL)
 	{
