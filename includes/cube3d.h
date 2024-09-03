@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/30 14:10:03 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/03 15:20:31 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define SCREEN_WIDTH 1300
 # define TEXTURE_H 64
 # define TEXTURE_W 64
-# define FOV 0.55 //field of view
+# define FOV 0.66 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.3
