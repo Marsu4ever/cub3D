@@ -8,8 +8,8 @@ LIBFT_PATH = libft
 
 LIBFT = $(LIBFT_PATH)/libft.a
 
-# CFLAGS =
-CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
+CFLAGS =
+# CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 
 HEADERS = -I includes -I $(LIBMLX_PATH)/include/MLX42 -I "/Users/$(USER)/.brew/opt/glfw/include" -I $(LIBFT_PATH)/headers
 
