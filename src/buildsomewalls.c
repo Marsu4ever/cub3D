@@ -33,7 +33,7 @@ void    texture_coordinates(t_vars *game)
     else
         game->x_wall = game->player->y_pos + game->player->ray->perp_wall_dist * game->player->ray->y_ray_dir;
     game->x_wall -=  floor(game->x_wall);
-    game->player->x_texture = (int)(game->x_wall * (double)TEXTURE_W - 1);
+    game->player->x_texture = (int)(game->x_wall * (double)TEXTURE_W - 1); // -1)
     if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
         (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
         game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
@@ -71,10 +71,14 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     position_of_texture = (i - SCREEN_HEIGHT / 2 + player->ray->wall_slice_height / 2) * j;
     while (i < player->wall_slice_end)
     {
-        player->y_texture = (int)position_of_texture & (TEXTURE_H - 1);
-        position_of_texture += j;
+        player->y_texture = (int)position_of_texture; //& (TEXTURE_H - 1);
+        if (player->y_texture >= TEXTURE_H)
+            player->y_texture = TEXTURE_H - 1;
+        if (player->y_texture < 0)
+            player->y_texture += TEXTURE_H;
         game->wall_paint = paint_wall_slice(player, game);
         mlx_put_pixel(game->image, x, i, game->wall_paint);
+        position_of_texture += j;
         i++;
     }
 }
@@ -90,9 +94,11 @@ void    wall_slicing(t_vars *game)
         init_rays(game->player, x);
         calc_rays(game);
         game->player->wall_slice_start = SCREEN_HEIGHT/2 - game->player->ray->wall_slice_height/2;
+        // printf("wall_slice_START: %d\n", game->player->wall_slice_start);
         if (game->player->wall_slice_start < 0)
             game->player->wall_slice_start = 0;
         game->player->wall_slice_end = game->player->ray->wall_slice_height/2 + SCREEN_HEIGHT/ 2;
+        // printf("wall_slice_END: %d\n", game->player->wall_slice_end);
         if (game->player->wall_slice_end >= SCREEN_HEIGHT)
             game->player->wall_slice_end = SCREEN_HEIGHT - 1;
         create_the_maze(x, game);
