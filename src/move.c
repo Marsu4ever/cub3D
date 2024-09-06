@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:34:41 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/02 11:45:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/06 13:08:34 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void    move_w(t_vars *game)
         return ;
     game->player->x_pos = new_xpos;
     game->player->y_pos = new_ypos;
-    wall_slicing(game);
+    // wall_slicing(game);
 }
 
 void    move_d(t_vars *game)
@@ -65,7 +65,7 @@ void    move_d(t_vars *game)
         return ;
     game->player->x_pos = new_xpos;
     game->player->y_pos = new_ypos;
-    wall_slicing(game);
+    // wall_slicing(game);
 }
 
 void    move_s(t_vars *game)
@@ -79,7 +79,7 @@ void    move_s(t_vars *game)
         return ;
     game->player->x_pos = new_xpos;
     game->player->y_pos = new_ypos;
-    wall_slicing(game);
+    // wall_slicing(game);
 }
 
 void    move_a(t_vars *game)
@@ -93,5 +93,5 @@ void    move_a(t_vars *game)
         return ;
     game->player->x_pos = new_xpos;
     game->player->y_pos = new_ypos;
-    wall_slicing(game);
+    // wall_slicing(game);
 }

@@ -6,17 +6,17 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/03 15:20:31 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/06 13:33:57 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# define SCREEN_HEIGHT 980
+# define SCREEN_HEIGHT 960
 # define SCREEN_WIDTH 1300
-# define TEXTURE_H 64
-# define TEXTURE_W 64
+# define TEXTURE_H 128
+# define TEXTURE_W 128
 # define FOV 0.66 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
@@ -75,7 +75,7 @@ typedef struct s_ray
 	// double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
 	// double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
 	double          perp_wall_dist; //perpendtical wall distance
-	int		        wall_slice_height;
+	double		        wall_slice_height;
 	int				side;
 }	t_ray;
 
@@ -93,8 +93,8 @@ typedef struct s_player
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	int		        wall_slice_start;
-	int		        wall_slice_end;
+	double	        wall_slice_start;
+	double		    wall_slice_end;
 	int		        x_texture;
 	int		        y_texture;
 	t_ray			*ray;

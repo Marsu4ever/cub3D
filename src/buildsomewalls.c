@@ -71,11 +71,11 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     position_of_texture = (i - SCREEN_HEIGHT / 2 + player->ray->wall_slice_height / 2) * j;
     while (i < player->wall_slice_end)
     {
-        player->y_texture = (int)position_of_texture; //& (TEXTURE_H - 1);
-        if (player->y_texture >= TEXTURE_H)
-            player->y_texture = TEXTURE_H - 1;
-        if (player->y_texture < 0)
-            player->y_texture += TEXTURE_H;
+        player->y_texture = (int)position_of_texture & (TEXTURE_H - 1);
+        // if (player->y_texture >= TEXTURE_H)
+        //     player->y_texture = TEXTURE_H - 1;
+        // if (player->y_texture < 0)
+        //     player->y_texture += TEXTURE_H;
         game->wall_paint = paint_wall_slice(player, game);
         mlx_put_pixel(game->image, x, i, game->wall_paint);
         position_of_texture += j;
@@ -88,20 +88,27 @@ void    wall_slicing(t_vars *game)
     int     x;
 
     x = 0;
-    game->player->ray = malloc(sizeof(t_ray));
+    game->player->ray = malloc(sizeof(t_ray));//Add NULL protection
     while (x < SCREEN_WIDTH)
     {
         init_rays(game->player, x);
         calc_rays(game);
-        game->player->wall_slice_start = SCREEN_HEIGHT/2 - game->player->ray->wall_slice_height/2;
+        game->player->wall_slice_start = (double)SCREEN_HEIGHT/2 - game->player->ray->wall_slice_height/2;
         // printf("wall_slice_START: %d\n", game->player->wall_slice_start);
         if (game->player->wall_slice_start < 0)
             game->player->wall_slice_start = 0;
-        game->player->wall_slice_end = game->player->ray->wall_slice_height/2 + SCREEN_HEIGHT/ 2;
+        game->player->wall_slice_end = game->player->ray->wall_slice_height/2 + (double)SCREEN_HEIGHT/ 2;
         // printf("wall_slice_END: %d\n", game->player->wall_slice_end);
-        if (game->player->wall_slice_end >= SCREEN_HEIGHT)
-            game->player->wall_slice_end = SCREEN_HEIGHT - 1;
+        if (game->player->wall_slice_end >= (double)SCREEN_HEIGHT)
+            game->player->wall_slice_end = (double)SCREEN_HEIGHT - 1;
+        // if ((game->player->wall_slice_start >= SCREEN_HEIGHT) || (game->player->wall_slice_end < 0))
+        //     return ;
+        if (game->player->wall_slice_end <= game->player->ray->wall_slice_height)
+            printf("YES\n"); //stupid check
+        else
+            printf("YOU MADE IT!!!\n");
         create_the_maze(x, game);
         x++;
     }
 }
+ 

@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/05 14:13:25 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/06 12:57:30 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,13 @@ void    calc_rays(t_vars *game)
         game->player->ray->perp_wall_dist = game->player->ray->x_side_dist - delta_dist(game->player->ray->x_ray_dir);
     else
         game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
-    if (game->player->ray->perp_wall_dist < 0.5)
-        game->player->ray->perp_wall_dist = 0.5;
-    // else
-    // printf("wall_slice_height: %d\n", game->player->ray->wall_slice_height);
-    if (game->player->wall_slice_end < game->player->ray->wall_slice_height)
-        printf("YES\n"); //stupid check
-    game->player->ray->wall_slice_height = ((int)SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
+    // if (game->player->ray->perp_wall_dist <= 0.5)
+    // {
+    //     game->player->ray->perp_wall_dist = 0.5;
+    //     // game->player->ray->wall_slice_height = (double)SCREEN_HEIGHT; //here
+    // }
+    game->player->ray->wall_slice_height = ((double)SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
+    // if (game->player->ray->wall_slice_height >= game->player->wall_slice_end)
+    //     game->player->ray->wall_slice_height = game->player->wall_slice_end - 1;
+    printf("start: %f, height: %f, perp: %f, end: %f\n", game->player->wall_slice_start, game->player->ray->wall_slice_height, game->player->ray->perp_wall_dist, game->player->wall_slice_end);
 }

@@ -6,13 +6,13 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/02 14:05:44 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/06 13:21:52 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void    create_floor(int x, t_vars *game)
+void    create_ceiling(int x, t_vars *game)
 {
 	int y;
 
@@ -24,7 +24,7 @@ void    create_floor(int x, t_vars *game)
     }
 }
 
-void    create_ceiling(int x, t_vars *game)
+void    create_floor(int x, t_vars *game)
 {
 	int y;
 
