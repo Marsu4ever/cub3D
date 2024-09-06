@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/06 13:33:57 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/06 16:15:35 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # define SCREEN_HEIGHT 960
 # define SCREEN_WIDTH 1300
-# define TEXTURE_H 128
-# define TEXTURE_W 128
+# define TEXTURE_H 256.0
+# define TEXTURE_W 256.0
 # define FOV 0.66 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
@@ -95,8 +95,8 @@ typedef struct s_player
 	double          rot_speed;
 	double	        wall_slice_start;
 	double		    wall_slice_end;
-	int		        x_texture;
-	int		        y_texture;
+	double		    x_texture;
+	double		    y_texture;
 	t_ray			*ray;
 }               t_player;
 
