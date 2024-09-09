@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/06 16:15:35 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/09 16:08:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # define SCREEN_HEIGHT 960
 # define SCREEN_WIDTH 1300
-# define TEXTURE_H 256.0
-# define TEXTURE_W 256.0
-# define FOV 0.66 //field of view
+# define TEXTURE_H 256
+# define TEXTURE_W 256
+# define FOV 0.55 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.3
@@ -95,8 +95,8 @@ typedef struct s_player
 	double          rot_speed;
 	double	        wall_slice_start;
 	double		    wall_slice_end;
-	double		    x_texture;
-	double		    y_texture;
+	int		    	x_texture;
+	int		    	y_texture;
 	t_ray			*ray;
 }               t_player;
 
@@ -123,7 +123,7 @@ typedef struct s_vars
     int             c_values;
     int             f_values;
     uint32_t        wall_paint;
-    double          x_wall;
+    double          x_hit;
     int             players_nbr;
     char            **file;
 
@@ -231,9 +231,10 @@ void e_w_compass(t_player * player, double num, double nmro);
 //buildsomewalls.c
 void			wall_slicing(t_vars *game);
 mlx_texture_t	*texture_pick(t_vars *game);
-void    		texture_coordinates(t_vars *game);
+int    			texture_coordinates(t_vars *game);
 void			render_wall_slice(int r, t_player *player, t_vars *game);
 int 			pos_valid(t_vars *game);
+uint32_t    	paint_wall_slice(t_player *player, t_vars *game, int x);
 
 //move.c
 void    move_w(t_vars *game);
