@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/09 11:51:03 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/10 15:21:07 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,4 @@ void    calc_rays(t_vars *game)
     else
         game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
     game->player->ray->wall_slice_height = ((double)SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
-    // printf("start: %f, height: %f, perp: %f, end: %f\n", game->player->wall_slice_start, game->player->ray->wall_slice_height, game->player->ray->perp_wall_dist, game->player->wall_slice_end);
 }

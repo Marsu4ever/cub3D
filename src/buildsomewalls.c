@@ -31,10 +31,12 @@ int    texture_coordinates(t_vars *game)
     else
         game->x_hit = game->player->y_pos + game->player->ray->perp_wall_dist * game->player->ray->y_ray_dir;
     game->x_hit -=  floor(game->x_hit);
-    game->player->x_texture = (int)(game->x_hit * (double)TEXTURE_W);
+    game->player->x_texture = (int)(game->x_hit * (double)TEXTURE_W + 25) % TEXTURE_W;
     if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
         (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
         game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
+    if (game->player->x_texture < 0)
+        game->player->x_texture = 0;
     if (game->player->x_texture >= TEXTURE_W)
         game->player->x_texture = TEXTURE_W - 1;
     return (game->player->x_texture);
@@ -68,21 +70,20 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
 
     i = player->wall_slice_start;
     game->texture = texture_pick(game);
-    x_of_texture = texture_coordinates(game); //THE PROBLEM IS HERE
-    printf("x_texture: %d\n", x_of_texture);
+    x_of_texture = texture_coordinates(game);
     j = (double)TEXTURE_H / player->ray->wall_slice_height;
     position_of_texture = (i - SCREEN_HEIGHT / 2 + player->ray->wall_slice_height / 2) * j;
     while (i < player->wall_slice_end)
     {
-        player->y_texture = (int)position_of_texture % (TEXTURE_H - 1);
+        player->y_texture = (int)position_of_texture % TEXTURE_H;
         if (player->y_texture < 0)
             player->y_texture += TEXTURE_H;
         game->wall_paint = paint_wall_slice(player, game, x_of_texture);
         mlx_put_pixel(game->image, x, i, game->wall_paint);
         position_of_texture += j;
-        // printf("x_texture: %d\n", x_of_texture);
         i++;
     }
+
 }
 
 void    wall_slicing(t_vars *game)
@@ -90,7 +91,7 @@ void    wall_slicing(t_vars *game)
     int     x;
 
     x = 0;
-    game->player->ray = malloc(sizeof(t_ray));//Add NULL protection
+    game->player->ray = malloc(sizeof(t_ray)); //Add NULL protection
     while (x < SCREEN_WIDTH)
     {
         init_rays(game->player, x);
