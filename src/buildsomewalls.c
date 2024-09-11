@@ -16,10 +16,12 @@ uint32_t    paint_wall_slice(t_player *player, t_vars *game, int x)
 {
     uint32_t    paint;
     int         y;
-    int         i;
+    uint16_t    i;
 
     y = player->y_texture;
     i = y * TEXTURE_W + x * game->texture->bytes_per_pixel;
+    // if (i < 0 || i >= TEXTURE_W * TEXTURE_H * game->texture->bytes_per_pixel)
+    //     return 0;
     paint = (uint32_t)get_rgba(game->texture->pixels[i], game->texture->pixels[i + 1], game->texture->pixels[i + 2]);
     return (paint);
 }
@@ -30,15 +32,15 @@ int    texture_coordinates(t_vars *game)
         game->x_hit = game->player->x_pos + game->player->ray->perp_wall_dist * game->player->ray->x_ray_dir;
     else //x-axis
         game->x_hit = game->player->y_pos + game->player->ray->perp_wall_dist * game->player->ray->y_ray_dir;
-    game->x_hit -=  (int)(game->x_hit);
+    game->x_hit -=  (floor)(game->x_hit);
     game->player->x_texture = (int)(game->x_hit * TEXTURE_W /*+ 25*/) /*% TEXTURE_W*/;
-    // if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
-    //     (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
-    //     game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
-    // if (game->player->x_texture < 0)
-    //     game->player->x_texture = 0;
-    // if (game->player->x_texture >= TEXTURE_W)
-    //     game->player->x_texture = TEXTURE_W - 1;
+    if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
+        (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
+        game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
+    if (game->player->x_texture < 0)
+        game->player->x_texture = 0;
+    if (game->player->x_texture >= TEXTURE_W)
+        game->player->x_texture = TEXTURE_W - 1;
     return (game->player->x_texture);
 }
 
@@ -76,8 +78,8 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     while (i < player->wall_slice_end)
     {
         player->y_texture = (int)pos_of_texture % TEXTURE_H;
-        // if (player->y_texture < 0)
-        //     player->y_texture = 0;
+        if (player->y_texture < 0)
+            player->y_texture += TEXTURE_H;
         //  if (player->y_texture >= TEXTURE_H)
         //     player->y_texture = TEXTURE_H - 1;
         game->wall_paint = paint_wall_slice(player, game, x_of_texture);
@@ -85,7 +87,7 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
         pos_of_texture += j;
         i++;
     }
-    printf("x_texture: %d\n", player->x_texture);
+    // printf("x_texture: %d\n", player->x_texture);
     // exit(0);
 }
 
@@ -94,7 +96,9 @@ void    wall_slicing(t_vars *game)
     int     x;
 
     x = 0;
-    game->player->ray = malloc(sizeof(t_ray)); //Add NULL protection
+    game->player->ray = malloc(sizeof(t_ray)); //Add better NULL protection
+    if (game->player->ray == NULL)
+        exit(EXIT_FAILURE);
     while (x < SCREEN_WIDTH)
     {
         init_rays(game->player, x);

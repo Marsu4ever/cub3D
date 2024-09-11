@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/11 11:54:56 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/11 13:12:45 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,11 @@ void    init_rays(t_player  *player, int r)
     player->x_camera = 2 * r / (double)SCREEN_WIDTH - 1;
     player->ray->x_ray_dir = player->xdir + player->x_plane * player->x_camera;
     player->ray->y_ray_dir = player->ydir + player->y_plane * player->x_camera;
+    if (fabs(player->ray->x_ray_dir) < 1e-6)
+        player->ray->x_ray_dir = 1e-6; // Avoid division by zero
+    if (fabs(player->ray->y_ray_dir) < 1e-6)
+        player->ray->y_ray_dir = 1e-6; // Avoid division by zero
+    // printf("x_ray_dir: %f, y_ray_dir: %f\n", player->ray->x_ray_dir, player->ray->y_ray_dir);
 }
 
 void    calc_rays(t_vars *game)
@@ -84,5 +89,6 @@ void    calc_rays(t_vars *game)
         game->player->ray->perp_wall_dist = game->player->ray->x_side_dist - delta_dist(game->player->ray->x_ray_dir);
     else
         game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
+    // printf("perp_wall_dist: %f\n", game->player->ray->perp_wall_dist);
     game->player->ray->wall_slice_height = (int)(SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
 }
