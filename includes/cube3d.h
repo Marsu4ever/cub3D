@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/10 15:48:46 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/11 11:55:43 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,8 @@ typedef struct s_ray
 	double          y_ray_dir;
 	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
 	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
-	// double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
-	// double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
 	double          perp_wall_dist; //perpendtical wall distance
-	double		        wall_slice_height;
+	double		    wall_slice_height;
 	int				side;
 }	t_ray;
 
