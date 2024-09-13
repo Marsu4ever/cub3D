@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/11 13:12:45 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/13 15:10:41 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,9 @@ void    init_rays(t_player  *player, int r)
     player->ray->x_ray_dir = player->xdir + player->x_plane * player->x_camera;
     player->ray->y_ray_dir = player->ydir + player->y_plane * player->x_camera;
     if (fabs(player->ray->x_ray_dir) < 1e-6)
-        player->ray->x_ray_dir = 1e-6; // Avoid division by zero
+        player->ray->x_ray_dir = 1e-6;
     if (fabs(player->ray->y_ray_dir) < 1e-6)
-        player->ray->y_ray_dir = 1e-6; // Avoid division by zero
-    // printf("x_ray_dir: %f, y_ray_dir: %f\n", player->ray->x_ray_dir, player->ray->y_ray_dir);
+        player->ray->y_ray_dir = 1e-6;
 }
 
 void    calc_rays(t_vars *game)
@@ -86,9 +85,13 @@ void    calc_rays(t_vars *game)
 	game->y_map = (int)game->player->y_pos;  
     dda_loop(game->player, game);
     if (game->player->ray->side == 0)
-        game->player->ray->perp_wall_dist = game->player->ray->x_side_dist - delta_dist(game->player->ray->x_ray_dir);
+        game->player->ray->perp_wall_dist = (game->x_map - game->player->x_pos + (1 - game->player->x_step) / 2) / game->player->ray->x_ray_dir;
     else
-        game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
+        game->player->ray->perp_wall_dist = (game->y_map - game->player->y_pos + (1 - game->player->y_step) / 2) / game->player->ray->y_ray_dir;
     // printf("perp_wall_dist: %f\n", game->player->ray->perp_wall_dist);
-    game->player->ray->wall_slice_height = (int)(SCREEN_HEIGHT / game->player->ray->perp_wall_dist);
+    // if (game->player->ray->perp_wall_dist > 0.001)
+    //     game->player->ray->wall_slice_height = (double)SCREEN_HEIGHT / game->player->ray->perp_wall_dist;
+    // else
+    //     game->player->ray->wall_slice_height = SCREEN_HEIGHT;
+    game->player->ray->wall_slice_height = SCREEN_HEIGHT / game->player->ray->perp_wall_dist;
 }

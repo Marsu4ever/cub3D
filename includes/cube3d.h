@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/11 13:58:57 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/13 16:08:45 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define SCREEN_WIDTH 1300
 # define TEXTURE_H 256
 # define TEXTURE_W 256
-# define FOV 0.55 //field of view
+# define FOV 0.66 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.3
@@ -121,7 +121,7 @@ typedef struct s_vars
     int             c_values;
     int             f_values;
     uint32_t        wall_paint;
-    double          x_hit;
+    double          hit_pos;
     int             players_nbr;
     char            **file;
 
@@ -229,10 +229,10 @@ void e_w_compass(t_player * player, double num, double nmro);
 //buildsomewalls.c
 void			wall_slicing(t_vars *game);
 mlx_texture_t	*texture_pick(t_vars *game);
-int    			texture_coordinates(t_vars *game);
+int    			x_texture(t_vars *game);
 void			render_wall_slice(int r, t_player *player, t_vars *game);
 int 			pos_valid(t_vars *game);
-uint32_t    	paint_wall_slice(t_player *player, t_vars *game, int x);
+uint32_t    	paint_wall_slice(t_player *player, t_vars *game, int x, uint32_t *pixar);
 
 //move.c
 void    move_w(t_vars *game);
