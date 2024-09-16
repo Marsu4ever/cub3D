@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/16 17:08:34 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:30:12 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # define SCREEN_HEIGHT 896
 # define SCREEN_WIDTH 1280
-# define TEXTURE_H 128
-# define TEXTURE_W 128
-# define FOV 0.66 //field of view
+# define FOV 0.66
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 0.3
@@ -70,9 +68,9 @@ typedef struct s_ray
 {
 	double          x_ray_dir;
 	double          y_ray_dir;
-	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
-	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
-	double          perp_wall_dist; //perpendtical wall distance
+	double          x_side_dist;
+	double          y_side_dist; 
+	double          perp_wall_dist;
 	double		    wall_slice_height;
 	int				side;
 }	t_ray;

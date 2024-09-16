@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/13 15:16:39 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:56:28 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void    create_ceiling(int x, t_vars *game)
 	int y;
 
 	y = game->player->wall_slice_end;
-    while (y < (SCREEN_HEIGHT - 1))
+    while (y <= (SCREEN_HEIGHT - 1))
     {
-        mlx_put_pixel(game->image, x, y, game->f_values);
+        mlx_put_pixel(game->image, x, y, game->c_values);
         y++;
     }
 }
@@ -31,7 +31,7 @@ void    create_floor(int x, t_vars *game)
 	y = 0;
     while (y < game->player->wall_slice_start)
     {
-        mlx_put_pixel(game->image, x, y, game->c_values);
+        mlx_put_pixel(game->image, x, y, game->f_values);
         y++;
     }
 }
