@@ -6,17 +6,17 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/13 16:08:45 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:08:34 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# define SCREEN_HEIGHT 960
-# define SCREEN_WIDTH 1300
-# define TEXTURE_H 256
-# define TEXTURE_W 256
+# define SCREEN_HEIGHT 896
+# define SCREEN_WIDTH 1280
+# define TEXTURE_H 128
+# define TEXTURE_W 128
 # define FOV 0.66 //field of view
 # define PI 3.14159265358979323846
 # define ROT_SPEED 0.1

@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/10 15:45:51 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 13:00:24 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,77 +183,29 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook)
 	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(game->mlx);
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-	{
 		rotate_right(game);
-		// printf("Key Press: -------->\n");
-		// minimap_movement(game, 'R');
-	}
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-	{
 		rotate_left(game);
-		// printf("Key Press: <--------\n");			
-		// minimap_movement(game, 'L');
-	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-	{
 		move_w(game);
-		// printf("Key Press: W\n");			
-		// minimap_movement(game, 'W');
-	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-	{
 		move_s(game);
-		// printf("Key Press: S\n");			
-		// minimap_movement(game, 'S');
-	}	
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_PRESS)
-	{
 		move_d(game);
-		// printf("Key Press: D\n");		
-		// minimap_movement(game, 'D');
-	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-	{
 		move_a(game);
-		// printf("Key Press: A\n");			
-		// minimap_movement(game, 'A');
-	}
 	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_REPEAT)
-	{
 		rotate_right(game);
-		// printf("Key Press: -------->\n");           
-		// minimap_movement(game, 'R');
-	}	
 	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_REPEAT)
-	{
 		rotate_left(game);
-		// printf("Key Press: <--------\n");				
-		// minimap_movement(game, 'L');
-	}
 	if (keydata.key == MLX_KEY_W && keydata.action == MLX_REPEAT)
-	{
 		move_w(game);
-		// printf("Key Press: W\n");			
-		// minimap_movement(game, 'W');
-	}
 	if (keydata.key == MLX_KEY_S && keydata.action == MLX_REPEAT)
-	{
 		move_s(game);
-		// printf("Key Press: S\n");				
-		// minimap_movement(game, 'S');
-	}	
 	if (keydata.key == MLX_KEY_D && keydata.action == MLX_REPEAT)
-	{
 		move_d(game);
-		// printf("Key Press: D\n");
-		// minimap_movement(game, 'D');
-	}
 	if (keydata.key == MLX_KEY_A && keydata.action == MLX_REPEAT)
-	{
 		move_a(game);
-		// printf("Key Press: A\n");
-		// minimap_movement(game, 'A');
-	}
 }
 
 void	run_wolfenstein(t_vars *game)
@@ -266,8 +218,7 @@ void	run_wolfenstein(t_vars *game)
 	if (!game->image)
 		error_msg_and_exit(MLX_NEW_IMAGE_FAIL, "game->image", game);
 	if (mlx_image_to_window(game->mlx, game->image, 0, 0) == -1)
-		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);
-	// minimap(game);	
+		error_msg_and_exit(MLX_IMG_TO_WINDOW_FAIL, NULL, game);	
 	if (mlx_loop_hook(game->mlx, (void *)wall_slicing, game) != 1)
 		error_msg_and_exit(MLX_LOOP_HOOK_FAIL, NULL, game);
 	mlx_key_hook(game->mlx, move_hook, game);

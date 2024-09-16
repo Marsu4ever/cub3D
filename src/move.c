@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:34:41 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/13 15:26:12 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 13:00:48 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ int hit_a_wall(t_vars *game, double new_x, double new_y)
         newer_y = new_y - 0.2;
     else
         newer_y = new_y;
-    // if ((int)new_x < 0 || (int)new_x >= SCREEN_WIDTH || 
-    // (int)new_y < 0 || (int)new_y >= SCREEN_HEIGHT ||
-    // (int)newer_x < 0 || (int)newer_x >= SCREEN_WIDTH || 
-    // (int)newer_y < 0 || (int)newer_y >= SCREEN_HEIGHT)
-    //     return (1);
     if ((game->map[(int)new_y][(int)new_x] == '1') \
         || (game->map[(int)newer_y][(int)newer_x] == '1'))
         return (1);
@@ -84,7 +79,7 @@ void    move_s(t_vars *game)
 
 void    move_a(t_vars *game)
 {
-        double  new_xpos;
+    double  new_xpos;
     double  new_ypos;
 
     new_xpos = game->player->x_pos - game->player->x_plane * MOVE_SPEED;

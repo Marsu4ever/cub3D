@@ -6,13 +6,13 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/13 15:10:41 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:16:09 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void dda_loop(t_player *player, t_vars *game)
+void    dda_loop(t_player *player, t_vars *game)
 {
     while (player->hit == 0)
     {
@@ -33,7 +33,7 @@ void dda_loop(t_player *player, t_vars *game)
     }
 }
 
-void get_ray(t_player *player)
+void    get_ray(t_player *player)
 {
     player->ray->side = -1;
     if (player->ray->x_ray_dir >= 0)
@@ -58,7 +58,7 @@ void get_ray(t_player *player)
     }
 }
 
-double delta_dist(double ray_dir)
+double  delta_dist(double ray_dir)
 {
     if (ray_dir != 0)
         return (fabs(1/ray_dir));
@@ -82,15 +82,14 @@ void    calc_rays(t_vars *game)
     game->player->hit = 0;
     get_ray(game->player);
     game->x_map = (int)game->player->x_pos;
-	game->y_map = (int)game->player->y_pos;  
+    game->y_map = (int)game->player->y_pos;  
     dda_loop(game->player, game);
     if (game->player->ray->side == 0)
-        game->player->ray->perp_wall_dist = (game->x_map - game->player->x_pos + (1 - game->player->x_step) / 2) / game->player->ray->x_ray_dir;
+        game->player->ray->perp_wall_dist = game->player->ray->x_side_dist - delta_dist(game->player->ray->x_ray_dir);
     else
-        game->player->ray->perp_wall_dist = (game->y_map - game->player->y_pos + (1 - game->player->y_step) / 2) / game->player->ray->y_ray_dir;
-    // printf("perp_wall_dist: %f\n", game->player->ray->perp_wall_dist);
+        game->player->ray->perp_wall_dist = game->player->ray->y_side_dist - delta_dist(game->player->ray->y_ray_dir);
     // if (game->player->ray->perp_wall_dist > 0.001)
-    //     game->player->ray->wall_slice_height = (double)SCREEN_HEIGHT / game->player->ray->perp_wall_dist;
+    //     game->player->ray->wall_slice_height = SCREEN_HEIGHT / game->player->ray->perp_wall_dist;
     // else
     //     game->player->ray->wall_slice_height = SCREEN_HEIGHT;
     game->player->ray->wall_slice_height = SCREEN_HEIGHT / game->player->ray->perp_wall_dist;

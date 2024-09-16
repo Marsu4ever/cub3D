@@ -19,7 +19,7 @@ uint32_t    paint_wall_slice(t_player *player, t_vars *game, int x, uint32_t *pi
     int         i;
 
     y = player->y_texture;
-    i = y * TEXTURE_W + x * (int)game->texture->bytes_per_pixel;
+    i = y * game->texture->width + x * (int)game->texture->bytes_per_pixel;
     paint = pixar[i];
     return (paint);
 }
@@ -31,14 +31,14 @@ int    x_texture(t_vars *game)
     else //Vertical_wall
         game->hit_pos = game->player->y_pos + game->player->ray->perp_wall_dist * game->player->ray->y_ray_dir;
     game->hit_pos -=  (floor)(game->hit_pos);
-    game->player->x_texture = (int)(game->hit_pos * (double)TEXTURE_W /*+ 25*/) /*%TEXTURE_W*/;
+    game->player->x_texture = (int)(game->hit_pos/2 * (double)game->texture->width - 1) /*%TEXTURE_W*/;
     if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
         (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
-        game->player->x_texture = TEXTURE_W - game->player->x_texture - 1;
-    // if (game->player->x_texture < 0)
-    //     game->player->x_texture = 0;
-    // if (game->player->x_texture >= TEXTURE_W)
-    //     game->player->x_texture = TEXTURE_W - 1;
+        game->player->x_texture = game->texture->width - game->player->x_texture - 1;
+    if (game->player->x_texture < 0)
+        game->player->x_texture = 0;
+    if (game->player->x_texture >= (int)game->texture->width)
+        game->player->x_texture = (int)game->texture->width - 1;
     return (game->player->x_texture);
 }
 
@@ -71,27 +71,25 @@ void    render_wall_slice(int x, t_player *player, t_vars *game)
     i = player->wall_slice_start;
     game->texture = texture_pick(game);
     x_of_texture = x_texture(game);
-    j = (double)(TEXTURE_H) / player->ray->wall_slice_height;
-    pos_of_texture = (player->wall_slice_start - SCREEN_HEIGHT / 2 + player->ray->wall_slice_height / 2) * j;
+    // printf("x_texture: %d\n", player->x_texture);
+    j = game->texture->height / player->ray->wall_slice_height;
+    pos_of_texture = (i - (SCREEN_HEIGHT / 2 - player->ray->wall_slice_height / 2)) * j;
     while (i < player->wall_slice_end)
     {
-        player->y_texture = (int)pos_of_texture % (TEXTURE_H);
-        if (player->y_texture < 0)
-            player->y_texture += TEXTURE_H;
+        player->y_texture = (int)pos_of_texture % (game->texture->height);
+        // if (player->y_texture < 0)
+        //     player->y_texture += TEXTURE_H;
         // if (game->player->y_texture < 0)
         //     game->player->y_texture = 0;
-        // if (game->player->y_texture >= TEXTURE_H)
-        //     game->player->y_texture = TEXTURE_H - 1;
+        if (game->player->y_texture >= (int)game->texture->height)
+            game->player->y_texture = (int)game->texture->height - 1;
         pos_of_texture += j;
         game->wall_paint = paint_wall_slice(player, game, x_of_texture, (uint32_t *)game->texture->pixels);
         game->wall_paint = (game->wall_paint << 24) | (((game->wall_paint >> 16) << 24) >> 16) | \
 			(((game->wall_paint << 16) >> 24) << 16) | (game->wall_paint >> 24);
         mlx_put_pixel(game->image, x, i, game->wall_paint);
-        // printf("end - start: %f = height: %f\n", player->wall_slice_end - player->wall_slice_start, player->ray->wall_slice_height);
         i++;
     }
-    // printf("x_texture: %d y_texture: %d should be in [0, 255] \n", player->x_texture, player->y_texture);
-    // exit(0);
 }
 void    wall_slicing(t_vars *game)
 {
@@ -112,9 +110,8 @@ void    wall_slicing(t_vars *game)
         if (game->player->wall_slice_end >= SCREEN_HEIGHT)
             game->player->wall_slice_end = SCREEN_HEIGHT - 1;
         create_the_maze(x, game);
-        // printf("wall_slice_start: %f, wall_slice_end: %f\n", game->player->wall_slice_start, game->player->wall_slice_end);
-        // printf("wall_slice_height: %f\n", game->player->ray->wall_slice_height);
         x++;
+        // printf("start + height:%f , end:%f\n",  game->player->wall_slice_start + game->player->ray->wall_slice_height, game->player->wall_slice_end);
     }
 }
  
