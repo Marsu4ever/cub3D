@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:29:04 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/26 14:10:31 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 12:55:19 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void	free_all(t_vars *game)
 	if (game->map != NULL)
 	{
 		free_array(game->map);
+	}
+	if (game->player->ray != NULL)
+	{
+		free(game->player->ray);
+		game->player->ray = NULL;
 	}
 	if (game->player != NULL)
 	{	

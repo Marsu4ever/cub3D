@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/03 15:54:18 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:19:51 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ static mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 	path = character_replace(path, '\n', '\0');
 	error_check_texture_string(game, path, identifier);
 	texture = mlx_load_png(path);
-	/* 	mlx_load_png("./textures/NO.png");
-	mlx_load_png("./textures/EA.png");
-	mlx_load_png("./textures/SO.png");
-	mlx_load_png("./textures/WE.png"); */
 	free(path);
 	if (texture == NULL)
 	{
@@ -60,18 +56,16 @@ static mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 	return (texture);
 }
 
-static void	init_player(t_vars *game)
+static t_player	*init_player(t_vars *game)
 {
 	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)
 		error_msg_and_exit(MALLOC_FAIL, "Allocation of player failed.", game);
-	/*
-		-ft_memset?
-	*/
-	// player = (t_player*){0};
-	game->player = player;
+	player = (t_player *)ft_memset((void *)player, 0, sizeof(t_player));
+	//ask Simos about t_player use...
+	return (player);
 }
 
 void	get_and_check_data(t_vars *game)
@@ -83,15 +77,8 @@ void	get_and_check_data(t_vars *game)
 	game->f_values = get_colour(game, "F ");
 	game->c_values = get_colour(game, "C ");
 	make_modify_and_check_map(game);
-	init_player(game);
-	find_player_position(game); /*Set player orientation???*/ //I'm calling this function from far away. Do I need this???
+	game->player = init_player(game);
+	find_player_position(game);
 	free_array(game->file);
 	game->file = NULL;
-	/*
-		game->player_start_direction = get_player_start_direction(game);
-		game->player_start_x = get_player_start_x(game); 	//I don't need these.
-		game->player_start_y = get_player_start_y(game);	//I don't need these.
-		printf("game->player_start_x: %d\n", game->player_start_x);
-		printf("game->player_start_y: %d\n", game->player_start_y);
-	*/
 }

@@ -32,7 +32,6 @@ SRCS = \
 	src/run_wolfenstein.c \
 	src/errors/errors.c \
 	src/errors/error_message_selector.c \
-	src/minimap.c \
 	src/render.c \
 	src/raycasting.c \
 	src/parsing/parsing.c \

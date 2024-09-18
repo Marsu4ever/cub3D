@@ -96,9 +96,9 @@ void    wall_slicing(t_vars *game)
     int     x;
 
     x = 0;
-    game->player->ray = malloc(sizeof(t_ray)); //Add better NULL protection
+    game->player->ray = malloc(sizeof(t_ray));
     if (game->player->ray == NULL)
-        exit(EXIT_FAILURE);
+        error_msg_and_exit(MALLOC_FAIL, "game->player->ray", game);
     while (x < SCREEN_WIDTH)
     {
         init_rays(game->player, x);

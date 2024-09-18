@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/16 17:30:12 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:11:16 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # include <stdlib.h> //exit, free, malloc
 # include <string.h> //strerror
 # include <stdint.h> //uint32_t
-# include "errno.h"
+# include "errno.h" //Do we need this?
 # include "MLX42.h"
 # include "libft.h"
 # include "get_next_line.h"
@@ -100,7 +100,6 @@ typedef struct s_vars
 {
     mlx_t           *mlx;
     mlx_image_t     *image;
-	mlx_image_t     *minimap;
     t_player        *player;
  
     char            player_start_direction; //N, S, W, E
@@ -122,12 +121,6 @@ typedef struct s_vars
     double          hit_pos;
     int             players_nbr;
     char            **file;
-
-/* Quick fix variables - MINIMAP*/
-	mlx_image_t  	*wall;
-	mlx_image_t		*floor;
-	mlx_image_t		*player_image;
-	int				player_degrees;
 }               t_vars;
 
 //check_file.c
@@ -168,9 +161,6 @@ void	get_and_check_data(t_vars *game);
 
 //get_colour.c
 int	get_colour(t_vars *game, char *identifier);
-
-//minimap.c
-void	minimap(t_vars *game);
 
 //make_modify_and_check_map_1.c
 void	make_modify_and_check_map(t_vars *game);
