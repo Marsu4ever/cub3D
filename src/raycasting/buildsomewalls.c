@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:54:37 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 13:43:07 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 15:04:24 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,6 @@ void	wall_slicing(t_vars *game)
 	int	x;
 
 	x = 0;
-	game->pl->ray = malloc(sizeof(t_ray));
-	if (game->pl->ray == NULL)
-		error_msg_and_exit(MALLOC_FAIL, "game->player->ray", game);
 	while (x < SCREEN_W)
 	{
 		init_rays(game->pl, x);

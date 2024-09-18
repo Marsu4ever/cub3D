@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 14:10:30 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:05:01 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	pos_valid(t_vars *game)
+int	pos_valid(t_vars *game)//Why is this function here? XD
 {
 	int	i;
 	int	j;
@@ -34,7 +34,7 @@ int	pos_valid(t_vars *game)
 	return (1);
 }
 
-void	close_program(t_vars *game)
+static void	close_program(t_vars *game)
 {
 	mlx_terminate(game->mlx);
 	game->mlx = NULL;
@@ -45,7 +45,7 @@ void	close_program(t_vars *game)
 
 int	main(int ac, char **av)
 {
-	t_vars	game; 
+	t_vars	game;
 
 	game = (t_vars){0};
 	parsing(&game, ac, av);

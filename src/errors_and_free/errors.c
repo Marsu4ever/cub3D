@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/29 12:49:03 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:33:22 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	it_ends_here(t_vars *game)
+static int	it_ends_here(t_vars *game)
 {
 	if (game->mlx != NULL)
 	{
@@ -25,7 +25,7 @@ void	it_ends_here(t_vars *game)
 	exit(1);
 }
 
-void	error_msg_and_exit(int error_number, char *where, t_vars *game)
+int	error_msg_and_exit(int error_number, char *where, t_vars *game)
 {
 	ft_putstr_fd("Error\n", 2);
 	error_msg_selector(error_number);

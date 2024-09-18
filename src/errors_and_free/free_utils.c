@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:29:04 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 13:44:15 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:35:34 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_all(t_vars *game)
 		game->pl->ray = NULL;
 	}
 	if (game->pl != NULL)
-	{	
+	{
 		free(game->pl);
 		game->pl = NULL;
 	}

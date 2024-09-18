@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_player_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 14:05:45 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:04:27 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	set_player_position(t_vars *game, char **map, int y)
 		if (map[y][j] == 'N' || map[y][j] == 'W' \
 			|| map[y][j] == 'E' || map[y][j] == 'S')
 		{
-			set_player_direction(game, map[y][j]); /*Might delete this one*/
+			set_player_direction(game, map[y][j]);
 			orientation_calc(map[y][j], game);
 			game->pl->x_pos = (double)j;
 			game->pl->y_pos = (double)y;

@@ -1,4 +1,4 @@
-NAME=cub3D
+NAME = cub3D
 
 LIBMLX_PATH = MLX42
 
@@ -8,7 +8,6 @@ LIBFT_PATH = libft
 
 LIBFT = $(LIBFT_PATH)/libft.a
 
-# CFLAGS =
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 
 HEADERS = -I includes -I $(LIBMLX_PATH)/include/MLX42 -I "/Users/$(USER)/.brew/opt/glfw/include" -I $(LIBFT_PATH)/headers
@@ -17,30 +16,31 @@ LIBS = $(LIBFT) $(LIBMLX) -L/Users/$(USER)/.brew/lib/ -ldl -lglfw -pthread -lm
 
 SRCS = \
 	src/main.c \
+	src/run_wolfenstein.c \
+	src/errors_and_free/error_message_selector.c \
+	src/errors_and_free/errors.c \
+	src/errors_and_free/free_utils.c \
 	src/parsing/check_file.c \
 	src/parsing/check_if_closed.c \
 	src/parsing/check_right.c \
 	src/parsing/check_user_input.c \
+	src/parsing/compass.c \
 	src/parsing/find_player_position.c \
 	src/parsing/get_and_check_data.c \
-	src/free_utils.c \
 	src/parsing/get_colour.c \
 	src/parsing/make_modify_and_check_map_1.c \
 	src/parsing/make_modify_and_check_map_2.c \
 	src/parsing/make_modify_and_check_map_3.c \
-	src/parsing/read_file.c \
-	src/run_wolfenstein.c \
-	src/errors/errors.c \
-	src/errors/error_message_selector.c \
-	src/render.c \
-	src/raycasting.c \
 	src/parsing/parsing.c \
 	src/parsing/parsing_utils_1.c \
 	src/parsing/parsing_utils_2.c \
-	src/parsing/compass.c \
-	src/buildsomewalls.c \
-	src/move.c \
-	src/rotate_and_move_utils.c
+	src/parsing/read_file.c \
+	src/move/move.c \
+	src/move/move_hook.c \
+	src/move/rotate_and_move_utils.c \
+	src/raycasting/buildsomewalls.c \
+	src/raycasting/raycasting.c \
+	src/raycasting/render.c \
 
 OBJS = $(SRCS:.c=.o)
 

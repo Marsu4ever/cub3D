@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 13:39:58 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 16:44:16 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,15 +138,14 @@ void	check_right(t_vars *game, char **map, int row_count);
 void	check_user_input(int ac, char *av);
 
 //compass.c
-void n_s_compass(t_player * player, double num, double nmro);
-void e_w_compass(t_player * player, double num, double nmro);
+void	n_s_compass(t_player * player, double num, double nmro);
+void	e_w_compass(t_player * player, double num, double nmro);
 
 // error_message_selector.c
 void	error_msg_selector(int error);
 
 //errors.c
-void	error_msg_and_exit(int error_number, char *specifier, t_vars *game);
-void	it_ends_here(t_vars *game); //Del this later?
+int	error_msg_and_exit(int error_number, char *specifier, t_vars *game);
 
 //find_player_position.c
 void	find_player_position(t_vars *game);
@@ -162,7 +161,7 @@ void	destroy_textures(t_vars *game);
 void	get_and_check_data(t_vars *game);
 
 //get_colour.c
-int	get_colour(t_vars *game, char *identifier);
+int		get_colour(t_vars *game, char *identifier);
 
 //make_modify_and_check_map_1.c
 void	make_modify_and_check_map(t_vars *game);
@@ -177,7 +176,6 @@ void	check_number_of_players(t_vars *game, char **map);
 
 //run_wolfenstein.c
 void    run_wolfenstein(t_vars *game);
-void	move_repeat(mlx_key_data_t keydata, void *game);
 
 //parsing.c
 int     get_rgba(int r, int g, int b);  //Does this stay here?
@@ -231,6 +229,9 @@ void    move_a(t_vars *game);
 void    move_s(t_vars *game);
 void    move_d(t_vars *game);
 int		hit_a_wall(t_vars *game, double new_x, double new_y);
+
+//move_hook.c
+void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook);
 
 //rotate_and_move_utils.c
 void    rotate_left(t_vars *game);

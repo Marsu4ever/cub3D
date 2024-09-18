@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message_selector.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:08:10 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 14:15:14 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:08:46 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	group_3_msgs(int error)
 {
 	if (error == COLOUR_INVALID_CHAR)
 	{
-		ft_putstr_fd("Only digits[0-9] and commas are allowed", 2);/* Forgot this one!!!?!*/
+		ft_putstr_fd("Only digits[0-9] and commas are allowed", 2);
 		ft_putstr_fd(" - Check identifier", 2);
 	}
 	if (error == COLOUR_INVALID_FORMAT)
@@ -96,16 +96,4 @@ void	error_msg_selector(int error)
 		ft_putstr_fd("mlx_image_to_window fail", 2);
 	if (error == MLX_LOOP_HOOK_FAIL)
 		ft_putstr_fd("mlx_loop_hook failed", 2);
-/* 	if (error == )
-	{
-		ft_putstr_fd("", 2);
-	}
-	if (error == )
-	{
-		ft_putstr_fd("", 2);
-	}
-	if (error == )
-	{
-		ft_putstr_fd("", 2);
-	}		 */
 }

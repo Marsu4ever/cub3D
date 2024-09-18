@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 14:06:07 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 16:10:41 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static mlx_texture_t	*get_texture(t_vars *game, char *identifier)
 	return (texture);
 }
 
-static t_player	*init_player(t_vars *game)
+static t_player	*init_player_struct(t_vars *game)
 {
 	t_player	*player;
 
@@ -65,6 +65,16 @@ static t_player	*init_player(t_vars *game)
 		error_msg_and_exit(MALLOC_FAIL, "Allocation of player failed.", game);
 	player = (t_player *)ft_memset((void *)player, 0, sizeof(t_player));
 	return (player);
+}
+
+static t_ray	*init_ray_struct(t_vars *game)
+{
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	if (ray == NULL)
+		error_msg_and_exit(MALLOC_FAIL, "ray", game);
+	return (ray);
 }
 
 void	get_and_check_data(t_vars *game)
@@ -76,7 +86,8 @@ void	get_and_check_data(t_vars *game)
 	game->f_values = get_colour(game, "F ");
 	game->c_values = get_colour(game, "C ");
 	make_modify_and_check_map(game);
-	game->pl = init_player(game);
+	game->pl = init_player_struct(game);
+	game->pl->ray = init_ray_struct(game);
 	find_player_position(game);
 	free_array(game->file);
 	game->file = NULL;
