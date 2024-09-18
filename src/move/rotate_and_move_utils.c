@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_and_move_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 10:53:36 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 13:12:22 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:12:58 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ void	rotate_left(t_vars *game)
 	double	oldxplane;
 
 	old_xdir = game->pl->xdir;
-	game->pl->xdir = game->pl->xdir * cos(rot) \
-		- game->pl->ydir * sin(rot);
-	game->pl->ydir = game->pl->ydir * cos(rot) \
-		+ old_xdir * sin(rot);
+	game->pl->xdir = game->pl->xdir * cos(ROT) \
+		- game->pl->ydir * sin(ROT);
+	game->pl->ydir = game->pl->ydir * cos(ROT) \
+		+ old_xdir * sin(ROT);
 	oldxplane = game->pl->x_plane;
-	game->pl->x_plane = game->pl->x_plane * cos(rot) \
-		- game->pl->y_plane * sin(rot);
-	game->pl->y_plane = game->pl->y_plane * cos(rot) \
-		+ oldxplane * sin(rot);
+	game->pl->x_plane = game->pl->x_plane * cos(ROT) \
+		- game->pl->y_plane * sin(ROT);
+	game->pl->y_plane = game->pl->y_plane * cos(ROT) \
+		+ oldxplane * sin(ROT);
 }
 
 void	rotate_right(t_vars *game)
@@ -35,13 +35,13 @@ void	rotate_right(t_vars *game)
 	double	oldxplane;
 
 	old_xdir = game->pl->xdir;
-	game->pl->xdir = game->pl->xdir * cos(-rot) \
-		- game->pl->ydir * sin(-rot);
-	game->pl->ydir = game->pl->ydir * cos(-rot) \
-		+ old_xdir * sin(-rot);
+	game->pl->xdir = game->pl->xdir * cos(-ROT) \
+		- game->pl->ydir * sin(-ROT);
+	game->pl->ydir = game->pl->ydir * cos(-ROT) \
+		+ old_xdir * sin(-ROT);
 	oldxplane = game->pl->x_plane;
 	game->pl->x_plane = game->pl->x_plane \
-		* cos(-rot) - game->pl->y_plane * sin(-rot);
+		* cos(-ROT) - game->pl->y_plane * sin(-ROT);
 	game->pl->y_plane = game->pl->y_plane \
-		* cos(-rot) + oldxplane * sin(-rot);
+		* cos(-ROT) + oldxplane * sin(-ROT);
 }

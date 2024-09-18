@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 11:36:24 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 16:33:22 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:10:11 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	it_ends_here(t_vars *game)
 	{
 		mlx_terminate(game->mlx);
 		game->mlx = NULL;
-	}
+	}	
 	destroy_textures(game);
 	free_all(game);
 	game = NULL;
