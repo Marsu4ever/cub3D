@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:02:05 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 13:44:28 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:50:18 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	move_repeat(mlx_key_data_t keydata, void *game)
 
 void	run_wolfenstein(t_vars *game)
 {
-	game->mlx = mlx_init(SCREEN_W, SCREEN_H, "Wolfenstein_3D", true);
+	game->mlx = mlx_init(SCREEN_W, SCREEN_H, "WolfenTeam 3D", true);
 	if (game->mlx == NULL)
 		error_msg_and_exit(MLX_INIT_FAIL, "game->mlx", game);
 	game->image = mlx_new_image(game->mlx, SCREEN_W, SCREEN_H);
