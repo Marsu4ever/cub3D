@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_and_check_data.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 13:42:02 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:06:07 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static t_player	*init_player(t_vars *game)
 	if (!player)
 		error_msg_and_exit(MALLOC_FAIL, "Allocation of player failed.", game);
 	player = (t_player *)ft_memset((void *)player, 0, sizeof(t_player));
-	//ask Simos about t_player use...
 	return (player);
 }
 

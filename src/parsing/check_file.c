@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:38:47 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 13:54:13 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 14:01:39 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,13 @@ static void	check_for_invalid_characters_in_file(t_vars *game)
 	while (game->file[i])
 	{
 		if (check_if_indicator(game->file[i]) == true)
-		{
 			i++;
-		}
 		else if (check_if_map(game->file[i]) == true)
-		{
 			i = skip_map_section(game, i);
-		}
 		else if (game->file[i][0] == '\n')
-		{
 			i++;
-		}
 		else
-		{
 			error_msg_and_exit(INVALID_CHAR_IN_FILE, NULL, game);
-		}
 	}
 }
 
@@ -61,20 +53,16 @@ static void	check_if_map_exists_and_is_last(t_vars *game)
 		else if (check_if_map(game->file[i]) == true)
 		{
 			if (identifier_count == 6)
-			{
 				return ;
-			}
 			if (identifier_count < 6)
-			{
 				error_msg_and_exit(MAP_WRONG_PLACE, NULL, game);
-			}
 		}
 		i++;
 	}
 	error_msg_and_exit(MAP_NOT_FOUND, NULL, game);
 }
 
-static void	check_for_identifier(t_vars *game, char *identifier)
+static	void	check_for_identifier(t_vars *game, char *identifier)
 {
 	int	i;
 	int	identifier_count;
@@ -84,23 +72,15 @@ static void	check_for_identifier(t_vars *game, char *identifier)
 	while (game->file[i])
 	{
 		if (ft_strncmp(game->file[i], identifier, ft_strlen(identifier)) == 0)
-		{
 			identifier_count++;
-		}
 		i++;
 	}
 	if (identifier_count == 0)
-	{
 		error_msg_and_exit(NO_IDENTIFIER, identifier, game);
-	}
 	if (identifier_count == 1)
-	{
 		return ;
-	}
 	if (identifier_count >= 2)
-	{
 		error_msg_and_exit(DUPLICATE_IDENTIFIER, identifier, game);
-	}
 }
 
 void	check_file(t_vars *game)
