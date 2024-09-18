@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/03 15:54:18 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:20:46 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	init_player(t_vars *game)
 		-ft_memset?
 	*/
 	// player = (t_player*){0};
-	game->player = player;
+	game->pl = player;
 }
 
 void	get_and_check_data(t_vars *game)

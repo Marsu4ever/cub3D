@@ -6,36 +6,42 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 10:53:36 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/13 14:44:54 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:12:22 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void    rotate_left(t_vars *game)
+void	rotate_left(t_vars *game)
 {
-    double  old_xdir;
-    double  old_x_plane;
+	double	old_xdir;
+	double	oldxplane;
 
-    old_xdir = game->player->xdir;
-    game->player->xdir = game->player->xdir * cos(ROT_SPEED) - game->player->ydir * sin(ROT_SPEED);
-    game->player->ydir = game->player->ydir * cos(ROT_SPEED) + old_xdir * sin(ROT_SPEED);
-    old_x_plane = game->player->x_plane;
-    game->player->x_plane = game->player->x_plane * cos(ROT_SPEED) - game->player->y_plane * sin(ROT_SPEED);
-    game->player->y_plane = game->player->y_plane * cos(ROT_SPEED) + old_x_plane * sin(ROT_SPEED);
-    // wall_slicing(game);
+	old_xdir = game->pl->xdir;
+	game->pl->xdir = game->pl->xdir * cos(rot) \
+		- game->pl->ydir * sin(rot);
+	game->pl->ydir = game->pl->ydir * cos(rot) \
+		+ old_xdir * sin(rot);
+	oldxplane = game->pl->x_plane;
+	game->pl->x_plane = game->pl->x_plane * cos(rot) \
+		- game->pl->y_plane * sin(rot);
+	game->pl->y_plane = game->pl->y_plane * cos(rot) \
+		+ oldxplane * sin(rot);
 }
 
-void    rotate_right(t_vars *game)
+void	rotate_right(t_vars *game)
 {
-    double  old_xdir;
-    double  old_x_plane;
+	double	old_xdir;
+	double	oldxplane;
 
-    old_xdir = game->player->xdir;
-    game->player->xdir = game->player->xdir * cos(-ROT_SPEED) - game->player->ydir * sin(-ROT_SPEED);
-    game->player->ydir = game->player->ydir * cos(-ROT_SPEED) + old_xdir * sin(-ROT_SPEED);
-    old_x_plane = game->player->x_plane;
-    game->player->x_plane = game->player->x_plane * cos(-ROT_SPEED) - game->player->y_plane * sin(-ROT_SPEED);
-    game->player->y_plane = game->player->y_plane * cos(-ROT_SPEED) + old_x_plane * sin(-ROT_SPEED);
-    // wall_slicing(game);
+	old_xdir = game->pl->xdir;
+	game->pl->xdir = game->pl->xdir * cos(-rot) \
+		- game->pl->ydir * sin(-rot);
+	game->pl->ydir = game->pl->ydir * cos(-rot) \
+		+ old_xdir * sin(-rot);
+	oldxplane = game->pl->x_plane;
+	game->pl->x_plane = game->pl->x_plane \
+		* cos(-rot) - game->pl->y_plane * sin(-rot);
+	game->pl->y_plane = game->pl->y_plane \
+		* cos(-rot) + oldxplane * sin(-rot);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:29:04 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/26 14:10:31 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:21:02 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	free_all(t_vars *game)
 	{
 		free_array(game->map);
 	}
-	if (game->player != NULL)
+	if (game->pl != NULL)
 	{	
-		free(game->player);
-		game->player = NULL;
+		free(game->pl);
+		game->pl = NULL;
 	}
 }
 

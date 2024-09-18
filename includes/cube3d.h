@@ -6,19 +6,21 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/16 17:30:12 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:27:09 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# define SCREEN_HEIGHT 896
-# define SCREEN_WIDTH 1280
+# define SCREEN_H 896
+# define SCREEN_W 1280
+# define TEXTURE_W 128
+# define TEXTURE_H 128
 # define FOV 0.66
 # define PI 3.14159265358979323846
-# define ROT_SPEED 0.1
-# define MOVE_SPEED 0.3
+# define rot 0.1
+# define speed 0.3
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -66,12 +68,12 @@ enum				e_codes
 
 typedef struct s_ray
 {
-	double          x_ray_dir;
-	double          y_ray_dir;
-	double          x_side_dist;
-	double          y_side_dist; 
-	double          perp_wall_dist;
-	double		    wall_slice_height;
+	double          x_rdir;
+	double          y_rdir;
+	double          xside_d;
+	double          yside_d; 
+	double          perp_wdist;
+	double		    wall_h;
 	int				side;
 }	t_ray;
 
@@ -89,9 +91,9 @@ typedef struct s_player
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	double	        wall_slice_start;
-	double		    wall_slice_end;
-	int		    	x_texture;
+	double	        w_start;
+	double		    w_end;
+	int		    	x_tex;
 	int		    	y_texture;
 	t_ray			*ray;
 }               t_player;
@@ -101,12 +103,12 @@ typedef struct s_vars
     mlx_t           *mlx;
     mlx_image_t     *image;
 	mlx_image_t     *minimap;
-    t_player        *player;
+    t_player        *pl;
  
-    char            player_start_direction; //N, S, W, E
-    int 			player_start_x; // 3
-	int 			player_start_y; // 4
-    int             map_start; //?
+    char            player_start_direction;
+    int 			player_start_x;
+	int 			player_start_y;
+    int             map_start;
     char            *map_path;
     char            **map;
     int             x_map;
@@ -118,7 +120,7 @@ typedef struct s_vars
     mlx_texture_t   *texture;
     int             c_values;
     int             f_values;
-    uint32_t        wall_paint;
+    uint32_t        paint;
     double          hit_pos;
     int             players_nbr;
     char            **file;
@@ -185,6 +187,7 @@ void	check_number_of_players(t_vars *game, char **map);
 
 //run_wolfenstein.c
 void    run_wolfenstein(t_vars *game);
+void	move_repeat(mlx_key_data_t keydata, void *game);
 
 //parsing.c
 int     get_rgba(int r, int g, int b);  //Does this stay here?
@@ -202,7 +205,7 @@ void    create_floor(int x, t_vars *game);
 //raycasting.c
 void    init_rays(t_player *player, int r);
 void    calc_rays(t_vars *game);
-double  delta_dist(double  ray_dir);
+double  delta_d(double  ray_dir);
 void 	get_ray(t_player *player);
 
 //parsing.c
@@ -230,7 +233,7 @@ mlx_texture_t	*texture_pick(t_vars *game);
 int    			x_texture(t_vars *game);
 void			render_wall_slice(int r, t_player *player, t_vars *game);
 int 			pos_valid(t_vars *game);
-uint32_t    	paint_wall_slice(t_player *player, t_vars *game, int x, uint32_t *pixar);
+uint32_t    	paint_wslice(t_player *player, t_vars *game, int x, uint32_t *pixar);
 
 //move.c
 void    move_w(t_vars *game);

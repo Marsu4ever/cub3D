@@ -5,112 +5,111 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/09 16:47:37 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/09 16:47:37 by stigkas          ###   ########.fr       */
+/*   Created: 2024/09/18 11:54:37 by stigkas           #+#    #+#             */
+/*   Updated: 2024/09/18 13:14:25 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-uint32_t    paint_wall_slice(t_player *player, t_vars *game, int x, uint32_t *pixar)
+uint32_t	paint_wslice(t_player *player, t_vars *game, int x, uint32_t *pixar)
 {
-    uint32_t    paint;
-    int         y;
-    int         i;
+	uint32_t	paint;
+	int			y;
+	int			i;
 
-    y = player->y_texture;
-    i = y * game->texture->width + x * (int)game->texture->bytes_per_pixel;
-    if (i < 0 || i >= (int)(game->texture->width * game->texture->height))
-        return 0;
-    paint = pixar[i];
-    return (paint);
+	y = player->y_texture;
+	i = y * game->texture->width + x * (int)game->texture->bytes_per_pixel;
+	if (i < 0 || i >= (int)(game->texture->width * game->texture->height))
+		return (0);
+	paint = pixar[i];
+	return (paint);
 }
 
-int    x_texture(t_vars *game)
+int	x_texture(t_vars *game)
 {
-    if (game->player->ray->side == 1)
-        game->hit_pos = game->player->x_pos + game->player->ray->perp_wall_dist * game->player->ray->x_ray_dir;
-    else
-        game->hit_pos = game->player->y_pos + game->player->ray->perp_wall_dist * game->player->ray->y_ray_dir;
-    game->hit_pos -=  (floor)(game->hit_pos);
-    game->player->x_texture = (int)(game->hit_pos/2 * (double)game->texture->width) /*%TEXTURE_W*/;
-    // if ((game->player->ray->x_ray_dir > 0 && game->player->ray->side == 0) || 
-    //     (game->player->ray->y_ray_dir < 0 && game->player->ray->side == 1))
-    //     game->player->x_texture = game->texture->width - game->player->x_texture - 1;
-    if (game->player->x_texture < 0)
-        game->player->x_texture = 0;
-    if (game->player->x_texture >= (int)game->texture->width)
-        game->player->x_texture = (int)game->texture->width - 1;
-    return (game->player->x_texture);
+	if (game->pl->ray->side == 1)
+		game->hit_pos = game->pl->x_pos + game->pl->ray->perp_wdist * \
+			game->pl->ray->x_rdir;
+	else
+		game->hit_pos = game->pl->y_pos + game->pl->ray->perp_wdist * \
+			game->pl->ray->y_rdir;
+	game->hit_pos -= (floor)(game->hit_pos);
+	game->pl->x_tex = (int)((game->hit_pos / 2) * (double)TEXTURE_W);
+	if (game->pl->x_tex < 0)
+		game->pl->x_tex = 0;
+	if (game->pl->x_tex >= (int)TEXTURE_W)
+		game->pl->x_tex = (int)TEXTURE_W - 1;
+	return (game->pl->x_tex);
 }
 
-mlx_texture_t    *texture_pick(t_vars *game)
+mlx_texture_t	*texture_pick(t_vars *game)
 {
-    if (game->player->ray->side == 1)
-    {
-        if (game->player->ray->y_ray_dir < 0)
-            game->texture = game->south;
-        else if (game->player->ray->y_ray_dir > 0)
-            game->texture = game->north;
-    }
-    else if (game->player->ray->side == 0)
-    {
-        if (game->player->ray->x_ray_dir > 0)
-            game->texture = game->east;
-        else if (game->player->ray->x_ray_dir < 0)
-            game->texture = game->west;
-    }
-    return (game->texture);
+	if (game->pl->ray->side == 1)
+	{
+		if (game->pl->ray->y_rdir < 0)
+			game->texture = game->south;
+		else if (game->pl->ray->y_rdir > 0)
+			game->texture = game->north;
+	}
+	else if (game->pl->ray->side == 0)
+	{
+		if (game->pl->ray->x_rdir > 0)
+			game->texture = game->east;
+		else if (game->pl->ray->x_rdir < 0)
+			game->texture = game->west;
+	}
+	return (game->texture);
 }
 
-void    render_wall_slice(int x, t_player *player, t_vars *game)
+void	render_wall_slice(int x, t_player *player, t_vars *game)
 {
-    int             i;
-    int             x_of_texture;
-    double          j;
-    double          pos_of_texture;
+	int		i;
+	int		x_text;
+	double	j;
+	double	pos_tex;
 
-    i = player->wall_slice_start;
-    game->texture = texture_pick(game);
-    x_of_texture = x_texture(game);
-    // printf("x_texture: %d\n", player->x_texture);
-    j = game->texture->height / player->ray->wall_slice_height;
-    pos_of_texture = (i - (SCREEN_HEIGHT / 2 - player->ray->wall_slice_height / 2)) * j;
-    while (i < player->wall_slice_end)
-    {
-        player->y_texture = (int)pos_of_texture;
-        if (game->player->y_texture < 0)
-            game->player->y_texture = 0;
-        if (game->player->y_texture >= (int)game->texture->height)
-            game->player->y_texture = (int)game->texture->height - 1;
-        pos_of_texture += j;
-        game->wall_paint = paint_wall_slice(player, game, x_of_texture, (uint32_t *)game->texture->pixels);
-        game->wall_paint = (game->wall_paint << 24) | (((game->wall_paint >> 16) << 24) >> 16) | \
-			(((game->wall_paint << 16) >> 24) << 16) | (game->wall_paint >> 24);
-        mlx_put_pixel(game->image, x, i, game->wall_paint);
-        i++;
-    }
+	i = player->w_start;
+	game->texture = texture_pick(game);
+	x_text = x_texture(game);
+	j = TEXTURE_H / player->ray->wall_h;
+	pos_tex = (i - (SCREEN_H / 2 - player->ray->wall_h / 2)) * j;
+	while (i < player->w_end)
+	{
+		player->y_texture = (int)pos_tex;
+		if (game->pl->y_texture < 0)
+			game->pl->y_texture = 0;
+		if (game->pl->y_texture >= (int)TEXTURE_H)
+			game->pl->y_texture = (int)TEXTURE_H - 1;
+		pos_tex += j;
+		game->paint = paint_wslice(player, game, x_text, \
+			(uint32_t *)game->texture->pixels);
+		game->paint = (game->paint << 24) | (((game->paint >> 16) << 24) >> 16) \
+			| (((game->paint << 16) >> 24) << 16) | (game->paint >> 24);
+		mlx_put_pixel(game->image, x, i, game->paint);
+		i++;
+	}
 }
-void    wall_slicing(t_vars *game)
+
+void	wall_slicing(t_vars *game)
 {
-    int     x;
+	int	x;
 
-    x = 0;
-    game->player->ray = malloc(sizeof(t_ray)); //Add better NULL protection
-    if (game->player->ray == NULL)
-        exit(EXIT_FAILURE);
-    while (x < SCREEN_WIDTH)
-    {
-        init_rays(game->player, x);
-        calc_rays(game);
-        game->player->wall_slice_start = SCREEN_HEIGHT/2 - game->player->ray->wall_slice_height/2;
-        if (game->player->wall_slice_start < 0)
-            game->player->wall_slice_start = 0;
-        game->player->wall_slice_end = game->player->ray->wall_slice_height/2 + SCREEN_HEIGHT/ 2;
-        if (game->player->wall_slice_end >= SCREEN_HEIGHT)
-            game->player->wall_slice_end = SCREEN_HEIGHT - 1;
-        create_the_maze(x, game);
-        x++;
-    }
+	x = 0;
+	game->pl->ray = malloc(sizeof(t_ray));
+	if (game->pl->ray == NULL)
+		exit(EXIT_FAILURE);
+	while (x < SCREEN_W)
+	{
+		init_rays(game->pl, x);
+		calc_rays(game);
+		game->pl->w_start = SCREEN_H / 2 - game->pl->ray->wall_h / 2;
+		if (game->pl->w_start < 0)
+			game->pl->w_start = 0;
+		game->pl->w_end = game->pl->ray->wall_h / 2 + SCREEN_H / 2;
+		if (game->pl->w_end >= SCREEN_H)
+			game->pl->w_end = SCREEN_H - 1;
+		create_the_maze(x, game);
+		x++;
+	}
 }
- 
