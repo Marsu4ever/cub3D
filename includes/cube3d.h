@@ -6,19 +6,19 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/26 15:57:56 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/16 17:30:12 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE3D_H
 # define CUBE3D_H
 
-# define SCREEN_HEIGHT 540
-# define SCREEN_WIDTH 960
-# define TEXTURE_H 64
-# define TEXTURE_W 64
-# define FOV 0.55 //field of view
+# define SCREEN_HEIGHT 896
+# define SCREEN_WIDTH 1280
+# define FOV 0.66
 # define PI 3.14159265358979323846
+# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.3
 
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
@@ -64,6 +64,17 @@ enum				e_codes
 	MLX_LOOP_HOOK_FAIL,
 }					;
 
+typedef struct s_ray
+{
+	double          x_ray_dir;
+	double          y_ray_dir;
+	double          x_side_dist;
+	double          y_side_dist; 
+	double          perp_wall_dist;
+	double		    wall_slice_height;
+	int				side;
+}	t_ray;
+
 typedef struct s_player
 {
     double          x_pos;
@@ -72,25 +83,17 @@ typedef struct s_player
 	double          ydir;
 	double          x_plane;
 	double          y_plane;
-	double          x_side_dist; //represents the distance the ray has done from player's position to the first grid line in the x direction
-	double          y_side_dist; //represents the distance the ray has done from player's position to the first grid line in the y direction
-	double          x_delta_dist; //represents the distance the ray has to travel along the x-axis to move from one vertical grid line to the next
-	double          y_delta_dist; //represents the distance the ray has to travel along the y-axis to move from one horizontal grid line to the next
-	double          perp_wall_dist; //perpendtical wall distance
 	int		        x_step;
 	int		        y_step;
 	int		        hit;
-	int		        side;
-	int		        wall_slice_height;
-	double          x_ray_dir;
-	double          y_ray_dir;
 	double          x_camera;
 	double          move_speed;
 	double          rot_speed;
-	int		        wall_slice_start;
-	int		        wall_slice_end;
-	int		        x_texture;
-	int		        y_texture;
+	double	        wall_slice_start;
+	double		    wall_slice_end;
+	int		    	x_texture;
+	int		    	y_texture;
+	t_ray			*ray;
 }               t_player;
 
 typedef struct s_vars
@@ -116,7 +119,7 @@ typedef struct s_vars
     int             c_values;
     int             f_values;
     uint32_t        wall_paint;
-    double          x_wall;
+    double          hit_pos;
     int             players_nbr;
     char            **file;
 
@@ -187,24 +190,20 @@ void    run_wolfenstein(t_vars *game);
 int     get_rgba(int r, int g, int b);  //Does this stay here?
 void	parsing(t_vars *game, int ac, char **av);
 
-//raycasting.c
-void    raycasting(t_player *player, t_vars *game);
-void    init_rays(t_player *player, int r);
-void    delta_dist(t_player *player, t_vars *vars);
-void	display_it(int r, t_player *player, t_vars *game);
-
 //read_file.c
 void	read_file(t_vars *game, char *av);
 
 //render.c
-void	render(t_vars *game);
 int     get_rgba(int r, int g, int b);
-void    create_floor_ceiling(t_vars *game);
+void    create_ceiling(int x, t_vars *game);
+void	create_the_maze(int x, t_vars *game);
+void    create_floor(int x, t_vars *game);
 
 //raycasting.c
-void    raycasting(t_player *player, t_vars *game);
 void    init_rays(t_player *player, int r);
-void    delta_dist(t_player *player, t_vars *vars);
+void    calc_rays(t_vars *game);
+double  delta_dist(double  ray_dir);
+void 	get_ray(t_player *player);
 
 //parsing.c
 void	player_nbr_check(t_vars *game, char **map, int i);//Delete???
@@ -226,10 +225,22 @@ void n_s_compass(t_player * player, double num, double nmro);
 void e_w_compass(t_player * player, double num, double nmro);
 
 //buildsomewalls.c
-void	wall_slicing(t_vars *game);
-void 	put_textures(t_vars *game);
-void    texture_coordinates(t_vars *game);
-void	render_wall_slice(int r, t_player *player, t_vars *game);
+void			wall_slicing(t_vars *game);
+mlx_texture_t	*texture_pick(t_vars *game);
+int    			x_texture(t_vars *game);
+void			render_wall_slice(int r, t_player *player, t_vars *game);
+int 			pos_valid(t_vars *game);
+uint32_t    	paint_wall_slice(t_player *player, t_vars *game, int x, uint32_t *pixar);
 
+//move.c
+void    move_w(t_vars *game);
+void    move_a(t_vars *game);
+void    move_s(t_vars *game);
+void    move_d(t_vars *game);
+int		hit_a_wall(t_vars *game, double new_x, double new_y);
+
+//rotate_and_move_utils.c
+void    rotate_left(t_vars *game);
+void    rotate_right(t_vars *game);
 
 #endif
