@@ -1,4 +1,4 @@
-NAME=cube3d
+NAME=cub3D
 
 LIBMLX_PATH = MLX42
 
