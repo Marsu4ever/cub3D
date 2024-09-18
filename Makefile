@@ -20,6 +20,9 @@ SRCS = \
 	src/errors_and_free/error_message_selector.c \
 	src/errors_and_free/errors.c \
 	src/errors_and_free/free_utils.c \
+	src/move/move.c \
+	src/move/move_hook.c \
+	src/move/rotate_and_move_utils.c \
 	src/parsing/check_file.c \
 	src/parsing/check_if_closed.c \
 	src/parsing/check_right.c \
@@ -35,9 +38,6 @@ SRCS = \
 	src/parsing/parsing_utils_1.c \
 	src/parsing/parsing_utils_2.c \
 	src/parsing/read_file.c \
-	src/move/move.c \
-	src/move/move_hook.c \
-	src/move/rotate_and_move_utils.c \
 	src/raycasting/buildsomewalls.c \
 	src/raycasting/raycasting.c \
 	src/raycasting/render.c \
