@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/08/29 12:41:17 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/18 13:19:40 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int pos_valid(t_vars *game)
 
     i = 0;
     j = 0;
-    x = (int)game->player->x_pos;
-    y = (int)game->player->y_pos;
+    x = (int)game->pl->x_pos;
+    y = (int)game->pl->y_pos;
     while (game->map[j])
         j++;
     if (j < y)

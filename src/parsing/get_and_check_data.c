@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 11:42:33 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 13:19:51 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/18 13:42:02 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	get_and_check_data(t_vars *game)
 	game->f_values = get_colour(game, "F ");
 	game->c_values = get_colour(game, "C ");
 	make_modify_and_check_map(game);
-	game->player = init_player(game);
+	game->pl = init_player(game);
 	find_player_position(game);
 	free_array(game->file);
 	game->file = NULL;
