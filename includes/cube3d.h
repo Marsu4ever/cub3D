@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 17:47:01 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:05:10 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,9 @@
 # include <math.h> //math functions for raycasting
 # include <fcntl.h> //open
 # include <unistd.h> //write, read, close
-# include <stdio.h> //perror, printf
 # include <stdlib.h> //exit, free, malloc
 # include <string.h> //strerror
-# include <stdint.h> //uint32_t
-# include "errno.h" //strerror
+# include "errno.h" //errno
 # include "MLX42.h"
 # include "libft.h"
 # include "get_next_line.h"
@@ -120,7 +118,7 @@ typedef struct s_vars
 	int				f_values;
 	uint32_t		paint;
 	double			hit_pos;
-	int				players_nbr;
+	int				players_nbr;// is this needed?
 	char			**file;
 }			t_vars;
 
@@ -156,7 +154,6 @@ int				error_msg_and_exit(int error_number, char *specifier, t_vars *game);
 
 //find_player_position.c
 void			find_player_position(t_vars *game);
-void			orientation_calc(char compass, t_vars *game);
 
 //free_utils.c
 void			destroy_textures(t_vars *game);
