@@ -3,16 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 13:16:08 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/19 10:40:30 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	dda_loop(t_player *pl, t_vars *game)
+static double	delta_d(double ray_dir)
+{
+	if (ray_dir != 0)
+		return (fabs(1 / ray_dir));
+	else
+		return (1e10);
+}
+
+static void		dda_loop(t_player *pl, t_vars *game)
 {
 	while (pl->hit == 0)
 	{
@@ -33,7 +41,7 @@ void	dda_loop(t_player *pl, t_vars *game)
 	}
 }
 
-void	get_ray(t_player *pl)
+static void		get_ray(t_player *pl)
 {
 	pl->ray->side = -1;
 	if (pl->ray->x_rdir >= 0)
@@ -60,14 +68,6 @@ void	get_ray(t_player *pl)
 		pl->ray->yside_d = (pl->y_pos - (int)pl->y_pos) \
 			* delta_d(pl->ray->y_rdir);
 	}
-}
-
-double	delta_d(double ray_dir)
-{
-	if (ray_dir != 0)
-		return (fabs(1 / ray_dir));
-	else
-		return (1e10);
 }
 
 void	init_rays(t_player *pl, int r)

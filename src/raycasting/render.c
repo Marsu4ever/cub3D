@@ -6,13 +6,13 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 15:10:23 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:36:05 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cube3d.h"
 
-void	create_ceiling(int x, t_vars *game)
+static void		create_ceiling(int x, t_vars *game)
 {
 	int	y;
 
@@ -24,7 +24,7 @@ void	create_ceiling(int x, t_vars *game)
 	}
 }
 
-void	create_floor(int x, t_vars *game)
+static void		create_floor(int x, t_vars *game)
 {
 	int	y;
 
@@ -36,14 +36,14 @@ void	create_floor(int x, t_vars *game)
 	}
 }
 
-void	create_the_maze(int x, t_vars *game)
+void		create_the_maze(int x, t_vars *game)
 {
 	create_ceiling(x, game);
 	render_wall_slice(x, game->pl, game);
 	create_floor(x, game);
 }
 
-int	get_rgba(int r, int g, int b)
+int		give_rgba(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 255);
 }

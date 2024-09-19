@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:25:55 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 13:57:23 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:27:35 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static int	check_range_and_get_colour_value(t_vars *game, char *value,
 		i++;
 	}
 	free_array(rgb_strings);
-	return (get_rgba(rgb_numbers[0], rgb_numbers[1], rgb_numbers[2]));
+	return (give_rgba(rgb_numbers[0], rgb_numbers[1], rgb_numbers[2]));
 }
 
 int	get_colour(t_vars *game, char *identifier)

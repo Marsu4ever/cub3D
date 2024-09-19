@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 10:05:10 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:39:32 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,18 +204,14 @@ char			*parse_out_key_and_spaces(t_vars *game, char *line, int value_start);
 
 //raycasting.c
 void			calc_rays(t_vars *game);
-double			delta_d(double ray_dir);
-void			get_ray(t_player *player);
 void			init_rays(t_player *player, int r);
 
 //read_file.c
 void			read_file(t_vars *game, char *av);
 
 //render.c
-void			create_ceiling(int x, t_vars *game);
-void			create_floor(int x, t_vars *game);
 void			create_the_maze(int x, t_vars *game);
-int				get_rgba(int r, int g, int b);
+int				give_rgba(int r, int g, int b);
 
 //rotate_and_move_utils.c
 void			rotate_left(t_vars *game);
