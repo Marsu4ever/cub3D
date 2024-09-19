@@ -10,9 +10,9 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast -g
 
-HEADERS = -I includes -I $(LIBMLX_PATH)/include/MLX42 -I "/Users/$(USER)/.brew/opt/glfw/include" -I $(LIBFT_PATH)/headers
+HEADERS = -I includes -I $(LIBMLX_PATH)/include/MLX42 -I $(LIBFT_PATH)/headers
 
-LIBS = $(LIBFT) $(LIBMLX) -L/Users/$(USER)/.brew/lib/ -ldl -lglfw -pthread -lm
+LIBS = $(LIBFT) $(LIBMLX)  -lglfw -pthread -lm
 
 SRCS = \
 	src/main.c \
