@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 11:09:17 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 10:40:30 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:22:27 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static double	delta_d(double ray_dir)
 		return (1e10);
 }
 
-static void		dda_loop(t_player *pl, t_vars *game)
+static void	dda_loop(t_player *pl, t_vars *game)
 {
 	while (pl->hit == 0)
 	{
@@ -41,7 +41,7 @@ static void		dda_loop(t_player *pl, t_vars *game)
 	}
 }
 
-static void		get_ray(t_player *pl)
+static void	get_ray(t_player *pl)
 {
 	pl->ray->side = -1;
 	if (pl->ray->x_rdir >= 0)

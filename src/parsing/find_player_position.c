@@ -6,13 +6,13 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/19 11:08:13 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:21:25 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void		set_player_direction(t_vars *game, char player_direction)
+static void	set_player_direction(t_vars *game, char player_direction)
 {
 	if (player_direction == 'N')
 		game->player_start_direction = 'N';
@@ -24,7 +24,7 @@ static void		set_player_direction(t_vars *game, char player_direction)
 		game->player_start_direction = 'W';
 }
 
-static void		orientation_calc(char compass, t_vars *game)
+static void	orientation_calc(char compass, t_vars *game)
 {
 	if (compass == 'N')
 		n_s_compass(game->pl, 1.0, FOV);
@@ -36,7 +36,7 @@ static void		orientation_calc(char compass, t_vars *game)
 		e_w_compass(game->pl, -1.0, -FOV);
 }
 
-static void		set_player_position(t_vars *game, char **map, int y)
+static void	set_player_position(t_vars *game, char **map, int y)
 {
 	size_t	j;
 

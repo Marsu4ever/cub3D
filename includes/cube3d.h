@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 11:28:18 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 12:18:07 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,100 +113,100 @@ typedef struct s_vars
 }			t_vars;
 
 //buildsomewalls.c
-void			render_wall_slice(int r, t_player *player, t_vars *game);
-void			wall_slicing(t_vars *game);
+void	render_wall_slice(int r, t_player *player, t_vars *game);
+void	wall_slicing(t_vars *game);
 
 //check_if_closed.c
-void			check_if_closed(t_vars *game, char **map);
+void	check_if_closed(t_vars *game, char **map);
 
 //check_file.c
-void			check_file(t_vars *game);
+void	check_file(t_vars *game);
 
 //check_right.c
-void			check_right(t_vars *game, char **map, int row_count);
+void	check_right(t_vars *game, char **map, int row_count);
 
 //check_user_input.c
-void			check_user_input(int ac, char *av);
+void	check_user_input(int ac, char *av);
 
 //compass.c
-void			n_s_compass(t_player *player, double num, double nmro);
-void			e_w_compass(t_player *player, double num, double nmro);
+void	n_s_compass(t_player *player, double num, double nmro);
+void	e_w_compass(t_player *player, double num, double nmro);
 
 // error_message_selector.c
-void			error_msg_selector(int error);
+void	error_msg_selector(int error);
 
 //errors.c
-int				error_msg_and_exit(int error_number, char *specifier, t_vars *game);
+int		error_msg_and_exit(int error_number, char *specifier, t_vars *game);
 
 //find_player_position.c
-void			find_player_position(t_vars *game);
+void	find_player_position(t_vars *game);
 
 //free_utils.c
-void			destroy_textures(t_vars *game);
-void			free_all(t_vars *game);
-void			free_array(char **array);
-void			free_incomplete_array(char **array, int i);
+void	destroy_textures(t_vars *game);
+void	free_all(t_vars *game);
+void	free_array(char **array);
+void	free_incomplete_array(char **array, int i);
 
 //get_and_check_data.c
-void			get_and_check_data(t_vars *game);
+void	get_and_check_data(t_vars *game);
 
 //get_colour.c
-int				get_colour(t_vars *game, char *identifier);
+int		get_colour(t_vars *game, char *identifier);
 
 //make_modify_and_check_map_1.c
-void			make_modify_and_check_map(t_vars *game);
+void	make_modify_and_check_map(t_vars *game);
 
 //make_modify_and_check_map_2.c
-void			modify_map(char **map);
-void			new_line_check(t_vars *game, char **map);
+void	modify_map(char **map);
+void	new_line_check(t_vars *game, char **map);
 
 //make_modify_and_check_map_3.c
-void			check_for_invalid_characters(t_vars *game, char **map);
-void			check_number_of_players(t_vars *game, char **map);
+void	check_for_invalid_characters(t_vars *game, char **map);
+void	check_number_of_players(t_vars *game, char **map);
 
 //move_1.c
-void			move_w(t_vars *game);
-void			move_a(t_vars *game);
-void			move_s(t_vars *game);
-void			move_d(t_vars *game);
+void	move_w(t_vars *game);
+void	move_a(t_vars *game);
+void	move_s(t_vars *game);
+void	move_d(t_vars *game);
 
 //move_2.c
-int				hit_a_wall(t_vars *game, double new_x, double new_y);
-int				pos_valid(t_vars *game);
+int		hit_a_wall(t_vars *game, double new_x, double new_y);
+int		pos_valid(t_vars *game);
 
 //move_hook.c
-void			move_hook(mlx_key_data_t keydata, void *game_from_key_hook);
+void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook);
 
 //parsing.c
-void			parsing(t_vars *game, int ac, char **av);
+void	parsing(t_vars *game, int ac, char **av);
 
 //parsing_utils.c
-char			*character_replace(char	*line, char char_initial, char char_final);
-bool			check_if_identifier(char *line);
-bool			check_if_indicator(char *line);
-bool			check_if_map(char *line);
-int				count_map_rows(char **map);
-int				get_element_index(t_vars *game, char *identifier);
-int				get_identifier_start(char *line, char *identifier_key);
-int				get_index_end_of_map(t_vars *game, int start);
-char			*parse_out_key_and_spaces(t_vars *game, char *line, int value_start);
+char	*character_replace(char	*line, char char_initial, char char_final);
+bool	check_if_identifier(char *line);
+bool	check_if_indicator(char *line);
+bool	check_if_map(char *line);
+int		count_map_rows(char **map);
+int		get_element_index(t_vars *game, char *identifier);
+int		get_identifier_start(char *line, char *identifier_key);
+int		get_index_end_of_map(t_vars *game, int start);
+char	*parse_out_key_and_spaces(t_vars *game, char *line, int value_start);
 
 //raycasting.c
-void			calc_rays(t_vars *game);
-void			init_rays(t_player *player, int r);
+void	calc_rays(t_vars *game);
+void	init_rays(t_player *player, int r);
 
 //read_file.c
-void			read_file(t_vars *game, char *av);
+void	read_file(t_vars *game, char *av);
 
 //render.c
-void			create_the_maze(int x, t_vars *game);
-int				give_rgba(int r, int g, int b);
+void	create_the_maze(int x, t_vars *game);
+int		give_rgba(int r, int g, int b);
 
 //rotate_and_move_utils.c
-void			rotate_left(t_vars *game);
-void			rotate_right(t_vars *game);
+void	rotate_left(t_vars *game);
+void	rotate_right(t_vars *game);
 
 //run_wolfenstein.c
-void			run_wolfenstein(t_vars *game);
+void	run_wolfenstein(t_vars *game);
 
 #endif

@@ -41,7 +41,7 @@ SRCS = \
 	src/parsing/read_file.c \
 	src/raycasting/buildsomewalls.c \
 	src/raycasting/raycasting.c \
-	src/raycasting/render.c \
+	src/raycasting/render.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -50,7 +50,7 @@ all: $(NAME)
 $(LIBMLX):
 	@cmake $(LIBMLX_PATH) -B $(LIBMLX_PATH)/build && make -C $(LIBMLX_PATH)/build -j4
 
-$(NAME): $(LIBMLX) $(OBJS)
+$(NAME): $(OBJS) $(LIBMLX)
 	cd $(LIBFT_PATH) && make
 	cc $(CFLAGS) $(SRCS) $(HEADERS) $(LIBS) -o $(NAME)
 
