@@ -20,7 +20,8 @@ SRCS = \
 	src/errors_and_free/error_message_selector.c \
 	src/errors_and_free/errors.c \
 	src/errors_and_free/free_utils.c \
-	src/move/move.c \
+	src/move/move_1.c \
+	src/move/move_2.c \
 	src/move/move_hook.c \
 	src/move/rotate_and_move_utils.c \
 	src/parsing/check_file.c \

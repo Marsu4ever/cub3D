@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 10:39:32 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:28:18 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,16 @@
 # define TEXTURE_W 128
 # define TEXTURE_H 128
 # define FOV 0.66
-# define PI 3.14159265358979323846
 # define ROT 0.1
 # define SPEED 0.3
 
-# include <math.h> //math functions for raycasting
-# include <fcntl.h> //open
-# include <unistd.h> //write, read, close
-# include <stdlib.h> //exit, free, malloc
-# include <string.h> //strerror
-# include "errno.h" //errno
+# include <math.h>
+# include <fcntl.h>
+# include <string.h>
+# include "errno.h"
 # include "MLX42.h"
-# include "libft.h"
 # include "get_next_line.h"
+# include "libft.h"
 
 enum				e_codes
 {
@@ -87,12 +84,10 @@ typedef struct s_player
 	int				y_step;
 	int				hit;
 	double			x_camera;
-	double			move_speed;
-	double			rot_speed;
 	double			w_start;
 	double			w_end;
 	int				x_tex;
-	int				y_texture;
+	int				y_tex;
 	t_ray			*ray;
 }			t_player;
 
@@ -101,33 +96,24 @@ typedef struct s_vars
 	mlx_t			*mlx;
 	mlx_image_t		*image;
 	t_player		*pl;
-	char			player_start_direction;
-	int				player_start_x;
-	int				player_start_y;
-	int				map_start;
-	char			*map_path;
-	char			**map;
-	int				x_map;
-	int				y_map;
+	char			**map;	
+	char			player_start_direction;	
+	int				c_values;
+	int				f_values;
+	char			**file;	
 	mlx_texture_t	*east;
 	mlx_texture_t	*north;
 	mlx_texture_t	*south;
 	mlx_texture_t	*west;
+	int				x_map;
+	int				y_map;
 	mlx_texture_t	*texture;
-	int				c_values;
-	int				f_values;
-	uint32_t		paint;
 	double			hit_pos;
-	int				players_nbr;// is this needed?
-	char			**file;
+	uint32_t		paint;
 }			t_vars;
 
 //buildsomewalls.c
-uint32_t		paint_wslice(t_player *player, t_vars *game, int x, uint32_t *pixar);
-int				pos_valid(t_vars *game);
 void			render_wall_slice(int r, t_player *player, t_vars *game);
-mlx_texture_t	*texture_pick(t_vars *game);
-int				x_texture(t_vars *game);
 void			wall_slicing(t_vars *game);
 
 //check_if_closed.c
@@ -178,12 +164,15 @@ void			new_line_check(t_vars *game, char **map);
 void			check_for_invalid_characters(t_vars *game, char **map);
 void			check_number_of_players(t_vars *game, char **map);
 
-//move.c
+//move_1.c
 void			move_w(t_vars *game);
 void			move_a(t_vars *game);
 void			move_s(t_vars *game);
 void			move_d(t_vars *game);
+
+//move_2.c
 int				hit_a_wall(t_vars *game, double new_x, double new_y);
+int				pos_valid(t_vars *game);
 
 //move_hook.c
 void			move_hook(mlx_key_data_t keydata, void *game_from_key_hook);

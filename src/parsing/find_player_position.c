@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/19 10:07:50 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 11:08:13 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void		set_player_position(t_vars *game, char **map, int y)
 			orientation_calc(map[y][j], game);
 			game->pl->x_pos = (double)j;
 			game->pl->y_pos = (double)y;
-			game->players_nbr++;
 		}
 		j++;
 	}

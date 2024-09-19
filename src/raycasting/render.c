@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 15:39:20 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 10:44:25 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:48:39 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,3 @@ int		give_rgba(int r, int g, int b)
 	return (r << 24 | g << 16 | b << 8 | 255);
 }
 
-int	pos_valid(t_vars *game)
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-
-	i = 0;
-	j = 0;
-	x = (int)game->pl->x_pos;
-	y = (int)game->pl->y_pos;
-	while (game->map[j])
-		j++;
-	if (j < y)
-		return (0);
-	while (game->map[y][i])
-		i++;
-	if (i < x)
-		return (0);
-	return (1);
-}

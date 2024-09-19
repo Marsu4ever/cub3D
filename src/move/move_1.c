@@ -6,34 +6,11 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 13:34:41 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 17:02:41 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:48:55 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int	hit_a_wall(t_vars *game, double new_x, double new_y)
-{
-	double	newer_x;
-	double	newer_y;
-
-	if (game->pl->xdir > 0)
-		newer_x = new_x + 0.2;
-	else if (game->pl->xdir < 0)
-		newer_x = new_x - 0.2;
-	else
-		newer_x = new_x;
-	if (game->pl->ydir > 0)
-		newer_y = new_y + 0.2;
-	else if (game->pl->ydir < 0)
-		newer_y = new_y - 0.2;
-	else
-		newer_y = new_y;
-	if ((game->map[(int)new_y][(int)new_x] == '1') \
-		|| (game->map[(int)newer_y][(int)newer_x] == '1'))
-		return (1);
-	return (0);
-}
 
 void	move_w(t_vars *game)
 {

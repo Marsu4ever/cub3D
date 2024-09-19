@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   buildsomewalls.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:54:37 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 10:37:52 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/19 11:29:03 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-uint32_t	paint_wslice(t_player *player, t_vars *game, int x, uint32_t *pixar)
+static uint32_t	paint_wslice(t_player *player, t_vars *game,
+					int x, uint32_t *pixar)
 {
 	uint32_t	paint;
 	int			y;
 	int			i;
 
-	y = player->y_texture;
+	y = player->y_tex;
 	i = y * game->texture->width + x * (int)game->texture->bytes_per_pixel;
 	if (i < 0 || i >= (int)(game->texture->width * game->texture->height))
 		return (0);
@@ -26,7 +27,7 @@ uint32_t	paint_wslice(t_player *player, t_vars *game, int x, uint32_t *pixar)
 	return (paint);
 }
 
-int	x_texture(t_vars *game)
+static int	x_texture(t_vars *game)
 {
 	if (game->pl->ray->side == 1)
 		game->hit_pos = game->pl->x_pos + game->pl->ray->perp_wdist * \
@@ -43,7 +44,7 @@ int	x_texture(t_vars *game)
 	return (game->pl->x_tex);
 }
 
-mlx_texture_t	*texture_pick(t_vars *game)
+static mlx_texture_t	*texture_pick(t_vars *game)
 {
 	if (game->pl->ray->side == 1)
 	{
@@ -76,11 +77,11 @@ void	render_wall_slice(int x, t_player *player, t_vars *game)
 	pos_tex = (i - (SCREEN_H / 2 - player->ray->wall_h / 2)) * j;
 	while (i < player->w_end)
 	{
-		player->y_texture = (int)pos_tex;
-		if (game->pl->y_texture < 0)
-			game->pl->y_texture = 0;
-		if (game->pl->y_texture >= (int)TEXTURE_H)
-			game->pl->y_texture = (int)TEXTURE_H - 1;
+		player->y_tex = (int)pos_tex;
+		if (game->pl->y_tex < 0)
+			game->pl->y_tex = 0;
+		if (game->pl->y_tex >= (int)TEXTURE_H)
+			game->pl->y_tex = (int)TEXTURE_H - 1;
 		pos_tex += j;
 		game->paint = paint_wslice(player, game, x_text, \
 			(uint32_t *)game->texture->pixels);
