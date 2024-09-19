@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:57:59 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/18 16:05:01 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 10:27:23 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int	pos_valid(t_vars *game)//Why is this function here? XD
-{
-	int	i;
-	int	j;
-	int	x;
-	int	y;
-
-	i = 0;
-	j = 0;
-	x = (int)game->pl->x_pos;
-	y = (int)game->pl->y_pos;
-	while (game->map[j])
-		j++;
-	if (j < y)
-		return (0);
-	while (game->map[y][i])
-		i++;
-	if (i < x)
-		return (0);
-	return (1);
-}
 
 static void	close_program(t_vars *game)
 {
