@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:48:48 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/29 13:48:50 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:26:12 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/get_next_line.h"
+#include "../headers/libft.h"
 
 static void	shift_buff(char *buff, size_t from)
 {

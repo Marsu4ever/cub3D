@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 13:48:52 by stigkas           #+#    #+#             */
-/*   Updated: 2024/07/29 13:48:53 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/20 11:25:58 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/get_next_line.h"
+#include "../headers/libft.h"
 
 static void	fn_tmp_strjoin(char *str, char *s1, char *s2)
 {

@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 10:48:25 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 12:18:07 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:26:49 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <string.h>
 # include "errno.h"
 # include "MLX42.h"
-# include "get_next_line.h"
 # include "libft.h"
 
 enum				e_codes
@@ -180,16 +179,18 @@ void	move_hook(mlx_key_data_t keydata, void *game_from_key_hook);
 //parsing.c
 void	parsing(t_vars *game, int ac, char **av);
 
-//parsing_utils.c
+//parsing_utils_1.c
 char	*character_replace(char	*line, char char_initial, char char_final);
-bool	check_if_identifier(char *line);
-bool	check_if_indicator(char *line);
-bool	check_if_map(char *line);
-int		count_map_rows(char **map);
 int		get_element_index(t_vars *game, char *identifier);
 int		get_identifier_start(char *line, char *identifier_key);
 int		get_index_end_of_map(t_vars *game, int start);
 char	*parse_out_key_and_spaces(t_vars *game, char *line, int value_start);
+
+//parsing_utils_2.c
+bool	check_if_identifier(char *line);
+bool	check_if_indicator(char *line);
+bool	check_if_map(char *line);
+int		count_map_rows(char **map);
 
 //raycasting.c
 void	calc_rays(t_vars *game);

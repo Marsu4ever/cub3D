@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:25:55 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/19 10:27:35 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 11:14:35 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static void	check_for_3_numbers_and_2_commas(t_vars *game, char	*value,
 static int	check_range_and_get_colour_value(t_vars *game, char *value,
 			char *identifier)
 {
-	int		rgb_numbers[3];
 	char	**rgb_strings;
 	int		i;
 	int		number;
+	int		rgb_numbers[3];
 
 	rgb_strings = ft_split(value, ',');
 	free(value);
