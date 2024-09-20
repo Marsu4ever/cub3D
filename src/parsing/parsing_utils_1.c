@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:43:18 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 13:57:10 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:42:30 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	get_identifier_start(char *line, char *identifier_key)
 	int		value_start;
 
 	value_start = ft_strlen(identifier_key);
-	if (line[value_start] == ' ')
+	while (line[value_start] == ' ')
 	{
 		value_start++;
 	}
@@ -72,18 +72,18 @@ int	get_element_index(t_vars *game, char *identifier)
 	return (-1);
 }
 
-bool	check_if_map(char *line)
+int	get_index_end_of_map(t_vars *game, int start)
 {
-	int	i;
+	int	end;
 
-	i = 0;
-	while (line[i])
+	end = start;
+	while (game->file[start])
 	{
-		if (line[i] == '1')
+		if (check_if_map(game->file[start]) == true)
 		{
-			return (true);
+			end = start;
 		}
-		i++;
+		start++;
 	}
-	return (false);
+	return (end);
 }

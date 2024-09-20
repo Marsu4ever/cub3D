@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:08:10 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/19 11:33:55 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 09:29:23 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	group_2_msgs(int error)
 	if (error == HIDDEN_FILE_PNG)
 		ft_putstr_fd(".png [hidden] file does not have .png extension.", 2);
 	if (error == LOAD_PNG_FAIL)
-		ft_putstr_fd("Check key value (in file) for this identifier", 2);
+		ft_putstr_fd("Check path for this identifier", 2);
 }
 
 static void	group_3_msgs(int error)
@@ -66,7 +66,7 @@ static void	group_3_msgs(int error)
 static void	group_4_msgs(int error)
 {
 	if (error == INVALID_CHAR_IN_MAP)
-		ft_putstr_fd("Map should only contain 0, 1, N, S, W, E or spaces", 2);
+		ft_putstr_fd("Map should only contain 0, 1, N, S, W, E and spaces", 2);
 	if (error == NO_PLAYER_FOUND)
 		ft_putstr_fd("No player found on map", 2);
 	if (error == TOO_MANY_PLAYERS)

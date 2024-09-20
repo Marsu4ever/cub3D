@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
+/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 12:38:47 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/18 14:01:39 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/09/20 10:36:50 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+/*
+	Function searches for last line that contains a valid map character.
+	Then it returns the line index after the map.
+*/
 static int	skip_map_section(t_vars *game, int start)
 {
 	int	end;

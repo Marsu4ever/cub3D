@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:19:19 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/08/23 15:52:59 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/20 10:44:16 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_map_rows(char **map)
 	int	i;
 
 	i = 0;
-	while (map[i])
+	while (map[i] != NULL)
 	{
 		i++;
 	}
@@ -77,18 +77,38 @@ bool	check_if_indicator(char *line)
 	return (false);
 }
 
-int	get_index_end_of_map(t_vars *game, int start)
+static bool	is_it_a_map_character(char character)
 {
-	int	end;
-
-	end = start;
-	while (game->file[start])
+	if (character == '1')
+		return (true);
+	else if (character == '0')
+		return (true);
+	else if (character == 'N')
+		return (true);
+	else if (character == 'S')
+		return (true);
+	else if (character == 'E')
+		return (true);
+	else if (character == 'W')
+		return (true);
+	else
 	{
-		if (ft_strchr(game->file[start], '1') != NULL)
-		{
-			end = start;
-		}
-		start++;
+		return (false);
 	}
-	return (end);
+}
+
+bool	check_if_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (is_it_a_map_character(line[i]) == true)
+		{
+			return (true);
+		}
+		i++;
+	}
+	return (false);
 }

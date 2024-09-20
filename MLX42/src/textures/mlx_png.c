@@ -6,7 +6,7 @@
 /*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 23:11:29 by W2Wizard          #+#    #+#             */
-/*   Updated: 2024/08/07 14:09:16 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:24:33 by mkorpela         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ mlx_texture_t* mlx_load_png(const char* path)
 	{
 		free(image);
 		// Explicitly print error on purpose
-		fprintf(stderr, "MLX42: LodePNG: %s\n", lodepng_error_text(error));
+		// fprintf(stderr, "MLX42: LodePNG: %s\n", lodepng_error_text(error));
 		return ((void*)mlx_error(MLX_INVPNG));
 	}
 	return (image);
