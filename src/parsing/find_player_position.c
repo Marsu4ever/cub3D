@@ -6,7 +6,7 @@
 /*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 13:38:43 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/10/02 11:21:32 by stigkas          ###   ########.fr       */
+/*   Updated: 2024/10/02 11:23:43 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static void	orientation_calc(char compass, t_vars *game)
 	if (compass == 'N')
 		n_s_compass(game->pl, -1.0, -FOV);
 	else if (compass == 'E')
-		e_w_compass(game->pl, -1.0, -FOV);
+		e_w_compass(game->pl, 1.0, -FOV);
 	else if (compass == 'S')
 		n_s_compass(game->pl, 1.0, FOV);
 	else if (compass == 'W')
-		e_w_compass(game->pl, 1.0, FOV);
+		e_w_compass(game->pl, -1.0, FOV);
 }
 
 static void	set_player_position(t_vars *game, char **map, int y)
