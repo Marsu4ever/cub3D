@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message_selector.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:08:10 by mkorpela          #+#    #+#             */
-/*   Updated: 2024/09/20 09:29:23 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:03:40 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	group_2_msgs(int error)
 	if (error == HIDDEN_FILE_PNG)
 		ft_putstr_fd(".png [hidden] file does not have .png extension.", 2);
 	if (error == LOAD_PNG_FAIL)
-		ft_putstr_fd("Check path for this identifier", 2);
+		ft_putstr_fd("Error with this identifier", 2);
 }
 
 static void	group_3_msgs(int error)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   buildsomewalls.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mkorpela <mkorpela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: stigkas <stigkas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 11:54:37 by stigkas           #+#    #+#             */
-/*   Updated: 2024/09/19 11:29:03 by mkorpela         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:13:44 by stigkas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	render_wall_slice(int x, t_player *player, t_vars *game)
 	x_text = x_texture(game);
 	j = TEXTURE_H / player->ray->wall_h;
 	pos_tex = (i - (SCREEN_H / 2 - player->ray->wall_h / 2)) * j;
-	while (i < player->w_end)
+	while (i <= player->w_end)
 	{
 		player->y_tex = (int)pos_tex;
 		if (game->pl->y_tex < 0)
