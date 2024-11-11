@@ -1,6 +1,6 @@
 # cub3D
 Recreation of Wolfenstein 3D with New Tiles.  
-This 
+This was a pair project with SimosTigkas.  
 
 So if you want to make a 3D game, one way to do it is to...  
 1. Make a 2D map in a text file  
@@ -16,3 +16,5 @@ Use arrow keys:
 2. DOWN - Move Back  
 3. Left - Turn Left  
 4. Right - Turn Right  
+
+![pic1_of_wolfenstein](./Wolfenstein1.png)
