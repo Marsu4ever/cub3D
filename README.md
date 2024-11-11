@@ -9,7 +9,7 @@ So if you want to make a 3D game, one way to do it is to...
 **How to Run**:  
 ./cub3D maps/map_subject.cub  
 
-**Move around in simulator**  
+**Move around in simulator**:  
 Use arrow keys:  
 1. UP - Move Forward  
 2. DOWN - Move Back  
