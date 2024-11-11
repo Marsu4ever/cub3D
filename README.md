@@ -19,12 +19,12 @@ Use arrow keys:
 
 ![pic1_of_wolfenstein](./Wolfenstein1.png)
 
-**Modify it!**
-You can...
-1. Add your own png files to the walls
-   a. Put them into the **textures** subdirectory
-   b. Update the path to these new images into the map f.ex. maps/map_subject.cub (NO, SO, EA, WE)
-2. Change the colour of the floor and ceiling
-   a. Change the values in **F** and **C** in the maps/map_subject.cub file
+**Modify it!**  
+You can...  
+1. Add your own png files to the walls  
+   a. Put them into the **textures** subdirectory  
+   b. Update the path to these new images into the map f.ex. maps/map_subject.cub (NO, SO, EA, WE)  
+2. Change the colour of the floor and ceiling  
+   a. Change the values in **F** and **C** in the maps/map_subject.cub file  
 
 ![pic2_of_wolfenstein](./Wolfenstein2.png)
