@@ -18,3 +18,4 @@ Use arrow keys:
 4. Right - Turn Right  
 
 ![pic1_of_wolfenstein](./Wolfenstein1.png)
+![pic2_of_wolfenstein](./Wolfenstein2.png)
