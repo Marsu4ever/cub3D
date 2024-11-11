@@ -1,5 +1,5 @@
 # cub3D
-Recreation of Wolfenstein 3D  
+Recreation of Wolfenstein 3D with New Tiles
 
 So if you want to make a 3D game, one way to do it is to...  
 1. Make a 2D map in a text file  
