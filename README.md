@@ -5,7 +5,7 @@ This was a pair project with SimosTigkas.
 So if you want to make a 3D game, one way to do it is to...  
 1. Make a 2D map in a text file  
 2. Then move within the map  
-3. As you move, simulate what you should be seeing from your point of view -> Hence use RAY TRACING.  
+3. As you move, simulate what you should be seeing from your point of view -> Hence use Ray Tracing.  
 
 **How to Run**:  
 ./cub3D maps/map_subject.cub  
